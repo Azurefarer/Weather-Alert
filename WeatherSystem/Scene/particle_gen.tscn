@@ -1,48 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://b64005w06vqle"]
+[gd_scene load_steps=6 format=3 uid="uid://b64005w06vqle"]
 
 [ext_resource type="Shader" path="res://WeatherSystem/Shader/particle_mesh.gdshader" id="1_ctenx"]
-[ext_resource type="Shader" uid="uid://d02paxiglpjw4" path="res://WeatherSystem/Shader/base_particle.tres" id="1_f75pu"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_qeb5v"]
-shader = ExtResource("1_f75pu")
-shader_parameter/direction = Vector3(1, 0, 0)
-shader_parameter/spread = 45.0
-shader_parameter/flatness = 0.0
-shader_parameter/inherit_emitter_velocity_ratio = 0.0
-shader_parameter/initial_linear_velocity_min = 0.0
-shader_parameter/initial_linear_velocity_max = 0.0
-shader_parameter/directional_velocity_min = 1.0
-shader_parameter/directional_velocity_max = 1.0
-shader_parameter/angular_velocity_min = 0.0
-shader_parameter/angular_velocity_max = 0.0
-shader_parameter/orbit_velocity_min = 0.0
-shader_parameter/orbit_velocity_max = 0.0
-shader_parameter/radial_velocity_min = null
-shader_parameter/radial_velocity_max = null
-shader_parameter/linear_accel_min = 0.0
-shader_parameter/linear_accel_max = 0.0
-shader_parameter/radial_accel_min = 0.0
-shader_parameter/radial_accel_max = 0.0
-shader_parameter/tangent_accel_min = 0.0
-shader_parameter/tangent_accel_max = 0.0
-shader_parameter/damping_min = 0.0
-shader_parameter/damping_max = 0.0
-shader_parameter/initial_angle_min = 0.0
-shader_parameter/initial_angle_max = 0.0
-shader_parameter/scale_min = 1.0
-shader_parameter/scale_max = 1.0
-shader_parameter/hue_variation_min = 0.0
-shader_parameter/hue_variation_max = 0.0
-shader_parameter/anim_speed_min = 0.0
-shader_parameter/anim_speed_max = 0.0
-shader_parameter/anim_offset_min = 0.0
-shader_parameter/anim_offset_max = 0.0
-shader_parameter/lifetime_randomness = 0.0
-shader_parameter/emission_shape_offset = Vector3(0, 0, 0)
-shader_parameter/emission_shape_scale = Vector3(1, 1, 1)
-shader_parameter/velocity_pivot = Vector3(0, 0, 0)
-shader_parameter/color_value = Color(1, 1, 1, 1)
-shader_parameter/gravity = Vector3(0, -9.8, 0)
+[ext_resource type="Material" uid="uid://cocvdv6l6dvid" path="res://WeatherSystem/Shader/Particle_gen_stock.tres" id="1_tqisu"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_sg1cy"]
 render_priority = 0
@@ -61,7 +20,7 @@ outer_radius = 1000.0
 amount = 1000
 lifetime = 20.0
 randomness = 0.3
-process_material = SubResource("ShaderMaterial_qeb5v")
+process_material = ExtResource("1_tqisu")
 draw_pass_1 = SubResource("BoxMesh_1ma0h")
 
 [node name="ParticleObj" type="GPUParticles3D" parent="."]
