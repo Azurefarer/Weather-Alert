@@ -1,9 +1,9 @@
 extends Node
 
-var globalDelta: float
+var global_delta: float
 var gameScreen =-1
 
-var activeButton: Button
+var active_button: Button
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -12,7 +12,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	globalDelta = delta
+	global_delta = delta
 	toggleFullscreen()
 		
 func toggleFullscreen():
@@ -36,3 +36,5 @@ func buttonFeedback(button):
 	button.modulate = Color(1,1,1,1)
 	await get_tree().create_timer(.02).timeout
 	button.modulate = Color(1,1,1,0)  
+	await get_tree().create_timer(.02).timeout
+	button.modulate = Color(1,1,1,1)  

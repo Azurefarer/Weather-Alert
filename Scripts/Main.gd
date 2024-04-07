@@ -1,6 +1,7 @@
 extends Control
 
-var level: Node3D
+@export var level: Node3D
+@export var players: Node3D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -11,12 +12,15 @@ func _ready():
 func _process(delta):
 	pass
 
-
 func _on_debug_pressed():
 	await GameManager.buttonFeedback(GameManager.active_button)
+	change_level("res://Assets/Scenes/Test.tscn")
 	
 func hide_UI():
-	pass
+	$Main_UI.visible = false
+	
+func show_UI():
+	$Main_UI.visible = true
 	
 func change_level(scene :String):
 	for c in level.get_children():
@@ -26,5 +30,5 @@ func change_level(scene :String):
 	var stage = stageToLoad.instantiate()
 	hide_UI()
 	level.add_child(stage)
-	level.currentStage = stage
+	GameUtilities.spawn("res://Assets/Prefabs/player_character.tscn",players,Vector3.ZERO,Vector3.ZERO,Vector3.ONE)
 	

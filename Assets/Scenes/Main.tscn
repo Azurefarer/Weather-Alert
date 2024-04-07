@@ -5,16 +5,16 @@
 [ext_resource type="Texture2D" uid="uid://htvxvd3tlalj" path="res://Assets/EtcImages/WeatherAlertIconBig.png" id="2_6wsx3"]
 [ext_resource type="Script" path="res://Scripts/ButtonProperties.gd" id="3_ugwyl"]
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_dktlg"]
+blend_mode = 1
+
 [sub_resource type="Gradient" id="Gradient_uockt"]
 offsets = PackedFloat32Array(0.571429, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_hyloy"]
 gradient = SubResource("Gradient_uockt")
 
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_dktlg"]
-blend_mode = 1
-
-[node name="Main" type="Control"]
+[node name="Main" type="Control" node_paths=PackedStringArray("level", "players")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -22,13 +22,27 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_36uvr")
+level = NodePath("Level")
+players = NodePath("Players")
+
+[node name="Players" type="Node3D" parent="."]
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="Players"]
+_spawnable_scenes = PackedStringArray("res://Assets/Prefabs/player_character.tscn")
 
 [node name="Main_UI" type="Control" parent="."]
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="BG" type="TextureRect" parent="."]
+[node name="WeatherAlertIconBig" type="Sprite2D" parent="Main_UI"]
+modulate = Color(1, 1, 1, 0.388235)
+z_index = 100
+material = SubResource("CanvasItemMaterial_dktlg")
+position = Vector2(874, 398)
+texture = ExtResource("2_6wsx3")
+
+[node name="BG" type="TextureRect" parent="Main_UI"]
 layout_mode = 0
 offset_left = -747.0
 offset_top = -359.0
@@ -36,7 +50,7 @@ offset_right = 1871.0
 offset_bottom = 1059.0
 texture = SubResource("GradientTexture1D_hyloy")
 
-[node name="RichTextLabel" type="RichTextLabel" parent="."]
+[node name="RichTextLabel" type="RichTextLabel" parent="Main_UI"]
 layout_mode = 0
 offset_left = 21.0
 offset_top = 16.0
@@ -47,7 +61,7 @@ theme_override_fonts/normal_font = ExtResource("1_oieq6")
 theme_override_font_sizes/normal_font_size = 41
 text = "W E A T H E R   A L E R T "
 
-[node name="Start" type="Button" parent="."]
+[node name="Start" type="Button" parent="Main_UI"]
 modulate = Color(1, 1, 1, 0.498039)
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 0
@@ -57,7 +71,7 @@ offset_right = 94.0
 offset_bottom = 129.0
 script = ExtResource("3_ugwyl")
 
-[node name="Text" type="RichTextLabel" parent="Start"]
+[node name="Text" type="RichTextLabel" parent="Main_UI/Start"]
 layout_mode = 0
 offset_left = 1.0
 offset_top = 1.0
@@ -69,7 +83,7 @@ theme_override_fonts/normal_font = ExtResource("1_oieq6")
 theme_override_font_sizes/normal_font_size = 20
 text = "START"
 
-[node name="Debug" type="Button" parent="."]
+[node name="Debug" type="Button" parent="Main_UI"]
 modulate = Color(1, 1, 1, 0.498039)
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 0
@@ -79,7 +93,7 @@ offset_right = 94.0
 offset_bottom = 248.0
 script = ExtResource("3_ugwyl")
 
-[node name="Text" type="RichTextLabel" parent="Debug"]
+[node name="Text" type="RichTextLabel" parent="Main_UI/Debug"]
 layout_mode = 0
 offset_left = 1.0
 offset_top = 1.0
@@ -91,7 +105,7 @@ theme_override_fonts/normal_font = ExtResource("1_oieq6")
 theme_override_font_sizes/normal_font_size = 20
 text = "DEBUG"
 
-[node name="Host" type="Button" parent="."]
+[node name="Host" type="Button" parent="Main_UI"]
 modulate = Color(1, 1, 1, 0.498039)
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 0
@@ -101,7 +115,7 @@ offset_right = 251.0
 offset_bottom = 158.0
 script = ExtResource("3_ugwyl")
 
-[node name="Text" type="RichTextLabel" parent="Host"]
+[node name="Text" type="RichTextLabel" parent="Main_UI/Host"]
 layout_mode = 0
 offset_left = 1.0
 offset_top = 1.0
@@ -113,7 +127,7 @@ theme_override_fonts/normal_font = ExtResource("1_oieq6")
 theme_override_font_sizes/normal_font_size = 20
 text = "HOST ONLINE GAME"
 
-[node name="Join" type="Button" parent="."]
+[node name="Join" type="Button" parent="Main_UI"]
 modulate = Color(1, 1, 1, 0.498039)
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 0
@@ -123,7 +137,7 @@ offset_right = 238.0
 offset_bottom = 189.0
 script = ExtResource("3_ugwyl")
 
-[node name="Text" type="RichTextLabel" parent="Join"]
+[node name="Text" type="RichTextLabel" parent="Main_UI/Join"]
 layout_mode = 0
 offset_left = 1.0
 offset_top = 1.0
@@ -135,7 +149,7 @@ theme_override_fonts/normal_font = ExtResource("1_oieq6")
 theme_override_font_sizes/normal_font_size = 20
 text = "JOIN ONLINE GAME"
 
-[node name="Options" type="Button" parent="."]
+[node name="Options" type="Button" parent="Main_UI"]
 modulate = Color(1, 1, 1, 0.498039)
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 0
@@ -145,7 +159,7 @@ offset_right = 125.0
 offset_bottom = 220.0
 script = ExtResource("3_ugwyl")
 
-[node name="Text" type="RichTextLabel" parent="Options"]
+[node name="Text" type="RichTextLabel" parent="Main_UI/Options"]
 layout_mode = 0
 offset_left = 1.0
 offset_top = 1.0
@@ -157,20 +171,16 @@ theme_override_fonts/normal_font = ExtResource("1_oieq6")
 theme_override_font_sizes/normal_font_size = 20
 text = "OPTIONS"
 
-[node name="WeatherAlertIconBig" type="Sprite2D" parent="."]
-modulate = Color(1, 1, 1, 0.388235)
-material = SubResource("CanvasItemMaterial_dktlg")
-position = Vector2(874, 398)
-texture = ExtResource("2_6wsx3")
+[node name="Level" type="Node3D" parent="."]
 
-[connection signal="mouse_entered" from="Start" to="Start" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="Start" to="Start" method="_on_mouse_exited"]
-[connection signal="mouse_entered" from="Debug" to="Debug" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="Debug" to="Debug" method="_on_mouse_exited"]
-[connection signal="pressed" from="Debug" to="." method="_on_debug_pressed"]
-[connection signal="mouse_entered" from="Host" to="Host" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="Host" to="Host" method="_on_mouse_exited"]
-[connection signal="mouse_entered" from="Join" to="Join" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="Join" to="Join" method="_on_mouse_exited"]
-[connection signal="mouse_entered" from="Options" to="Options" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="Options" to="Options" method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="Main_UI/Start" to="Main_UI/Start" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Main_UI/Start" to="Main_UI/Start" method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="Main_UI/Debug" to="Main_UI/Debug" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Main_UI/Debug" to="Main_UI/Debug" method="_on_mouse_exited"]
+[connection signal="pressed" from="Main_UI/Debug" to="." method="_on_debug_pressed"]
+[connection signal="mouse_entered" from="Main_UI/Host" to="Main_UI/Host" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Main_UI/Host" to="Main_UI/Host" method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="Main_UI/Join" to="Main_UI/Join" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Main_UI/Join" to="Main_UI/Join" method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="Main_UI/Options" to="Main_UI/Options" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Main_UI/Options" to="Main_UI/Options" method="_on_mouse_exited"]
