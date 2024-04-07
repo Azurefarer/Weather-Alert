@@ -64,6 +64,28 @@ theme_override_fonts/normal_font = ExtResource("1_oieq6")
 theme_override_font_sizes/normal_font_size = 20
 text = "START"
 
+[node name="Debug" type="Button" parent="."]
+modulate = Color(1, 1, 1, 0.498039)
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 20.0
+offset_top = 226.0
+offset_right = 94.0
+offset_bottom = 248.0
+script = ExtResource("3_ugwyl")
+
+[node name="Text" type="RichTextLabel" parent="Debug"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 95.0
+offset_bottom = 27.0
+mouse_filter = 2
+theme_override_constants/outline_size = 2
+theme_override_fonts/normal_font = ExtResource("1_oieq6")
+theme_override_font_sizes/normal_font_size = 20
+text = "DEBUG"
+
 [node name="Host" type="Button" parent="."]
 modulate = Color(1, 1, 1, 0.498039)
 self_modulate = Color(1, 1, 1, 0)
@@ -138,6 +160,9 @@ texture = ExtResource("2_6wsx3")
 
 [connection signal="mouse_entered" from="Start" to="Start" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="Start" to="Start" method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="Debug" to="Debug" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Debug" to="Debug" method="_on_mouse_exited"]
+[connection signal="pressed" from="Debug" to="." method="_on_debug_pressed"]
 [connection signal="mouse_entered" from="Host" to="Host" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="Host" to="Host" method="_on_mouse_exited"]
 [connection signal="mouse_entered" from="Join" to="Join" method="_on_mouse_entered"]

@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://bav6q7bmslqvx"]
+
+[ext_resource type="Texture2D" uid="uid://cy4kybitqrbjh" path="res://Assets/EtcImages/DeebugTexture.png" id="1_h2p26"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_uxsru"]
+size = Vector2(80, 80)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8ixfj"]
+albedo_texture = ExtResource("1_h2p26")
+metallic_specular = 0.0
+uv1_scale = Vector3(8, 8, 8)
+
+[node name="Test" type="Node3D"]
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="."]
+transform = Transform3D(-1, -3.82137e-15, -8.74228e-08, -8.74228e-08, 4.37114e-08, 1, 0, 1, -4.37114e-08, 0, 0, 0)
+mesh = SubResource("QuadMesh_uxsru")
+material = SubResource("StandardMaterial3D_8ixfj")
