@@ -1,0 +1,146 @@
+[gd_scene load_steps=8 format=3 uid="uid://c2ei7wexs7rb7"]
+
+[ext_resource type="Script" path="res://Scripts/Main.gd" id="1_36uvr"]
+[ext_resource type="FontFile" uid="uid://diyl4h4a00hli" path="res://Assets/Fonts/GmarketSansTTFLight.ttf" id="1_oieq6"]
+[ext_resource type="Texture2D" uid="uid://htvxvd3tlalj" path="res://Assets/EtcImages/WeatherAlertIconBig.png" id="2_6wsx3"]
+[ext_resource type="Script" path="res://Scripts/ButtonProperties.gd" id="3_ugwyl"]
+
+[sub_resource type="Gradient" id="Gradient_uockt"]
+offsets = PackedFloat32Array(0.571429, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_hyloy"]
+gradient = SubResource("Gradient_uockt")
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_dktlg"]
+blend_mode = 1
+
+[node name="Main" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_36uvr")
+
+[node name="BG" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = -747.0
+offset_top = -359.0
+offset_right = 1871.0
+offset_bottom = 1059.0
+texture = SubResource("GradientTexture1D_hyloy")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 21.0
+offset_top = 16.0
+offset_right = 980.0
+offset_bottom = 230.0
+theme_override_constants/outline_size = 0
+theme_override_fonts/normal_font = ExtResource("1_oieq6")
+theme_override_font_sizes/normal_font_size = 41
+text = "W E A T H E R   A L E R T "
+
+[node name="Start" type="Button" parent="."]
+modulate = Color(1, 1, 1, 0.498039)
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 20.0
+offset_top = 107.0
+offset_right = 94.0
+offset_bottom = 129.0
+script = ExtResource("3_ugwyl")
+
+[node name="Text" type="RichTextLabel" parent="Start"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 81.0
+offset_bottom = 27.0
+mouse_filter = 2
+theme_override_constants/outline_size = 2
+theme_override_fonts/normal_font = ExtResource("1_oieq6")
+theme_override_font_sizes/normal_font_size = 20
+text = "START"
+
+[node name="Host" type="Button" parent="."]
+modulate = Color(1, 1, 1, 0.498039)
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 20.0
+offset_top = 136.0
+offset_right = 251.0
+offset_bottom = 158.0
+script = ExtResource("3_ugwyl")
+
+[node name="Text" type="RichTextLabel" parent="Host"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 360.0
+offset_bottom = 27.0
+mouse_filter = 2
+theme_override_constants/outline_size = 2
+theme_override_fonts/normal_font = ExtResource("1_oieq6")
+theme_override_font_sizes/normal_font_size = 20
+text = "HOST ONLINE GAME"
+
+[node name="Join" type="Button" parent="."]
+modulate = Color(1, 1, 1, 0.498039)
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 20.0
+offset_top = 167.0
+offset_right = 238.0
+offset_bottom = 189.0
+script = ExtResource("3_ugwyl")
+
+[node name="Text" type="RichTextLabel" parent="Join"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 360.0
+offset_bottom = 27.0
+mouse_filter = 2
+theme_override_constants/outline_size = 2
+theme_override_fonts/normal_font = ExtResource("1_oieq6")
+theme_override_font_sizes/normal_font_size = 20
+text = "JOIN ONLINE GAME"
+
+[node name="Options" type="Button" parent="."]
+modulate = Color(1, 1, 1, 0.498039)
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 20.0
+offset_top = 198.0
+offset_right = 125.0
+offset_bottom = 220.0
+script = ExtResource("3_ugwyl")
+
+[node name="Text" type="RichTextLabel" parent="Options"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 360.0
+offset_bottom = 27.0
+mouse_filter = 2
+theme_override_constants/outline_size = 2
+theme_override_fonts/normal_font = ExtResource("1_oieq6")
+theme_override_font_sizes/normal_font_size = 20
+text = "OPTIONS"
+
+[node name="WeatherAlertIconBig" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.388235)
+material = SubResource("CanvasItemMaterial_dktlg")
+position = Vector2(874, 398)
+texture = ExtResource("2_6wsx3")
+
+[connection signal="mouse_entered" from="Start" to="Start" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Start" to="Start" method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="Host" to="Host" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Host" to="Host" method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="Join" to="Join" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Join" to="Join" method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="Options" to="Options" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Options" to="Options" method="_on_mouse_exited"]
