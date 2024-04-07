@@ -1,34 +1,15 @@
 [gd_scene load_steps=7 format=3 uid="uid://b64005w06vqle"]
 
 [ext_resource type="Shader" path="res://WeatherSystem/Shader/particle_mesh.gdshader" id="1_ctenx"]
-[ext_resource type="Shader" uid="uid://bpgly8lmowhs" path="res://WeatherSystem/Shader/ripped.tres" id="1_mvm6y"]
+[ext_resource type="Shader" path="res://WeatherSystem/Scene/particle_gen_main.gdshader" id="1_dmpsq"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1iqcq"]
-shader = ExtResource("1_mvm6y")
-shader_parameter/direction = null
-shader_parameter/spread = null
-shader_parameter/flatness = null
-shader_parameter/inherit_emitter_velocity_ratio = 0.0
-shader_parameter/initial_linear_velocity_min = null
-shader_parameter/initial_linear_velocity_max = null
-shader_parameter/directional_velocity_min = null
-shader_parameter/directional_velocity_max = null
-shader_parameter/angular_velocity_min = null
-shader_parameter/angular_velocity_max = null
-shader_parameter/orbit_velocity_min = null
-shader_parameter/orbit_velocity_max = null
-shader_parameter/radial_velocity_min = null
-shader_parameter/radial_velocity_max = null
-shader_parameter/linear_accel_min = null
-shader_parameter/linear_accel_max = null
-shader_parameter/radial_accel_min = null
-shader_parameter/radial_accel_max = null
-shader_parameter/tangent_accel_min = null
-shader_parameter/tangent_accel_max = null
-shader_parameter/damping_min = null
-shader_parameter/damping_max = null
-shader_parameter/initial_angle_min = null
-shader_parameter/initial_angle_max = null
+shader = ExtResource("1_dmpsq")
+shader_parameter/gravity = null
+shader_parameter/Emission_Shape = null
+shader_parameter/emission_tex_point_count = null
+shader_parameter/emission_shape_offset = Vector3(0, 0, 0)
+shader_parameter/emission_shape_scale = Vector3(1, 1, 1)
 shader_parameter/scale_min = null
 shader_parameter/scale_max = null
 shader_parameter/hue_variation_min = null
@@ -38,12 +19,27 @@ shader_parameter/anim_speed_max = null
 shader_parameter/anim_offset_min = null
 shader_parameter/anim_offset_max = null
 shader_parameter/lifetime_randomness = null
-shader_parameter/emission_shape_offset = Vector3(0, 0, 0)
-shader_parameter/emission_shape_scale = Vector3(1, 1, 1)
-shader_parameter/velocity_pivot = Vector3(0, 0, 0)
-shader_parameter/emission_texture_point_count = null
 shader_parameter/color_value = null
-shader_parameter/gravity = null
+shader_parameter/initial_angle_min = null
+shader_parameter/initial_angle_max = null
+shader_parameter/angular_velocity_min = null
+shader_parameter/angular_velocity_max = null
+shader_parameter/initial_linear_velocity_min = null
+shader_parameter/initial_linear_velocity_max = null
+shader_parameter/directional_velocity_min = null
+shader_parameter/directional_velocity_max = null
+shader_parameter/radial_velocity_min = null
+shader_parameter/radial_velocity_max = null
+shader_parameter/orbit_velocity_min = null
+shader_parameter/orbit_velocity_max = null
+shader_parameter/linear_accel_min = null
+shader_parameter/linear_accel_max = null
+shader_parameter/radial_accel_min = null
+shader_parameter/radial_accel_max = null
+shader_parameter/tangent_accel_min = null
+shader_parameter/tangent_accel_max = null
+shader_parameter/damping_min = null
+shader_parameter/damping_max = null
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_sg1cy"]
 render_priority = 0
@@ -65,13 +61,6 @@ randomness = 0.3
 process_material = SubResource("ShaderMaterial_1iqcq")
 draw_pass_1 = SubResource("BoxMesh_1ma0h")
 
-[node name="ParticleObj" type="GPUParticles3D" parent="."]
-amount = 1000
-lifetime = 20.0
-randomness = 0.3
-draw_pass_1 = SubResource("BoxMesh_1ma0h")
-
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.1951, 0, 0.107655)
-visible = false
 mesh = SubResource("TorusMesh_qlhe4")
