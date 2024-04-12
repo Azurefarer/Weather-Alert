@@ -3,7 +3,7 @@ extends Node
 var globalDelta: float
 var gameScreen =-1
 
-var activeButton: Button
+var active_button: Button
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

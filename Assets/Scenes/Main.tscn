@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://c2ei7wexs7rb7"]
+[gd_scene load_steps=10 format=3 uid="uid://c2ei7wexs7rb7"]
 
 [ext_resource type="Script" path="res://Scripts/Main.gd" id="1_36uvr"]
 [ext_resource type="FontFile" uid="uid://diyl4h4a00hli" path="res://Assets/Fonts/GmarketSansTTFLight.ttf" id="1_oieq6"]
@@ -6,35 +6,33 @@
 [ext_resource type="Shader" path="res://Shaders/Main_BG.gdshader" id="2_jdy6r"]
 [ext_resource type="Script" path="res://Scripts/ButtonProperties.gd" id="3_ugwyl"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_v07y6"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_k1wjb"]
 shader = ExtResource("2_jdy6r")
-shader_parameter/hover = null
-shader_parameter/_VertexAmplitudeMod = null
-shader_parameter/_VertexAmplitude = null
-shader_parameter/_VertexFrequencyMod = null
-shader_parameter/_VertexFrequency = null
-shader_parameter/_VertexWavelengthMod = null
-shader_parameter/_VertexWavelength = null
-shader_parameter/_VertexPeakWidth = null
+shader_parameter/hover = PackedVector2Array()
+shader_parameter/time_since_hover = PackedFloat32Array()
+shader_parameter/_VertexVelocityMult = 0.839
+shader_parameter/_VertexVelocity = 13.531
+shader_parameter/_VertexWavelengthMult = 0.731
+shader_parameter/_VertexWavelength = 59.299
+shader_parameter/_RippleVelocityMult = 0.6
+shader_parameter/_RippleVelocity = 16.0
+shader_parameter/_RippleWavelengthMult = 0.5
+shader_parameter/_RippleWavelength = 150.0
+shader_parameter/_WaveGroupVelocity = 250.0
+shader_parameter/_DispersionCoeff = 0.8
+shader_parameter/_RipplePeakWidth = 13.0
+shader_parameter/wave_time = null
+shader_parameter/num_inst = null
+shader_parameter/intensity = 0.3
 
 [sub_resource type="Gradient" id="Gradient_uockt"]
-offsets = PackedFloat32Array(0.571429, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0, 1, 1, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_hyloy"]
 gradient = SubResource("Gradient_uockt")
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_dktlg"]
 blend_mode = 1
-
-[sub_resource type="Gradient" id="Gradient_p13vd"]
-colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_sboc0"]
-gradient = SubResource("Gradient_p13vd")
-fill = 1
-fill_from = Vector2(0.5, 0.5)
-fill_to = Vector2(1, 1)
-metadata/_snap_enabled = true
 
 [node name="Main" type="Control"]
 layout_mode = 3
@@ -51,12 +49,10 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="BG" type="TextureRect" parent="."]
-material = SubResource("ShaderMaterial_v07y6")
+material = SubResource("ShaderMaterial_k1wjb")
 layout_mode = 0
-offset_left = -747.0
-offset_top = -359.0
-offset_right = 1871.0
-offset_bottom = 1059.0
+offset_right = 2618.0
+offset_bottom = 1418.0
 texture = SubResource("GradientTexture1D_hyloy")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
@@ -97,9 +93,9 @@ modulate = Color(1, 1, 1, 0.498039)
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 0
 offset_left = 20.0
-offset_top = 226.0
+offset_top = 227.0
 offset_right = 94.0
-offset_bottom = 248.0
+offset_bottom = 249.0
 script = ExtResource("3_ugwyl")
 
 [node name="Text" type="RichTextLabel" parent="Debug"]
@@ -119,9 +115,9 @@ modulate = Color(1, 1, 1, 0.498039)
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 0
 offset_left = 20.0
-offset_top = 136.0
+offset_top = 137.0
 offset_right = 251.0
-offset_bottom = 158.0
+offset_bottom = 159.0
 script = ExtResource("3_ugwyl")
 
 [node name="Text" type="RichTextLabel" parent="Host"]
@@ -163,9 +159,9 @@ modulate = Color(1, 1, 1, 0.498039)
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 0
 offset_left = 20.0
-offset_top = 198.0
+offset_top = 197.0
 offset_right = 125.0
-offset_bottom = 220.0
+offset_bottom = 219.0
 script = ExtResource("3_ugwyl")
 
 [node name="Text" type="RichTextLabel" parent="Options"]
@@ -186,19 +182,19 @@ material = SubResource("CanvasItemMaterial_dktlg")
 position = Vector2(874, 398)
 texture = ExtResource("2_6wsx3")
 
-[node name="PointLight2D" type="PointLight2D" parent="."]
-position = Vector2(459, 332)
-scale = Vector2(4.95313, 5.30079)
-texture = SubResource("GradientTexture2D_sboc0")
-
 [connection signal="mouse_entered" from="Start" to="Start" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="Start" to="Start" method="_on_mouse_exited"]
+[connection signal="pressed" from="Start" to="Start" method="_on_pressed"]
 [connection signal="mouse_entered" from="Debug" to="Debug" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="Debug" to="Debug" method="_on_mouse_exited"]
 [connection signal="pressed" from="Debug" to="." method="_on_debug_pressed"]
+[connection signal="pressed" from="Debug" to="Debug" method="_on_pressed"]
 [connection signal="mouse_entered" from="Host" to="Host" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="Host" to="Host" method="_on_mouse_exited"]
+[connection signal="pressed" from="Host" to="Host" method="_on_pressed"]
 [connection signal="mouse_entered" from="Join" to="Join" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="Join" to="Join" method="_on_mouse_exited"]
+[connection signal="pressed" from="Join" to="Join" method="_on_pressed"]
 [connection signal="mouse_entered" from="Options" to="Options" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="Options" to="Options" method="_on_mouse_exited"]
+[connection signal="pressed" from="Options" to="Options" method="_on_pressed"]

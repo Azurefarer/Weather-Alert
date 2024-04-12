@@ -5,6 +5,8 @@ var level: Node3D
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	GameManager.gameScreen = -1
+	RippleManager.BG = $BG
+	$BG.material.set("shader_parameter/wave_time", RippleManager.ripple_time)
 	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
