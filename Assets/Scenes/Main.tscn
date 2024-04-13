@@ -190,9 +190,6 @@ theme_override_fonts/normal_font = ExtResource("1_oieq6")
 theme_override_font_sizes/normal_font_size = 20
 text = "OPTIONS"
 
-[node name="BG" type="TextureRect" parent="."]
-layout_mode = 0
-
 [node name="Level" type="Node3D" parent="."]
 
 [connection signal="mouse_entered" from="Main_UI/Start" to="Main_UI/Start" method="_on_mouse_entered"]
