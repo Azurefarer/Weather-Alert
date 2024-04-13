@@ -59,7 +59,7 @@ func moveInputs(delta):
 	if true:#moveDirection == Vector3.ZERO:
 		velocity.x = lerpf(velocity.x,0.0,clamp(delta*DRAG,0,1))
 		velocity.z = lerpf(velocity.z,0.0,clamp(delta*DRAG,0,1))
-		print("velocity: "+str(velocity))
+		#print("velocity: "+str(velocity))
 		
 func playerFocus():
 	match Input.get_mouse_mode():
