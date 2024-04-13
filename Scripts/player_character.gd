@@ -58,7 +58,7 @@ func checkJump():
 		
 func gravity(delta):
 	if !is_on_floor():
-		velocity.y-=delta*FALL_SPEED
+		velocity.y-=clamp(delta*FALL_SPEED,0,15)
 		
 func moveInputs(delta):
 	moveDirection = Vector3.ZERO
@@ -78,7 +78,7 @@ func moveInputs(delta):
 		$RootScene/RootNode.look_at($RootScene/RootNode.global_position-moveDirection*100)
 	var target_rotation = $RootScene/RootNode.global_rotation
 	$RootScene/RootNode.global_rotation = initial_rotation
-	$RootScene/RootNode.global_rotation.y = lerp_angle($RootScene/RootNode.global_rotation.y,target_rotation.y,delta*4)
+	$RootScene/RootNode.global_rotation.y = lerp_angle($RootScene/RootNode.global_rotation.y,target_rotation.y,delta*14)
 	########################################################
 	velocity += moveDirection*runToggle
 	velocity.x = clamp(velocity.x,-MAX_SPEED,MAX_SPEED)
@@ -104,10 +104,10 @@ func animate():
 	if is_on_floor():
 		if velocity.length()>10:
 			$RootScene/AnimationPlayer.play("root|Run",.5)
-			$RootScene/AnimationPlayer.speed_scale = velocity.length()/13
+			$RootScene/AnimationPlayer.speed_scale = velocity.length()/10
 		elif velocity.length()>1:
 			$RootScene/AnimationPlayer.play("root|Walk",.5)
-			$RootScene/AnimationPlayer.speed_scale = velocity.length()/9
+			$RootScene/AnimationPlayer.speed_scale = velocity.length()/6
 		else:
 			$RootScene/AnimationPlayer.play("root|Idle",.5)
 			$RootScene/AnimationPlayer.speed_scale = 1
