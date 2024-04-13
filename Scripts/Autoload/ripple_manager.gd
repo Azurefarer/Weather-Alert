@@ -83,6 +83,9 @@ func inst_ripple_click(pos : Vector2) -> void:
 	wave_timer.append(timer)
 	wave_position.append(pos)
 	increase_num_inst()
+	
+# TODO: make it so that ripples dont clutter the screen so much.
+# Shorten time left on existing timers or speed up their countdown.
 
 func decrease_num_inst() -> void:
 	num_inst -= 1
