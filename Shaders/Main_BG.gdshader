@@ -8,10 +8,10 @@ uniform vec2[max_inst] hover;
 uniform float[max_inst] time_since_hover;
 
 // Wave data
-uniform float _VertexVelocityMult : hint_range(0.0, 3.0);
-uniform float _VertexVelocity : hint_range(0.0, 50.0);
-uniform float _VertexWavelengthMult : hint_range(0.0, 2.0);
-uniform float _VertexWavelength : hint_range(0.0, 1000.0);
+uniform float _VertexVelocityMult : hint_range(0.0, 3.0) = 0.83;
+uniform float _VertexVelocity : hint_range(0.0, 50.0) = 13.5;
+uniform float _VertexWavelengthMult : hint_range(0.0, 2.0) = 0.73;
+uniform float _VertexWavelength : hint_range(0.0, 1000.0) = 60.0;
 // Ripple data
 uniform float _RippleVelocityMult : hint_range(0.0, 3.0) = 0.6;
 uniform float _RippleVelocity : hint_range(0.0, 50.0) = 16.0;

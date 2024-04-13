@@ -1,29 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://c2ei7wexs7rb7"]
+[gd_scene load_steps=9 format=3 uid="uid://c2ei7wexs7rb7"]
 
 [ext_resource type="Script" path="res://Scripts/Main.gd" id="1_36uvr"]
 [ext_resource type="FontFile" uid="uid://diyl4h4a00hli" path="res://Assets/Fonts/GmarketSansTTFLight.ttf" id="1_oieq6"]
 [ext_resource type="Texture2D" uid="uid://htvxvd3tlalj" path="res://Assets/EtcImages/WeatherAlertIconBig.png" id="2_6wsx3"]
-[ext_resource type="Shader" path="res://Shaders/Main_BG.gdshader" id="2_jdy6r"]
+[ext_resource type="Material" uid="uid://b0xtnqw3f6cr3" path="res://Shaders/Materials/ripple_ring.tres" id="2_kj15u"]
 [ext_resource type="Script" path="res://Scripts/ButtonProperties.gd" id="3_ugwyl"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_k1wjb"]
-shader = ExtResource("2_jdy6r")
-shader_parameter/hover = PackedVector2Array()
-shader_parameter/time_since_hover = PackedFloat32Array()
-shader_parameter/_VertexVelocityMult = 0.839
-shader_parameter/_VertexVelocity = 13.531
-shader_parameter/_VertexWavelengthMult = 0.731
-shader_parameter/_VertexWavelength = 59.299
-shader_parameter/_RippleVelocityMult = 0.6
-shader_parameter/_RippleVelocity = 16.0
-shader_parameter/_RippleWavelengthMult = 0.5
-shader_parameter/_RippleWavelength = 150.0
-shader_parameter/_WaveGroupVelocity = 250.0
-shader_parameter/_DispersionCoeff = 0.8
-shader_parameter/_RipplePeakWidth = 13.0
-shader_parameter/wave_time = null
-shader_parameter/num_inst = null
-shader_parameter/intensity = 0.25
 
 [sub_resource type="Gradient" id="Gradient_uockt"]
 colors = PackedColorArray(0, 0, 0, 1, 0, 1, 1, 1)
@@ -49,7 +30,7 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="BG" type="TextureRect" parent="."]
-material = SubResource("ShaderMaterial_k1wjb")
+material = ExtResource("2_kj15u")
 layout_mode = 0
 offset_right = 2618.0
 offset_bottom = 1418.0
