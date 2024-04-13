@@ -6,14 +6,17 @@
 [ext_resource type="Shader" path="res://Shaders/Main_BG.gdshader" id="2_jdy6r"]
 [ext_resource type="Script" path="res://Scripts/ButtonProperties.gd" id="3_ugwyl"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_k1wjb"]
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_dktlg"]
+blend_mode = 1
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_n3trf"]
 shader = ExtResource("2_jdy6r")
-shader_parameter/hover = PackedVector2Array()
-shader_parameter/time_since_hover = PackedFloat32Array()
-shader_parameter/_VertexVelocityMult = 0.839
-shader_parameter/_VertexVelocity = 13.531
-shader_parameter/_VertexWavelengthMult = 0.731
-shader_parameter/_VertexWavelength = 59.299
+shader_parameter/hover = null
+shader_parameter/time_since_hover = null
+shader_parameter/_VertexVelocityMult = null
+shader_parameter/_VertexVelocity = null
+shader_parameter/_VertexWavelengthMult = null
+shader_parameter/_VertexWavelength = null
 shader_parameter/_RippleVelocityMult = 0.6
 shader_parameter/_RippleVelocity = 16.0
 shader_parameter/_RippleWavelengthMult = 0.5
@@ -24,9 +27,6 @@ shader_parameter/_RipplePeakWidth = 13.0
 shader_parameter/wave_time = null
 shader_parameter/num_inst = null
 shader_parameter/intensity = 0.25
-
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_dktlg"]
-blend_mode = 1
 
 [sub_resource type="Gradient" id="Gradient_uockt"]
 colors = PackedColorArray(0, 0, 0, 1, 0, 1, 1, 1)
@@ -55,9 +55,6 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="BG" type="TextureRect" parent="."]
-material = SubResource("ShaderMaterial_k1wjb")
-
 [node name="WeatherAlertIconBig" type="Sprite2D" parent="Main_UI"]
 modulate = Color(1, 1, 1, 0.388235)
 z_index = 100
@@ -66,6 +63,7 @@ position = Vector2(874, 398)
 texture = ExtResource("2_6wsx3")
 
 [node name="BG" type="TextureRect" parent="Main_UI"]
+material = SubResource("ShaderMaterial_n3trf")
 layout_mode = 0
 offset_right = 2618.0
 offset_bottom = 1418.0
@@ -192,23 +190,24 @@ theme_override_fonts/normal_font = ExtResource("1_oieq6")
 theme_override_font_sizes/normal_font_size = 20
 text = "OPTIONS"
 
-[node name="Level" type="Node3D" parent="."]
+[node name="BG" type="TextureRect" parent="."]
+layout_mode = 0
 
-[connection signal="pressed" from="Main_UI/Start" to="Main_UI/Start" method="_on_pressed"]
-[connection signal="pressed" from="Main_UI/Debug" to="Main_UI/Debug" method="_on_pressed"]
-[connection signal="pressed" from="Main_UI/Host" to="Main_UI/Host" method="_on_pressed"]
-[connection signal="pressed" from="Main_UI/Join" to="Main_UI/Join" method="_on_pressed"]
-[connection signal="pressed" from="Main_UI/Options" to="Main_UI/Options" method="_on_pressed"]
+[node name="Level" type="Node3D" parent="."]
 
 [connection signal="mouse_entered" from="Main_UI/Start" to="Main_UI/Start" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="Main_UI/Start" to="Main_UI/Start" method="_on_mouse_exited"]
+[connection signal="pressed" from="Main_UI/Start" to="Main_UI/Start" method="_on_pressed"]
 [connection signal="mouse_entered" from="Main_UI/Debug" to="Main_UI/Debug" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="Main_UI/Debug" to="Main_UI/Debug" method="_on_mouse_exited"]
 [connection signal="pressed" from="Main_UI/Debug" to="." method="_on_debug_pressed"]
+[connection signal="pressed" from="Main_UI/Debug" to="Main_UI/Debug" method="_on_pressed"]
 [connection signal="mouse_entered" from="Main_UI/Host" to="Main_UI/Host" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="Main_UI/Host" to="Main_UI/Host" method="_on_mouse_exited"]
+[connection signal="pressed" from="Main_UI/Host" to="Main_UI/Host" method="_on_pressed"]
 [connection signal="mouse_entered" from="Main_UI/Join" to="Main_UI/Join" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="Main_UI/Join" to="Main_UI/Join" method="_on_mouse_exited"]
+[connection signal="pressed" from="Main_UI/Join" to="Main_UI/Join" method="_on_pressed"]
 [connection signal="mouse_entered" from="Main_UI/Options" to="Main_UI/Options" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="Main_UI/Options" to="Main_UI/Options" method="_on_mouse_exited"]
-
+[connection signal="pressed" from="Main_UI/Options" to="Main_UI/Options" method="_on_pressed"]
