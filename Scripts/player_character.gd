@@ -30,6 +30,8 @@ func _physics_process(delta):
 	if playerFocus() and fullyActionable():
 		moveInputs(delta)
 		checkJump()
+	velocity.x = lerpf(velocity.x,0.0,clamp(delta*DRAG,0,1))
+	velocity.z = lerpf(velocity.z,0.0,clamp(delta*DRAG,0,1))
 	move_and_slide()
 	mouseDelta = Vector2.ZERO
 	animate()
@@ -83,10 +85,6 @@ func moveInputs(delta):
 	velocity += moveDirection*runToggle
 	velocity.x = clamp(velocity.x,-MAX_SPEED,MAX_SPEED)
 	velocity.z = clamp(velocity.z,-MAX_SPEED,MAX_SPEED)
-	if true:#moveDirection == Vector3.ZERO:
-		velocity.x = lerpf(velocity.x,0.0,clamp(delta*DRAG,0,1))
-		velocity.z = lerpf(velocity.z,0.0,clamp(delta*DRAG,0,1))
-		print("velocity: "+str(velocity))
 		
 func playerFocus():
 	match Input.get_mouse_mode():

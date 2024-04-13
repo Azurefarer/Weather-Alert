@@ -25,6 +25,7 @@ tonemap_white = 3.38
 [node name="CSGMesh3D" type="CSGMesh3D" parent="."]
 transform = Transform3D(-1, -3.82137e-15, -8.74228e-08, -8.74228e-08, 4.37114e-08, 1, 0, 1, -4.37114e-08, 0, 0, 0)
 use_collision = true
+collision_mask = 0
 mesh = SubResource("QuadMesh_uxsru")
 material = SubResource("StandardMaterial3D_8ixfj")
 
@@ -34,3 +35,8 @@ transform = Transform3D(0.814349, 0.14988, 0.560689, -0.580376, 0.210302, 0.7867
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_xpl3y")
 camera_attributes = SubResource("CameraAttributesPhysical_6k6yt")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.22812, 2.66166, -4.88403)
+use_collision = true
+size = Vector3(1, 1, 10.7681)
