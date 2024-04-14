@@ -43,9 +43,9 @@ func _input(event: InputEvent) -> void:
 	
 func checkRun():
 	if Input.is_action_pressed("run"):
-		runToggle = 6
+		runToggle = 3
 	else:
-		runToggle = 2
+		runToggle = 1
 		
 func checkJump():
 	if Input.is_action_pressed("jump"):
@@ -56,11 +56,11 @@ func checkJump():
 				jumpIndex = 2
 			2:
 				jumpIndex = 1
-		velocity.y = 50
+		velocity.y = 30
 		
 func gravity(delta):
 	if !is_on_floor():
-		velocity.y-=clamp(delta*FALL_SPEED,0,15)
+		velocity.y-=clamp(delta*FALL_SPEED/2,0,10)
 		
 func moveInputs(delta):
 	moveDirection = Vector3.ZERO
@@ -102,10 +102,10 @@ func animate():
 	if is_on_floor():
 		if velocity.length()>10:
 			$RootScene/AnimationPlayer.play("root|Run",.5)
-			$RootScene/AnimationPlayer.speed_scale = velocity.length()/10
+			$RootScene/AnimationPlayer.speed_scale = velocity.length()/6
 		elif velocity.length()>1:
 			$RootScene/AnimationPlayer.play("root|Walk",.5)
-			$RootScene/AnimationPlayer.speed_scale = velocity.length()/6
+			$RootScene/AnimationPlayer.speed_scale = velocity.length()/4
 		else:
 			$RootScene/AnimationPlayer.play("root|Idle",.5)
 			$RootScene/AnimationPlayer.speed_scale = 1
