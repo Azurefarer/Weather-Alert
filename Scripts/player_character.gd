@@ -10,11 +10,16 @@ var mouseDelta: Vector2
 var runToggle = 10
 var moveDirection = Vector3.ZERO
 var flattening = false
+var camera
+var canSnap = false
 @export var rotateCheckRay: RayCast3D
 @export var floorCheckRay: RayCast3D
+@export var snapCheckRay: RayCast3D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	camera = $Camera3D
+	remove_child(camera)
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -36,7 +41,8 @@ func _physics_process(delta):
 	velocity.x = lerpf(velocity.x,0.0,clamp(delta*DRAG,0,1))
 	velocity.z = lerpf(velocity.z,0.0,clamp(delta*DRAG,0,1))
 	move_and_slide()
-	if floorCheckRay.is_colliding():
+	if snapCheckRay.is_colliding() and canSnap:
+		pass
 		apply_floor_snap()
 	mouseDelta = Vector2.ZERO
 	animate()
@@ -62,11 +68,14 @@ func checkJump():
 			2:
 				jumpIndex = 1
 		velocity.y = 15
+		canSnap = false
 		
 func gravity(delta):
 	if !is_on_floor():
-		velocity.y-=clamp(delta*FALL_SPEED/6,0,10)
+		velocity.y-=clamp(delta*FALL_SPEED/6,0,3)
 	else:
+		if !canSnap:
+			canSnap = true
 		velocity.y= 0
 
 func rotateToNormal():
@@ -78,7 +87,7 @@ func rotateToNormal():
 		var rotationSpeed = 0
 		rotationSpeed = (8-clamp(length,0,8))
 		#print(rotationSpeed)
-		basis.y = lerp(basis.y,normal,GameManager.global_delta*rotationSpeed*30) 
+		basis.y = lerp(basis.y,normal,GameManager.global_delta*rotationSpeed*3) 
 		basis.x = lerp(basis.x,-basis.z.cross(normal),GameManager.global_delta)
 		basis = basis.orthonormalized()
 		up_direction = normal
@@ -99,14 +108,16 @@ func moveInputs(delta):
 	moveDirection = Vector3.ZERO
 	rotation.y -= mouseDelta.x * TURN_SPEED * delta
 	if Input.is_action_just_released("scrolldown"):
-		$Camera3D.fov+=5
+		camera.fov+=5
 	elif Input.is_action_just_released("scrollup"):
-		$Camera3D.fov-=5
-	$Camera3D.fov = clamp($Camera3D.fov,10,70)	
-	$Camera3D.rotation.x -= mouseDelta.y * TURN_SPEED * delta
-	$Camera3D.rotation.x = clamp($Camera3D.rotation.x,-1.1,.3)
-	$Camera3D.position.y = 2-$Camera3D.rotation.x*10
-	$Camera3D.position.z = -12-$Camera3D.rotation.x*5
+		camera.fov-=5
+	camera.fov = clamp(camera.fov,10,70)	
+	$Camera3Dtrack.rotation.x -= mouseDelta.y * TURN_SPEED * delta
+	$Camera3Dtrack.rotation.x = clamp($Camera3Dtrack.rotation.x,-1.1,.3)
+	$Camera3Dtrack.position.y = 2-$Camera3Dtrack.rotation.x*10
+	$Camera3Dtrack.position.z = -12-$Camera3Dtrack.rotation.x*5
+	camera.global_position = lerp(camera.global_position,$Camera3Dtrack.global_position,delta)
+	camera.rotation = $Camera3Dtrack.global_rotation
 	if Input.is_action_pressed("forward"):
 		moveDirection += basis.z
 	if Input.is_action_pressed("back"):
