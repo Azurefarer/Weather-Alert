@@ -10,16 +10,21 @@ var mouseDelta: Vector2
 var runToggle = 10
 var moveDirection = Vector3.ZERO
 var flattening = false
-var camera
+@export var camera: Camera3D
+@export var cameraTrack: Node3D
 var canSnap = false
+var jumping = false
+var landing = false
+var landPower = 0
 @export var rotateCheckRay: RayCast3D
 @export var floorCheckRay: RayCast3D
 @export var snapCheckRay: RayCast3D
+var tilt = -.6
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	camera = $Camera3D
-	remove_child(camera)
+	camera.reparent(get_node("/root"))
+	$Camera3Dtrack.reparent(get_node("/root"))
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -27,6 +32,7 @@ func _process(delta):
 	pass
 
 func _physics_process(delta):
+	landing = is_on_floor()
 	if Input.is_action_just_pressed("tab"):
 		match Input.get_mouse_mode():
 			Input.MOUSE_MODE_CAPTURED:
@@ -44,8 +50,20 @@ func _physics_process(delta):
 	if snapCheckRay.is_colliding() and canSnap:
 		pass
 		apply_floor_snap()
-	mouseDelta = Vector2.ZERO
 	animate()
+	
+	camera.fov = clamp(camera.fov,10,70)	
+	tilt -= mouseDelta.y * TURN_SPEED * delta
+	tilt = clamp(tilt,-1.1,.3)
+	print(tilt)
+	cameraTrack.global_position = global_position + Vector3(basis.z.x,0,basis.z.z)*(-12-tilt*5)
+	cameraTrack.global_position.y = 2+ global_position.y-tilt*10
+	camera.global_position = lerp(camera.global_position,cameraTrack.global_position,delta*50)
+	camera.look_at(self.global_position+Vector3.UP*.5)
+	#camera.rotation.x = cameraTrack.rotation.x
+	if is_on_floor() and !landing:
+		land()
+	mouseDelta = Vector2.ZERO
 	
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
@@ -59,7 +77,7 @@ func checkRun():
 		runToggle = 1
 		
 func checkJump():
-	if Input.is_action_pressed("jump"):
+	if Input.is_action_pressed("jump") and !jumping:
 		if !is_on_floor():
 			return
 		match jumpIndex:
@@ -67,16 +85,32 @@ func checkJump():
 				jumpIndex = 2
 			2:
 				jumpIndex = 1
-		velocity.y = 15
-		canSnap = false
+		jump()
+		
+func jump():
+	jumping = true
+	await get_tree().create_timer(.2).timeout
+	canSnap = false
+	velocity.y = 15
+	await get_tree().create_timer(.1).timeout
+	jumping = false
+
+func land():
+	landing = true
+	await get_tree().create_timer(.005*landPower).timeout
+	landPower = 0
 		
 func gravity(delta):
 	if !is_on_floor():
-		velocity.y-=clamp(delta*FALL_SPEED/6,0,3)
+		landPower = abs(velocity.y)
+		landing = false
+		canSnap = false
+		velocity.y-=delta*FALL_SPEED/6
+		#velocity.y = clamp(velocity.y,0,1)
 	else:
-		if !canSnap:
+		if !jumping:
 			canSnap = true
-		velocity.y= 0
+			velocity.y= 0
 
 func rotateToNormal():
 	if rotateCheckRay.is_colliding():
@@ -111,13 +145,12 @@ func moveInputs(delta):
 		camera.fov+=5
 	elif Input.is_action_just_released("scrollup"):
 		camera.fov-=5
-	camera.fov = clamp(camera.fov,10,70)	
-	$Camera3Dtrack.rotation.x -= mouseDelta.y * TURN_SPEED * delta
-	$Camera3Dtrack.rotation.x = clamp($Camera3Dtrack.rotation.x,-1.1,.3)
-	$Camera3Dtrack.position.y = 2-$Camera3Dtrack.rotation.x*10
-	$Camera3Dtrack.position.z = -12-$Camera3Dtrack.rotation.x*5
-	camera.global_position = lerp(camera.global_position,$Camera3Dtrack.global_position,delta)
-	camera.rotation = $Camera3Dtrack.global_rotation
+	var normal = (rotateCheckRay.get_collision_normal()+Vector3.UP).normalized()
+	var rotationSpeed = 10
+	#print(rotationSpeed)
+	camera.global_transform.basis.y = lerp(camera.global_transform.basis.y,cameraTrack.global_transform.basis.y,GameManager.global_delta*rotationSpeed*3) 
+	camera.global_transform.basis.x = lerp(camera.global_transform.basis.x,-camera.global_transform.basis.z.cross(cameraTrack.global_transform.basis.y),GameManager.global_delta*rotationSpeed*3)
+	camera.basis = camera.basis.orthonormalized()	
 	if Input.is_action_pressed("forward"):
 		moveDirection += basis.z
 	if Input.is_action_pressed("back"):
@@ -138,7 +171,7 @@ func moveInputs(delta):
 	$RootScene/RootNode.rotation.y = lerp_angle($RootScene/RootNode.rotation.y,target_rotation.y,delta*14)
 	#$RootScene/RootNode.rotate(basis.y,target_rotation.y)
 	########################################################
-	velocity += moveDirection*runToggle
+	velocity += moveDirection*runToggle/2
 	velocity.x = clamp(velocity.x,-MAX_SPEED,MAX_SPEED)
 	velocity.z = clamp(velocity.z,-MAX_SPEED,MAX_SPEED)
 		
@@ -156,14 +189,21 @@ func fullyActionable():
 
 func animate():
 	if is_on_floor() or floorCheckRay.is_colliding():
-		if velocity.length()>10:
-			$RootScene/AnimationPlayer.play("root|Run",.5)
-			$RootScene/AnimationPlayer.speed_scale = velocity.length()/6
+		if jumping:
+			$RootScene/AnimationPlayer.play("root|Crouch",.1)
+			$RootScene/AnimationPlayer.speed_scale = 3
+		elif landing and landPower>0:
+			print(landPower)
+			$RootScene/AnimationPlayer.play("root|Crouch",.1)
+			$RootScene/AnimationPlayer.speed_scale = landPower*.2
+		elif velocity.length()>5:
+			$RootScene/AnimationPlayer.play("root|Run",.1)
+			$RootScene/AnimationPlayer.speed_scale = velocity.length()/3
 		elif velocity.length()>1:
-			$RootScene/AnimationPlayer.play("root|Walk",.5)
-			$RootScene/AnimationPlayer.speed_scale = velocity.length()/4
+			$RootScene/AnimationPlayer.play("root|Walk",.1)
+			$RootScene/AnimationPlayer.speed_scale = velocity.length()/2
 		else:
-			$RootScene/AnimationPlayer.play("root|Idle",.5)
+			$RootScene/AnimationPlayer.play("root|Idle",.1)
 			$RootScene/AnimationPlayer.speed_scale = 1
 	elif velocity.y>0:
 		$RootScene/AnimationPlayer.play("root|Jump"+str(jumpIndex),.5)

@@ -8,8 +8,8 @@ extends Skeleton3D
 @export var linear_spring_stiffness: float = 1500.0
 @export var linear_spring_damping: float =  50.0
 
-@export var angular_spring_stiffness: float = 1000.0
-@export var angular_spring_damping: float = 60.0
+@export var angular_spring_stiffness: float = 400
+@export var angular_spring_damping: float = 30.0
 
 var physics_bones
 # Called when the node enters the scene tree for the first time.
@@ -29,7 +29,6 @@ func _physics_process(delta):
 		var position_difference: Vector3 = target_transform.origin - current_transform.origin
 		var force = hookes_law(position_difference, b.linear_velocity, linear_spring_stiffness, linear_spring_damping)
 		b.linear_velocity += (force*delta)
-		
 		var rotation_difference: Basis = (target_transform.basis * current_transform.basis.inverse())
 		var relative_rotation_difference: Basis = (target_transform_no_collide.basis * target_transform.basis.inverse())
 		var torque = hookes_law(rotation_difference.get_euler(), b.angular_velocity, angular_spring_stiffness, angular_spring_damping)
