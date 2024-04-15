@@ -5,11 +5,11 @@ extends Skeleton3D
 @export var target_skeleton: Skeleton3D
 @export var skeleton_no_collision: Skeleton3D
 
-@export var linear_spring_stiffness: float = 2000.0
-@export var linear_spring_damping: float =  40.0
+@export var linear_spring_stiffness: float = 1500.0
+@export var linear_spring_damping: float =  50.0
 
-@export var angular_spring_stiffness: float = 2000.0
-@export var angular_spring_damping: float = 50.0
+@export var angular_spring_stiffness: float = 1000.0
+@export var angular_spring_damping: float = 60.0
 
 var physics_bones
 # Called when the node enters the scene tree for the first time.
