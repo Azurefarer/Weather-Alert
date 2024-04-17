@@ -1,22 +1,3 @@
-[gd_scene format=3 uid="uid://cojoo2c73fpsb"]
-
-[node name="HSplitContainer" type="HSplitContainer"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-split_offset = 250
-
-[node name="Tree" type="Tree" parent="."]
-layout_mode = 2
-offset_right = 250.0
-offset_bottom = 648.0
-
-[node name="RichTextLabel" type="RichTextLabel" parent="."]
-layout_mode = 2
-offset_left = 262.0
-offset_right = 1152.0
-offset_bottom = 648.0
-bbcode_enabled = true
-text = "[center] [b] [i] Documentation page [/i] [/b] [/center]"
+version https://git-lfs.github.com/spec/v1
+oid sha256:9fd1d3494d7887bb1e48ec8a6cdbebd1193e9ac9812ad80b7f217b924d3cf51b
+size 546

@@ -1,9 +1,3 @@
-[gd_scene load_steps=3 format=3 uid="uid://cia3jakp3wj1d"]
-
-[ext_resource type="PackedScene" uid="uid://dcnm2ijk7hj4j" path="res://addons/proton_scatter/demos/assets/models/grass_2.glb" id="1_xyqky"]
-[ext_resource type="Material" uid="uid://c4mot1fo3siox" path="res://addons/proton_scatter/demos/assets/materials/m_grass.tres" id="2_63qe5"]
-
-[node name="grass_2" instance=ExtResource("1_xyqky")]
-
-[node name="Grass" parent="." index="0"]
-surface_material_override/0 = ExtResource("2_63qe5")
+version https://git-lfs.github.com/spec/v1
+oid sha256:712edab1363bef681999e70af001658c1e4ae8329e88bd972593e52b35ce7e6e
+size 491
