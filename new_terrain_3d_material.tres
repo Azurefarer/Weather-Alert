@@ -402,12 +402,16 @@ void fragment() {
 [resource]
 _shader_parameters = {
 "_mouse_layer": 2147483648,
-"blend_sharpness": 0.0,
-"dual_scale_far": null,
-"dual_scale_near": null,
-"dual_scale_reduction": 0.222,
+"auto_base_texture": 1,
+"auto_height_reduction": 0.0,
+"auto_overlay_texture": 0,
+"auto_slope": 0.603,
+"blend_sharpness": 0.213,
+"dual_scale_far": 341.772,
+"dual_scale_near": 0.0,
+"dual_scale_reduction": 0.187,
 "dual_scale_texture": 0,
-"height_blending": false,
+"height_blending": true,
 "macro_variation1": null,
 "macro_variation2": null,
 "noise1_angle": 0.0,
@@ -418,5 +422,6 @@ _shader_parameters = {
 "noise_texture": SubResource("NoiseTexture2D_11jgk"),
 "tri_scale_reduction": 0.267
 }
+auto_shader = true
 dual_scaling = true
 shader_override = SubResource("Shader_w5io0")

@@ -148,7 +148,7 @@ func _input(event: InputEvent) -> void:
 	
 func checkRun():
 	if Input.is_action_pressed("run"):
-		runToggle = 3
+		runToggle =4
 	else:
 		runToggle = 1
 		
