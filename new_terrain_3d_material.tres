@@ -409,7 +409,7 @@ _shader_parameters = {
 "blend_sharpness": 0.213,
 "dual_scale_far": 341.772,
 "dual_scale_near": 0.0,
-"dual_scale_reduction": 0.187,
+"dual_scale_reduction": 0.102,
 "dual_scale_texture": 0,
 "height_blending": true,
 "macro_variation1": null,
