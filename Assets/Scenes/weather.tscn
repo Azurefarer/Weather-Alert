@@ -1,21 +1,3 @@
-[gd_scene load_steps=4 format=3 uid="uid://dmv7x268u30rw"]
-
-[ext_resource type="Script" path="res://Scripts/weather.gd" id="1_cy8tf"]
-[ext_resource type="Script" path="res://Scripts/weather_indices.gd" id="2_c8wdk"]
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_gdodt"]
-size = Vector3(1000, 200, 1000)
-
-[node name="Weather" type="Node3D"]
-script = ExtResource("1_cy8tf")
-
-[node name="Weather Space" type="Area3D" parent="."]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Weather Space"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 100, 0)
-shape = SubResource("BoxShape3D_gdodt")
-
-[node name="WeatherIndexTracker" type="Node" parent="."]
-script = ExtResource("2_c8wdk")
-
-[connection signal="body_entered" from="Weather Space" to="." method="_on_weather_space_body_entered"]
+version https://git-lfs.github.com/spec/v1
+oid sha256:043afc116fa68393dfd43c0c1e71f4597ac8e67045af294bd326801d068997dc
+size 802

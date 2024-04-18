@@ -1,11 +1,3 @@
-[gd_scene load_steps=3 format=3 uid="uid://dxvit65f8s0vu"]
-
-[ext_resource type="PackedScene" uid="uid://cr5ea21cm60fc" path="res://Assets/Cans/Can of Worms.glb" id="1_ew3vt"]
-[ext_resource type="Script" path="res://Scripts/physical_properties.gd" id="2_teh51"]
-
-[node name="box" type="Node3D"]
-
-[node name="Can of Worms" parent="." instance=ExtResource("1_ew3vt")]
-
-[node name="PhysicalProperties" type="Node" parent="."]
-script = ExtResource("2_teh51")
+version https://git-lfs.github.com/spec/v1
+oid sha256:a21f029cd96857b2fe946e69b620dd14d75b8f1500e45f15c7a7e0540f3ae98e
+size 454
