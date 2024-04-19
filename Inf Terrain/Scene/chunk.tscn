@@ -1,3 +1,6 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:34f9d53effb32cad725eda7023f61d427736a4149bfaba984b59eb766c48604e
-size 218
+[gd_scene load_steps=2 format=3 uid="uid://blny7yo7bst36"]
+
+[ext_resource type="Script" path="res://Inf Terrain/Script/Chunk.gd" id="1_liulg"]
+
+[node name="Chunk" type="MeshInstance3D"]
+script = ExtResource("1_liulg")

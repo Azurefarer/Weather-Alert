@@ -1,3 +1,3 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:868ffe22b0e143a907330dbd8028ec8ba0ada79be0d0cd17049fd6ca798300d0
-size 95
+[gd_scene format=3 uid="uid://c8e5plk5qpxpq"]
+
+[node name="WeatherStateMachine" type="Node3D"]
