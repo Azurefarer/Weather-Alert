@@ -62,6 +62,7 @@ func final_weather() -> void:
 	
 func do_rainy_things(amp : float):
 	player_shader.set("shader_parameter/vignette_color", WeatherData.colors.teal)
+	WeatherData.wind_factor = 3.0
 
 func do_blizzard_things(amp : float):
 	player_shader.set("shader_parameter/vignette_color", WeatherData.colors.icy_blue)
