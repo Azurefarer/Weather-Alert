@@ -1,3 +1,33 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:a607d22cb68a54eb4b6dc8fa3560f1909d874463489dbe041be9c6728229b3de
-size 1240
+[gd_scene load_steps=6 format=3 uid="uid://b64005w06vqle"]
+
+[ext_resource type="Material" uid="uid://vkkpylxda5br" path="res://WeatherSystem/Shader/particle_gen_main.tres" id="1_3re5t"]
+[ext_resource type="Shader" path="res://WeatherSystem/Shader/particle_mesh.gdshader" id="1_ctenx"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sg1cy"]
+render_priority = 0
+shader = ExtResource("1_ctenx")
+
+[sub_resource type="BoxMesh" id="BoxMesh_1ma0h"]
+material = SubResource("ShaderMaterial_sg1cy")
+
+[sub_resource type="TorusMesh" id="TorusMesh_qlhe4"]
+inner_radius = 20.14
+outer_radius = 24.041
+
+[node name="ParticleGen" type="Node3D"]
+
+[node name="ParticleShader" type="GPUParticles3D" parent="."]
+amount = 250
+lifetime = 34.05
+randomness = 0.3
+process_material = ExtResource("1_3re5t")
+draw_pass_1 = SubResource("BoxMesh_1ma0h")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.10373, 0.994605, 0, -0.994605, 0.10373, 0, 0, 0, 1, -95.175, 0, 0)
+mesh = SubResource("TorusMesh_qlhe4")
+
+[node name="GPUParticlesAttractorVectorField3D" type="GPUParticlesAttractorVectorField3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -43.121, 0, 0)
+visible = false
+size = Vector3(100, 100, 100)
