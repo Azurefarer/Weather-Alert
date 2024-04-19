@@ -1,3 +1,26 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:6a66ffe1fb1b94b0c72c6fe62c427fbf9bc10980bafe481a9e67332c4c322068
-size 1074
+[gd_scene load_steps=6 format=3 uid="uid://c1whlf4it5d72"]
+
+[ext_resource type="ArrayMesh" uid="uid://cjhvodkgynu1t" path="res://Assets/Props/flower1.obj" id="1_uoic6"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4ws1t"]
+albedo_color = Color(1, 1, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5k8q8"]
+cull_mode = 2
+albedo_color = Color(0, 1, 0.12549, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nt5yb"]
+cull_mode = 2
+albedo_color = Color(0, 1, 0.12549, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8k7mx"]
+
+[node name="Flower1" type="Node3D"]
+
+[node name="Flower1" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.5897, 0, 0, 0, 1.5897, 0, 0, 0, 1.5897, 0, 0, 0)
+mesh = ExtResource("1_uoic6")
+surface_material_override/0 = SubResource("StandardMaterial3D_4ws1t")
+surface_material_override/1 = SubResource("StandardMaterial3D_5k8q8")
+surface_material_override/2 = SubResource("StandardMaterial3D_nt5yb")
+surface_material_override/3 = SubResource("StandardMaterial3D_8k7mx")
