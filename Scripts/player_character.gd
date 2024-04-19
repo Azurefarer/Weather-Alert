@@ -276,13 +276,13 @@ func moveInputs(delta):
 	$RootScene/RootNode.rotation = initial_rotation
 	$RootScene/RootNode.rotation.y = lerp_angle($RootScene/RootNode.rotation.y,target_rotation.y,delta*14)
 	$RootScene/RootNode.rotation.x = lerp_angle($RootScene/RootNode.rotation.x,target_rotation.x,delta*14)
-	$RootScene/RootNode.rotation.z = lerp_angle($RootScene/RootNode.rotation.z,0,delta*7)
+	$RootScene/RootNode.rotation.z = lerp_angle($RootScene/RootNode.rotation.z,0,delta*14)
 	#$RootScene/RootNode.rotate(basis.y,target_rotation.y)
 	########################################################
 	if !is_gliding():
 		velocity += moveDirection*runToggle/2
 	else:
-		velocity += runToggle/2*moveDirection.normalized()*(velocity.length()/200+1)*(clamp(-flightSpeed-2,0,7)+1)+Vector3.UP*(clamp(flightSpeed/2+flightAngle+1,-3,3)*(velocity.length()/200+1))
+		velocity += 5/2.5*moveDirection.normalized()*(velocity.length()/200+1)*(clamp(-flightSpeed-2,0,7)+1)+5/2.5*Vector3.UP*(clamp(flightSpeed/2+flightAngle+1,-3,3)*(velocity.length()/200+1))
 	velocity.x = clamp(velocity.x,-MAX_SPEED,MAX_SPEED)
 	velocity.z = clamp(velocity.z,-MAX_SPEED,MAX_SPEED)
 		
