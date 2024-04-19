@@ -14,6 +14,8 @@ var flattening = false
 @export var cameraTrack: RayCast3D
 var canSnap = false
 var jumping = false
+var flightAngle = 0
+var flightSpeed = 0
 var landing = false
 var holding_item = null
 var landPower = 0
@@ -77,7 +79,6 @@ func toggle_held_item(holding):
 	holding_item.global_rotation = $RootScene.global_rotation
 
 func drop_item():
-	
 	if holding_item == null:
 		return
 	targeted_item = holding_item
@@ -110,7 +111,7 @@ func _physics_process(delta):
 	
 	camera.fov = clamp(camera.fov,10,70)	
 	tilt -= mouseDelta.y * TURN_SPEED * delta
-	tilt = clamp(tilt,-1.1,.3)
+	tilt = clamp(tilt,-2.1,2.1)
 	#print(tilt)
 
 	cameraTrack.global_position = global_position + Vector3(basis.z.x,0,basis.z.z)*(-12-tilt*5)
@@ -145,7 +146,12 @@ func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		mouseDelta.x = event.relative.x
 		mouseDelta.y = event.relative.y
-	
+
+func is_gliding():
+	if holding_item != null: 
+			if holding_item.name_=="Glider" and !is_on_floor():
+				return true
+
 func checkRun():
 	if Input.is_action_pressed("run"):
 		runToggle =4
@@ -233,7 +239,7 @@ func moveInputs(delta):
 	#print(rotationSpeed)
 	camera.global_transform.basis.y = lerp(camera.global_transform.basis.y,cameraTrack.global_transform.basis.y,GameManager.global_delta*rotationSpeed*3) 
 	camera.global_transform.basis.x = lerp(camera.global_transform.basis.x,-camera.global_transform.basis.z.cross(cameraTrack.global_transform.basis.y),GameManager.global_delta*rotationSpeed*3)
-	camera.basis = camera.basis.orthonormalized()	
+	camera.basis = camera.basis.orthonormalized()
 	if Input.is_action_pressed("forward"):
 		moveDirection += basis.z
 	if Input.is_action_pressed("back"):
@@ -242,22 +248,41 @@ func moveInputs(delta):
 		moveDirection -= basis.x
 	if Input.is_action_pressed("left"):
 		moveDirection += basis.x
-	moveDirection.y = 0
-	moveDirection = moveDirection.normalized()
+		moveDirection.y = 0
+		moveDirection = moveDirection.normalized()
+	if is_gliding():
+		moveDirection = Vector3.ZERO
+		if Input.is_action_pressed("forward"):
+			moveDirection += $RootScene/RootNode.global_basis.z
+		if Input.is_action_pressed("right"):
+			moveDirection -= basis.x
+		if Input.is_action_pressed("left"):
+			moveDirection += basis.x
+		moveDirection += $RootScene/RootNode.global_basis.z
+			
 	## rotate toward direction #############################
 	#rotateToNormal()
 	var initial_rotation = $RootScene/RootNode.rotation
+	flightAngle = 0
 	if moveDirection != Vector3.ZERO:
 		$RootScene/RootNode.look_at($RootScene/RootNode.global_position-moveDirection*100)
+		if is_gliding():
+			$RootScene/RootNode.look_at(global_position+camera.global_basis.z*100-moveDirection*100)
+			flightAngle = $RootScene/RootNode.rotation.x*3
+			flightSpeed -= (flightAngle+.7)*delta
+		else:
+			flightSpeed = 0
 	var target_rotation = $RootScene/RootNode.rotation
 	$RootScene/RootNode.rotation = initial_rotation
 	$RootScene/RootNode.rotation.y = lerp_angle($RootScene/RootNode.rotation.y,target_rotation.y,delta*14)
+	$RootScene/RootNode.rotation.x = lerp_angle($RootScene/RootNode.rotation.x,target_rotation.x,delta*14)
+	$RootScene/RootNode.rotation.z = lerp_angle($RootScene/RootNode.rotation.z,0,delta*7)
 	#$RootScene/RootNode.rotate(basis.y,target_rotation.y)
 	########################################################
-	if holding_item != null:
-		if holding_item.name_=="Glider" and !is_on_floor():
-			velocity += $RootScene/RootNode.global_basis.z*2
-	velocity += moveDirection*runToggle/2
+	if !is_gliding():
+		velocity += moveDirection*runToggle/2
+	else:
+		velocity += runToggle/2*moveDirection.normalized()*(velocity.length()/200+1)*(clamp(-flightSpeed-2,0,7)+1)+Vector3.UP*(clamp(flightSpeed/2+flightAngle+1,-3,3)*(velocity.length()/200+1))
 	velocity.x = clamp(velocity.x,-MAX_SPEED,MAX_SPEED)
 	velocity.z = clamp(velocity.z,-MAX_SPEED,MAX_SPEED)
 		
@@ -274,8 +299,16 @@ func fullyActionable():
 	return true
 
 func animate(delta):
+	if is_gliding():
+		$RootScene/RootNode.global_rotate($RootScene/RootNode.global_basis.z,velocity.dot($RootScene/RootNode.global_basis.x)*delta)
+		$RootScene/AnimationPlayer.play("root|Gliding",.2)
+		$RootScene/AnimationPlayer.speed_scale = velocity.length()/5
+		return
+	else:
+		rotateFlattenRootNode()
 	if is_on_floor() or floorCheckRay.is_colliding():
 		rotateFlattenRootNode()
+		rotateFlatten()
 		if jumping:
 			$RootScene/AnimationPlayer.play("root|Crouch",.1)
 			$RootScene/AnimationPlayer.speed_scale = 3
@@ -295,19 +328,12 @@ func animate(delta):
 	elif velocity.y>0:
 		$RootScene/AnimationPlayer.play("root|Jump"+str(jumpIndex),.5)
 		$RootScene/AnimationPlayer.speed_scale = 1
-	else:
-		if holding_item != null:
-			if holding_item.name_=="Glider":
-				$RootScene/RootNode.global_rotate($RootScene/RootNode.global_basis.z,velocity.dot($RootScene/RootNode.global_basis.x)*delta)
-				$RootScene/AnimationPlayer.play("root|Gliding",.2)
-				$RootScene/AnimationPlayer.speed_scale = velocity.length()/5
-			else:
-				rotateFlattenRootNode()
-		elif $RootScene/AnimationPlayer.current_animation!="root|Jump"+str(jumpIndex):
-			rotateFlattenRootNode()
-			$RootScene/AnimationPlayer.play("root|Jump"+str(jumpIndex),.5)
-			$RootScene/AnimationPlayer.speed_scale = 1
-			$RootScene/AnimationPlayer.seek(.5)
+	elif $RootScene/AnimationPlayer.current_animation!="root|Jump"+str(jumpIndex):
+		rotateFlattenRootNode()
+		$RootScene/AnimationPlayer.play("root|Jump"+str(jumpIndex),.5)
+		$RootScene/AnimationPlayer.speed_scale = 1
+		$RootScene/AnimationPlayer.seek(.5)
+	
  
 func _on_interact_area_body_entered(body):
 	print(body.name)
