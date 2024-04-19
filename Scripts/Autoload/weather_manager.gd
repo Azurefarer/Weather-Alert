@@ -9,11 +9,11 @@ var weather_props : Dictionary
 
 func _ready() -> void:
 	var root = get_parent()
-	for child in root.get_children():
-		if child is CharacterBody3D:
-			players = child
-	player_shader = players.get_node("ScreenShader").mesh.material
-	print(players)
+	#for child in root.get_children():
+		#if child is CharacterBody3D:
+			#players = child
+	#player_shader = players.get_node("ScreenShader").mesh.material
+	#print(players)
 	#get_players() # Mitch uses player node with gamer children
 
 func _process(delta : float) -> void:
@@ -24,15 +24,15 @@ func _process(delta : float) -> void:
 		
 	
 func weather_update():
-	var indicies = $WeatherIndexTracker.calc_weather_index(players.position, game_time)
-	print($WeatherIndexTracker.calc_weather_index(players.position, game_time))
+	var indicies = calc_weather_index(Vector3(0.0, 0.0, 0.0), game_time) # FIXME: need to do this for all players.
+	print(indicies)
 	for index in WeatherData.weather:
 		if index == "rainy":
-			WeatherData.weather.rainy = (-cos(WeatherData.indicies.temperature) + 1.0) + (cos(WeatherData.indicies.pressure) + 1.0) + (cos(WeatherData.indicies.dryness) + 1.0)
+			WeatherData.weather.rainy = (-cos(WeatherData.weather_properties.temperature) + 1.0) + (cos(WeatherData.weather_properties.pressure) + 1.0) + (cos(WeatherData.weather_properties.dryness) + 1.0)
 		if index == "blizzard":
-			WeatherData.weather.blizzard = (cos(WeatherData.indicies.temperature) + 1.0) + (-cos(WeatherData.indicies.pressure) + 1.0) + (sin(WeatherData.indicies.dryness) + 1.0)
+			WeatherData.weather.blizzard = (cos(WeatherData.weather_properties.temperature) + 1.0) + (-cos(WeatherData.weather_properties.pressure) + 1.0) + (sin(WeatherData.weather_properties.dryness) + 1.0)
 		if index == "sandstorm":
-			WeatherData.weather.sandstorm = (-cos(WeatherData.indicies.temperature) + 1.0) + (cos(WeatherData.indicies.pressure) + 1.0) + (cos(WeatherData.indicies.dryness) + 1.0)
+			WeatherData.weather.sandstorm = (-cos(WeatherData.weather_properties.temperature) + 1.0) + (cos(WeatherData.weather_properties.pressure) + 1.0) + (cos(WeatherData.weather_properties.dryness) + 1.0)
 	print(str("base weather" + str(WeatherData.weather)))
 	
 	final_weather()
@@ -61,24 +61,26 @@ func final_weather() -> void:
 			do_sandstorm_things(weatherF.get(index))
 	
 func do_rainy_things(amp : float):
-	player_shader.set("shader_parameter/vignette_color", WeatherData.colors.teal)
+	#player_shader.set("shader_parameter/vignette_color", WeatherData.colors.teal)
 	WeatherData.wind_factor = 3.0
 
 func do_blizzard_things(amp : float):
-	player_shader.set("shader_parameter/vignette_color", WeatherData.colors.icy_blue)
+	#player_shader.set("shader_parameter/vignette_color", WeatherData.colors.icy_blue)
+	pass
 
 func do_sandstorm_things(amp : float):
-	player_shader.set("shader_parameter/vignette_color", WeatherData.colors.beige)
+	#player_shader.set("shader_parameter/vignette_color", WeatherData.colors.beige)
+	pass
 
 func calc_weather_index(pos : Vector3, game_time : float) -> Dictionary:
 	# these need to be equations that take in pos and time as varibales
 	# and spit out the desired weather index
 	# Still looking into a sufficient eqn to use here
-		WeatherData.indicies.temperature = sqrt(pos.dot(pos))*sin(game_time)
-		WeatherData.indicies.pressure = sqrt(pos.dot(pos))*sin(game_time)
-		WeatherData.indicies.dryness = sqrt(pos.dot(pos))*sin(game_time)
+		WeatherData.weather_properties.temperature = sqrt(pos.dot(pos))*sin(game_time)
+		WeatherData.weather_properties.pressure = sqrt(pos.dot(pos))*sin(game_time)
+		WeatherData.weather_properties.dryness = sqrt(pos.dot(pos))*sin(game_time)
 		
-		return WeatherData.indicies
+		return WeatherData.weather_properties
 		
 
 
