@@ -39,15 +39,17 @@ var targeted_item: Node3D
 
 func _enter_tree():
 	set_multiplayer_authority(name.to_int())
+	print("set authority: "+str(get_multiplayer_authority()))
+	if !is_multiplayer_authority():
+		print("authority: "+str(get_multiplayer_authority())+"|system: "+str(multiplayer.get_unique_id()))
+		camera.current = false
+		return
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	if !is_multiplayer_authority():
-		camera.current = false
-		print ("UID is not equal to name of player|UID: "+str(multiplayer.get_unique_id())+"|Name of player: "+name)
 		return
-	else:
-		print ("UID is equal to name of player|UID: "+str(multiplayer.get_unique_id())+"|Name of player: "+name)
+	
 		
 	camera.reparent(get_node("/root"))
 	$Camera3Dtrack.reparent(get_node("/root"))
@@ -101,7 +103,7 @@ func drop_item():
 	
 func _physics_process(delta):
 	animate(delta)
-	if multiplayer.get_unique_id()!=name.to_int():
+	if !is_multiplayer_authority():
 		return
 	landing = is_on_floor()
 	if Input.is_action_just_pressed("tab"):
