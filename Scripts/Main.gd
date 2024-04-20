@@ -67,9 +67,9 @@ func change_level(scene :String):
 	hide_UI()
 	level.add_child(stage)
 
-@rpc("any_peer", "call_local") 	
+@rpc("any_peer", "call_local", "reliable") 	
 func add_player(id: int):
-	if multiplayer.get_unique_id() != id:
+	if !is_multiplayer_authority():
 		return
 	print("called add player")
 	var player
@@ -116,7 +116,9 @@ func _on_start_2_pressed():
 	multiplayer.multiplayer_peer = peer
 	
 func _on_connected_ok():
-	rpc("add_player",multiplayer.get_unique_id())
+	print("client UID: "+str(multiplayer.get_unique_id()))
+	#rpc("add_player",multiplayer.get_unique_id())
+	add_player(multiplayer.get_unique_id())
 	change_level("res://Assets/Scenes/World.tscn")
 	#_add_player(peer.generate_unique_id())
 	hide_UI()
