@@ -5,6 +5,7 @@ var stage
 var players
 var global_delta: float
 var gameScreen =-1
+var gameMode = "menu"
 var level
 
 var active_button: Button

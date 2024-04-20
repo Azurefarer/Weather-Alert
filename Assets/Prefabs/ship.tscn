@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://c6kpm6gi7t2ro"]
 
-[ext_resource type="Script" path="res://Scripts/Ship.gd" id="1_nhur4"]
+[ext_resource type="Script" path="res://Scripts/Ship.gd" id="1_sdh15"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x06wf"]
 diffuse_mode = 3
@@ -22,7 +22,7 @@ metallic_specular = 0.9
 roughness = 0.35
 
 [node name="Ship" type="Node3D"]
-script = ExtResource("1_nhur4")
+script = ExtResource("1_sdh15")
 
 [node name="Players" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00541258, 5.96046e-08, 0.297845)

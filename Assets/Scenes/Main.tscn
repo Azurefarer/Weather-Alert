@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://c2ei7wexs7rb7"]
+[gd_scene load_steps=11 format=3 uid="uid://c2ei7wexs7rb7"]
 
 [ext_resource type="Script" path="res://Scripts/Main.gd" id="1_36uvr"]
 [ext_resource type="FontFile" uid="uid://diyl4h4a00hli" path="res://Assets/Fonts/GmarketSansTTFLight.ttf" id="1_oieq6"]
 [ext_resource type="Texture2D" uid="uid://htvxvd3tlalj" path="res://Assets/EtcImages/WeatherAlertIconBig.png" id="2_6wsx3"]
 [ext_resource type="Script" path="res://Scripts/ButtonProperties.gd" id="3_ugwyl"]
+[ext_resource type="PackedScene" uid="uid://bvg87topw1dbf" path="res://Assets/Prefabs/time_and_weather.tscn" id="5_n7et8"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_dktlg"]
 blend_mode = 1
@@ -33,7 +34,7 @@ hostIP = NodePath("Main_UI/Sprite2D/TextEdit")
 joinField = NodePath("Main_UI/Sprite2D")
 
 [node name="ShipSpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("res://Assets/Prefabs/ship.tscn")
+_spawnable_scenes = PackedStringArray("res://Assets/Prefabs/Ship.tscn")
 spawn_path = NodePath("../Level")
 
 [node name="Main_UI" type="Control" parent="."]
@@ -229,6 +230,8 @@ theme_override_colors/selection_color = Color(0, 0, 0, 1)
 placeholder_text = "HOST IP ADDRESS"
 
 [node name="Level" type="Node3D" parent="."]
+
+[node name="TimeAndWeather" parent="." instance=ExtResource("5_n7et8")]
 
 [connection signal="mouse_entered" from="Main_UI/Start" to="Main_UI/Start" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="Main_UI/Start" to="Main_UI/Start" method="_on_mouse_exited"]

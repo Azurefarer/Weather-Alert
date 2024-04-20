@@ -2,9 +2,14 @@ extends RigidBody3D
 
 @export var name_: String
 var holder
+@export var holderID:= -1
 
 @rpc("any_peer","call_local","reliable")
+func update_holder_id(id):
+	holderID = id
+
 func update_holder(id):
+	holder = null
 	for player in GameManager.players.get_children(): 
 		if player.name.to_int() == id:
 			holder = player
@@ -17,6 +22,11 @@ func update_holder(id):
 		collision_layer = 17
 
 func _process(delta):
+	if holderID != 0:
+		if holder == null:
+			update_holder(holderID)
+		elif holderID != holder.name.to_int():
+			update_holder(holderID)
 	if holder:
 		match name_:
 			"FireExtinguisher":

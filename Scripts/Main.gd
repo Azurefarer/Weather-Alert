@@ -46,10 +46,17 @@ func _process(delta):
 	pass
 
 func _on_debug_pressed():
-	if multiplayer.multiplayer_peer == peer:
+	if multiplayer.multiplayer_peer == peer or GameManager.gameMode != "menu":
 		return
+	GameManager.gameMode = "debug"
 	await GameManager.buttonFeedback(GameManager.active_button)
 	change_level(preload("res://Assets/Scenes/Test.tscn"))
+	var player = preload("res://Assets/Prefabs/player_character.tscn").instantiate()
+	print ("Spawned client player "+player.name)
+	player.name = "1"
+	#player.global_position = Vector3(0,600,0)
+	#player.global_position = $StartingPositions.get_child(RandomNumberGenerator.new().randi_range(0,1)).global_position
+	$Level/Test/Players.add_child(player)
 	
 func hide_UI():
 	$Main_UI.visible = false
@@ -67,26 +74,27 @@ func change_level(scene :PackedScene):
 
 
 func _on_start_pressed():
-	if multiplayer.multiplayer_peer == peer:
+	if multiplayer.multiplayer_peer == peer or GameManager.gameMode != "menu":
 		return
+	GameManager.gameMode = "game"
 	await GameManager.buttonFeedback(GameManager.active_button)
-	change_level(preload("res://Assets/Scenes/World.tscn"))
+	change_level.call_deferred(preload("res://Assets/Prefabs/Ship.tscn"))
 
 func _on_host_pressed():
-	if multiplayer.multiplayer_peer == peer:
+	if multiplayer.multiplayer_peer == peer or GameManager.gameMode != "menu":
 		return
+	GameManager.gameMode = "game"
 	await GameManager.buttonFeedback(GameManager.active_button)
 	peer.create_server(9999)
 	multiplayer.multiplayer_peer = peer
-	change_level.call_deferred(preload("res://Assets/Prefabs/ship.tscn"))
-	#change_level.call_deferred(preload("res://Assets/Scenes/World.tscn"))
+	change_level.call_deferred(preload("res://Assets/Prefabs/Ship.tscn"))
 
 func _on_join_pressed():
 	joinField.visible  = !joinField.visible
 	await GameManager.buttonFeedback(GameManager.active_button)
 
 func _on_start_2_pressed():
-	if multiplayer.multiplayer_peer == peer:
+	if multiplayer.multiplayer_peer == peer or GameManager.gameMode != "menu":
 		return
 	await GameManager.buttonFeedback(GameManager.active_button)
 	if hostIP.text == "":
@@ -97,5 +105,6 @@ func _on_start_2_pressed():
 	#change_level("res://Assets/Scenes/World.tscn")
 	
 func _on_connected_ok():
+	GameManager.gameMode = "game"
 	hide_UI()
 
