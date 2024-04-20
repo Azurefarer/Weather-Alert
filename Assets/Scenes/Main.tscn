@@ -20,7 +20,7 @@ gradient = SubResource("Gradient_uockt")
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_wgxwx"]
 gradient = SubResource("Gradient_qxs4g")
 
-[node name="Main" type="Control" node_paths=PackedStringArray("level", "hostIP", "joinField")]
+[node name="Main" type="Control" node_paths=PackedStringArray("level", "players", "hostIP", "joinField")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -29,12 +29,13 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_36uvr")
 level = NodePath("Level")
+players = NodePath("Level")
 hostIP = NodePath("Main_UI/Sprite2D/TextEdit")
 joinField = NodePath("Main_UI/Sprite2D")
 
-[node name="PlayerSpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("res://Assets/Prefabs/player_character.tscn")
-spawn_path = NodePath("..")
+[node name="ShipSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://Assets/Prefabs/ship.tscn")
+spawn_path = NodePath("../Level")
 
 [node name="Main_UI" type="Control" parent="."]
 anchors_preset = 0
@@ -45,7 +46,8 @@ offset_bottom = 40.0
 modulate = Color(1, 1, 1, 0.388235)
 z_index = 100
 material = SubResource("CanvasItemMaterial_dktlg")
-position = Vector2(874, 398)
+position = Vector2(822, 349)
+scale = Vector2(0.269441, 0.269441)
 texture = ExtResource("2_6wsx3")
 
 [node name="BG" type="TextureRect" parent="Main_UI"]

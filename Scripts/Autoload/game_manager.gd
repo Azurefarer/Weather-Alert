@@ -2,8 +2,10 @@ extends Node
 
 var rng = RandomNumberGenerator.new()
 var stage
+var players
 var global_delta: float
 var gameScreen =-1
+var level
 
 var active_button: Button
 

@@ -11,6 +11,7 @@ var external_ip
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	portMap()
+	GameManager.level = $Level
 	GameManager.gameScreen = -1
 	multiplayer.connected_to_server.connect(_on_connected_ok)
 	$Main_UI/BG.material.set("shader_parameter/wave_time", RippleManager.ripple_time)
@@ -47,9 +48,10 @@ func _process(delta):
 	pass
 
 func _on_debug_pressed():
+	if multiplayer.multiplayer_peer == peer:
+		return
 	await GameManager.buttonFeedback(GameManager.active_button)
-	add_player(1)
-	change_level("res://Assets/Scenes/Test.tscn")
+	change_level(preload("res://Assets/Scenes/Test.tscn"))
 	
 func hide_UI():
 	$Main_UI.visible = false
@@ -57,69 +59,45 @@ func hide_UI():
 func show_UI():
 	$Main_UI.visible = true
 	
-func change_level(scene :String):
+func change_level(scene :PackedScene):
 	print("called change level")
-	for c in level.get_children():
-		level.remove_child(c)
-		c.queue_free()
-	var stageToLoad = load(scene)
-	var stage = stageToLoad.instantiate()
+	#for c in level.get_children():
+		#level.remove_child(c)
+		#c.queue_free()
 	hide_UI()
-	level.add_child(stage)
+	level.add_child(scene.instantiate())
 
-@rpc("any_peer", "call_local", "reliable") 	
-func add_player(id: int):
-	if !is_multiplayer_authority():
-		return
-	print("called add player")
-	var player
-	while !GameManager.stage:
-		await get_tree().process_frame
-	var starting_point = GameManager.stage.get_node("StartingPositions").get_child(GameManager.rng.randi_range(0,GameManager.stage.get_node("StartingPositions").get_child_count()-1))
-	player = GameUtilities.spawn_player("res://Assets/Prefabs/player_character.tscn",players,starting_point.global_position,Vector3.ZERO,Vector3.ONE,id)
-	#print("udpdated player name to id")
-
-func del_player(id):
-	rpc("_del_player", id)
-
-@rpc("any_peer", "call_local") 
-func _del_player(id):
-	get_node(str(id)).queue_free()
 
 func _on_start_pressed():
+	if multiplayer.multiplayer_peer == peer:
+		return
 	await GameManager.buttonFeedback(GameManager.active_button)
-	add_player(1)
-	change_level("res://Assets/Scenes/World.tscn")
+	change_level(preload("res://Assets/Scenes/World.tscn"))
 
 func _on_host_pressed():
+	if multiplayer.multiplayer_peer == peer:
+		return
 	await GameManager.buttonFeedback(GameManager.active_button)
 	peer.create_server(9999)
 	multiplayer.multiplayer_peer = peer
-	add_player(1)
-	change_level("res://Assets/Scenes/World.tscn")
-
-func exit_game(id):
-	multiplayer.peer_disconnected.connect(del_player)
-	del_player(id)
+	change_level.call_deferred(preload("res://Assets/Prefabs/ship.tscn"))
+	#change_level.call_deferred(preload("res://Assets/Scenes/World.tscn"))
 
 func _on_join_pressed():
 	joinField.visible  = !joinField.visible
 	await GameManager.buttonFeedback(GameManager.active_button)
 
-
 func _on_start_2_pressed():
+	if multiplayer.multiplayer_peer == peer:
+		return
 	await GameManager.buttonFeedback(GameManager.active_button)
 	if hostIP.text == "":
 		peer.create_client("localhost",9999)
 	else:
 		peer.create_client(hostIP.text,9999)
 	multiplayer.multiplayer_peer = peer
+	#change_level("res://Assets/Scenes/World.tscn")
 	
 func _on_connected_ok():
-	print("client UID: "+str(multiplayer.get_unique_id()))
-	#rpc("add_player",multiplayer.get_unique_id())
-	add_player(multiplayer.get_unique_id())
-	change_level("res://Assets/Scenes/World.tscn")
-	#_add_player(peer.generate_unique_id())
 	hide_UI()
 
