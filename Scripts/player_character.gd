@@ -12,6 +12,7 @@ var moveDirection = Vector3.ZERO
 var flattening = false
 @export var camera: Camera3D
 @export var cameraTrack: RayCast3D
+@export var stats: Node
 var canSnap = false
 var jumping = false
 var flightAngle = 0
@@ -36,8 +37,18 @@ var targeted_item: Node3D
 @export var leftHandPhysicsBone: PhysicalBone3D
 @export var rightHandPhysicsBone: PhysicalBone3D
 
+func _enter_tree():
+	set_multiplayer_authority(name.to_int())
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	if !is_multiplayer_authority():
+		camera.current = false
+		print ("UID is not equal to name of player|UID: "+str(multiplayer.get_unique_id())+"|Name of player: "+name)
+		return
+	else:
+		print ("UID is equal to name of player|UID: "+str(multiplayer.get_unique_id())+"|Name of player: "+name)
+		
 	camera.reparent(get_node("/root"))
 	$Camera3Dtrack.reparent(get_node("/root"))
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -89,6 +100,9 @@ func drop_item():
 	holding_item = null
 	
 func _physics_process(delta):
+	animate(delta)
+	if multiplayer.get_unique_id()!=name.to_int():
+		return
 	landing = is_on_floor()
 	if Input.is_action_just_pressed("tab"):
 		match Input.get_mouse_mode():
@@ -107,7 +121,6 @@ func _physics_process(delta):
 	if snapCheckRay.is_colliding() and canSnap:
 		pass
 		apply_floor_snap()
-	animate(delta)
 	
 	camera.fov = clamp(camera.fov,10,70)	
 	tilt -= mouseDelta.y * TURN_SPEED * delta

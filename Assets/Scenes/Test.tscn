@@ -1,8 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://bav6q7bmslqvx"]
+[gd_scene load_steps=12 format=3 uid="uid://bav6q7bmslqvx"]
 
+[ext_resource type="Script" path="res://Scripts/Test.gd" id="1_5fa3x"]
 [ext_resource type="Texture2D" uid="uid://cy4kybitqrbjh" path="res://Assets/EtcImages/DeebugTexture.png" id="1_h2p26"]
 [ext_resource type="PackedScene" uid="uid://ei5ein17lo4y" path="res://Assets/Prefabs/fire_extinguisher.tscn" id="2_chjk6"]
 [ext_resource type="PackedScene" uid="uid://om2lr6ft6tf6" path="res://Assets/Prefabs/glider.tscn" id="3_vvk2g"]
+[ext_resource type="Script" path="res://Scripts/Invisible.gd" id="5_4qkoh"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_uxsru"]
 size = Vector2(80, 80)
@@ -22,7 +24,13 @@ tonemap_white = 3.38
 
 [sub_resource type="CameraAttributesPhysical" id="CameraAttributesPhysical_6k6yt"]
 
+[sub_resource type="Gradient" id="Gradient_n67e4"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_36un5"]
+gradient = SubResource("Gradient_n67e4")
+
 [node name="Test" type="Node3D"]
+script = ExtResource("1_5fa3x")
 
 [node name="CSGMesh3D" type="CSGMesh3D" parent="."]
 transform = Transform3D(-1, -3.82137e-15, -8.74228e-08, -8.74228e-08, 4.37114e-08, 1, 0, 1, -4.37114e-08, 0, 0, 0)
@@ -59,3 +67,14 @@ mass = 1.0
 
 [node name="Glider" parent="." instance=ExtResource("3_vvk2g")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.12497, 4.08575, -8.56241)
+
+[node name="StartingPositions" type="Node3D" parent="."]
+
+[node name="1" type="Node3D" parent="StartingPositions"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.22702, 1.22613, -12.8299)
+
+[node name="Sprite3D" type="Sprite3D" parent="StartingPositions/1"]
+pixel_size = 0.035
+billboard = 1
+texture = SubResource("GradientTexture2D_36un5")
+script = ExtResource("5_4qkoh")
