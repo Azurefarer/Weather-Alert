@@ -1,35 +1,3 @@
-[gd_scene load_steps=9 format=3 uid="uid://63rstyvf4p8f"]
-
-[ext_resource type="Script" path="res://Inf Terrain/Script/inf_terrain.gd" id="1_exogy"]
-[ext_resource type="PackedScene" uid="uid://blny7yo7bst36" path="res://Inf Terrain/Scene/chunk.tscn" id="2_a65jt"]
-[ext_resource type="Texture2D" uid="uid://cu6bwfotwog35" path="res://kloppenheim_06_puresky_4k.exr" id="3_0iyod"]
-[ext_resource type="PackedScene" uid="uid://dmkkoiuoo7jf5" path="res://Observer/observer.tscn" id="4_8qgcw"]
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_vr41e"]
-noise_type = 3
-frequency = 0.0172
-
-[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_xb5ec"]
-panorama = ExtResource("3_0iyod")
-
-[sub_resource type="Sky" id="Sky_dsc0x"]
-sky_material = SubResource("PanoramaSkyMaterial_xb5ec")
-
-[sub_resource type="Environment" id="Environment_ylfbt"]
-background_mode = 2
-background_energy_multiplier = 0.37
-sky = SubResource("Sky_dsc0x")
-
-[node name="InfTerrain" type="Node3D" node_paths=PackedStringArray("observer")]
-script = ExtResource("1_exogy")
-observer = NodePath("Observer")
-chunk_mesh_scene = ExtResource("2_a65jt")
-noise = SubResource("FastNoiseLite_vr41e")
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_ylfbt")
-
-[node name="Observer" parent="." instance=ExtResource("4_8qgcw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 25.6264, 0)
+version https://git-lfs.github.com/spec/v1
+oid sha256:6d832a12cea9415334e625384cee02eea125ff1174d9aee6594d23e155ef03c0
+size 1481

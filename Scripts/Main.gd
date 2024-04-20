@@ -32,5 +32,14 @@ func change_level(scene :String):
 	var stage = stageToLoad.instantiate()
 	hide_UI()
 	level.add_child(stage)
-	GameUtilities.spawn("res://Assets/Prefabs/player_character.tscn",players,Vector3.ZERO,Vector3.ZERO,Vector3.ONE)
+	if stage.get_node("StartingPositions"):
+		var starting_point = stage.get_node("StartingPositions").get_child(GameManager.rng.randi_range(0,stage.get_node("StartingPositions").get_child_count()-1))
+		GameUtilities.spawn("res://Assets/Prefabs/player_character.tscn",players,starting_point.global_position,Vector3.ZERO,Vector3.ONE)
+	else:
+		GameUtilities.spawn("res://Assets/Prefabs/player_character.tscn",players,Vector3.ZERO,Vector3.ZERO,Vector3.ONE)
 	
+
+
+func _on_start_pressed():
+	await GameManager.buttonFeedback(GameManager.active_button)
+	change_level("res://Assets/Scenes/World.tscn")

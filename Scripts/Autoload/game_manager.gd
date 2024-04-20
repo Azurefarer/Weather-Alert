@@ -1,5 +1,7 @@
 extends Node
 
+var rng = RandomNumberGenerator.new()
+
 var global_delta: float
 var gameScreen =-1
 

@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://840q35guyxgq"]
+
+[node name="CharacterIKTargets" type="Node3D"]
+
+[node name="Hand_IK_Target_r" type="Node3D" parent="."]
+transform = Transform3D(0.0665338, -0.875777, -0.478108, 0.732845, 0.368075, -0.57224, 0.677134, -0.312306, 0.666299, -0.305002, -0.38085, 0.861611)
+
+[node name="Hand_IK_Target_l" type="Node3D" parent="."]
+transform = Transform3D(0.066614, 0.875507, 0.478592, -0.7327, 0.36851, -0.572146, -0.677284, -0.312552, 0.666032, 0.305, -0.381, 0.862)
+
+[node name="Extinguisher_IK_Target_r" type="Node3D" parent="."]
+transform = Transform3D(-0.833254, 0.552249, -0.0266158, -0.414597, -0.59226, 0.690896, 0.365783, 0.586726, 0.722464, -0.111725, -0.274217, 0.963915)
+
+[node name="Extinguisher_IK_Target_l" type="Node3D" parent="."]
+transform = Transform3D(0.428276, -0.139682, 0.892787, -0.257259, -0.965945, -0.0277195, 0.866255, -0.217806, -0.449625, 0.172094, -0.208403, 0.594879)
+
+[node name="Glider_IK_Target_r" type="Node3D" parent="."]
+transform = Transform3D(-0.969038, 0.241221, 0.0527038, -0.195303, -0.879427, 0.434125, 0.151069, 0.410391, 0.899309, -0.305002, -0.38085, 0.861611)
+
+[node name="Glider_IK_Target_l" type="Node3D" parent="."]
+transform = Transform3D(-0.969011, -0.241168, -0.0534396, 0.195029, -0.879718, 0.433659, -0.151596, 0.409798, 0.899491, 0.305, -0.381, 0.862)
