@@ -1,3 +1,4 @@
 # Godot 4+ specific ignores
 .godot/
 new_terrain_3d_storage.tres
+.git/lfs
