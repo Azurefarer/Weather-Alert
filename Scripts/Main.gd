@@ -13,6 +13,8 @@ func _ready():
 	portMap()
 	GameManager.gameScreen = -1
 	multiplayer.connected_to_server.connect(_on_connected_ok)
+	$Main_UI/BG.material.set("shader_parameter/wave_time", RippleManager.ripple_time)
+
 	
 func portMap():
 	var upnp = UPNP.new()

@@ -2673,6 +2673,10 @@ margin = 2.0
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_l34rj")
 
+<<<<<<< HEAD
+[editable path="RootScene"]
+[editable path="ActiveRagdoll"]
+=======
 [node name="RotateCheck" type="RayCast3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 target_position = Vector3(0, -2, 0)
@@ -2700,3 +2704,4 @@ script = ExtResource("5_tfayy")
 [editable path="RootScene/RootNode/root/Skeleton3D/CharacterIKTargets"]
 [editable path="ActiveRagdoll"]
 [editable path="ActiveRagdollNoCollide"]
+>>>>>>> FeatureFixed
