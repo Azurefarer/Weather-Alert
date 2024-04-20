@@ -1,7 +1,7 @@
 extends Button
 
 @onready var BG : TextureRect = $"../BG"
-@onready var main : Control = $"../"
+@onready var main : Control = get_node("/root/main")
 
 
 func _on_mouse_entered():

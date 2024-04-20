@@ -12,6 +12,14 @@ var wave_position : PackedVector2Array
 var wave_timer : Array
 var time_elapsed : PackedFloat32Array = []
 
+func _ready() -> void:
+	for child in get_node("/root").get_children():
+		if child is Control:
+			var UI = child.find_children("Main_UI")[0]
+			BG = UI.find_child("BG")
+		else:
+			pass
+
 func _process(_delta: float) -> void:
 	# First check if there are too many ripples
 	# If there are too many delete the oldest one
