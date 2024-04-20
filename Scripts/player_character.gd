@@ -5,7 +5,8 @@ const MAX_SPEED = 200
 const FALL_SPEED = 200
 const TURN_SPEED = 1
 const DRAG = 10
-var jumpIndex = 1
+@export var jumpIndex = 1
+@export var velocityExport: Vector3
 var mouseDelta: Vector2
 var runToggle = 10
 var moveDirection = Vector3.ZERO
@@ -19,7 +20,7 @@ var flightAngle = 0
 var flightSpeed = 0
 var landing = false
 var holding_item = null
-var landPower = 0
+@export var landPower = 0
 @export var rotateCheckRay: RayCast3D
 @export var floorCheckRay: RayCast3D
 @export var snapCheckRay: RayCast3D
@@ -39,24 +40,27 @@ var targeted_item: Node3D
 
 func _enter_tree():
 	set_multiplayer_authority(name.to_int())
-	print("set authority: "+str(get_multiplayer_authority()))
 	if !is_multiplayer_authority():
-		print("authority: "+str(get_multiplayer_authority())+"|system: "+str(multiplayer.get_unique_id()))
 		camera.current = false
 		return
+	camera.current = true
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	if !is_multiplayer_authority():
 		return
-	
-		
+	global_position = Vector3(0,600,0)
+	GameManager.level.add_child(preload("res://Assets/Scenes/World.tscn").instantiate())
+	print("authority: "+str(get_multiplayer_authority())+"|system: "+str(multiplayer.get_unique_id()))
 	camera.reparent(get_node("/root"))
 	$Camera3Dtrack.reparent(get_node("/root"))
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	cameraTrack.global_position = global_position + Vector3(basis.z.x,0,basis.z.z)*(-12-tilt*5)
 	cameraTrack.global_position.y = 4+ global_position.y-tilt*10
 	camera.global_position = lerp(camera.global_position,cameraTrack.global_position,1)
+	#while GameManager.stage == null:
+	#	global_position = Vector3(280,115,-153)
+	#	await get_tree().physics_frame
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -64,14 +68,11 @@ func _process(delta):
 
 func toggle_held_item(holding):
 	drop_item()
-	if holding_item == holding:
+	if holding == holding_item:
 		return
 	if targeted_item == null:
-		targeted_item = holding_item
-	holding_item = holding
-	holding_item.holder = self
-	holding_item.freeze = true
-	holding_item.collision_layer = 16
+		targeted_item = holding
+	holding.rpc("update_holder",name.to_int())
 	match holding.name_:
 		"":
 			leftHandIK.stop()
@@ -87,18 +88,15 @@ func toggle_held_item(holding):
 			leftHandIK.start()
 			rightHandIK_active_target.transform = glider_extinguisher_IK_pos_right.transform
 			rightHandIK.start()
-	holding_item.global_position = rightHandIK_active_target.global_position-$RootScene.basis.x*.25
+	holding.global_position = rightHandIK_active_target.global_position-$RootScene.basis.x*.25
 	#holding_item.reparent(rightHandIK_active_target)
-	holding_item.global_rotation = $RootScene.global_rotation
+	holding.global_rotation = $RootScene.global_rotation
 
 func drop_item():
 	if holding_item == null:
 		return
 	targeted_item = holding_item
-	holding_item.holder = null
-	holding_item.freeze = false
-	#holding_item.reparent(get_node("/root"))
-	holding_item.collision_layer = 17
+	holding_item.rpc("update_holder",-1)
 	holding_item = null
 	
 func _physics_process(delta):
@@ -120,6 +118,7 @@ func _physics_process(delta):
 	velocity.x = lerpf(velocity.x,0.0,clamp(delta*DRAG,0,1))
 	velocity.z = lerpf(velocity.z,0.0,clamp(delta*DRAG,0,1))
 	move_and_slide()
+	velocityExport = velocity
 	if snapCheckRay.is_colliding() and canSnap:
 		pass
 		apply_floor_snap()
@@ -158,6 +157,8 @@ func _physics_process(delta):
 	mouseDelta = Vector2.ZERO
 	
 func _input(event: InputEvent) -> void:
+	if !is_multiplayer_authority():
+		return
 	if event is InputEventMouseMotion:
 		mouseDelta.x = event.relative.x
 		mouseDelta.y = event.relative.y
@@ -317,7 +318,7 @@ func animate(delta):
 	if is_gliding():
 		$RootScene/RootNode.global_rotate($RootScene/RootNode.global_basis.z,velocity.dot($RootScene/RootNode.global_basis.x)*delta)
 		$RootScene/AnimationPlayer.play("root|Gliding",.2)
-		$RootScene/AnimationPlayer.speed_scale = velocity.length()/5
+		$RootScene/AnimationPlayer.speed_scale = velocityExport.length()/5
 		return
 	else:
 		rotateFlattenRootNode()
@@ -328,15 +329,15 @@ func animate(delta):
 			$RootScene/AnimationPlayer.play("root|Crouch",.1)
 			$RootScene/AnimationPlayer.speed_scale = 3
 		elif landing and landPower>0:
-			print(landPower)
+			#print(landPower)
 			$RootScene/AnimationPlayer.play("root|Crouch",.1)
 			$RootScene/AnimationPlayer.speed_scale = landPower*.2
-		elif velocity.length()>5:
+		elif velocityExport.length()>5:
 			$RootScene/AnimationPlayer.play("root|Run",.1)
-			$RootScene/AnimationPlayer.speed_scale = velocity.length()/3
-		elif velocity.length()>1:
+			$RootScene/AnimationPlayer.speed_scale = velocityExport.length()/3
+		elif velocityExport.length()>1:
 			$RootScene/AnimationPlayer.play("root|Walk",.1)
-			$RootScene/AnimationPlayer.speed_scale = velocity.length()/2
+			$RootScene/AnimationPlayer.speed_scale = velocityExport.length()/2
 		else:
 			$RootScene/AnimationPlayer.play("root|Idle",.1)
 			$RootScene/AnimationPlayer.speed_scale = 1
@@ -351,13 +352,13 @@ func animate(delta):
 	
  
 func _on_interact_area_body_entered(body):
-	print(body.name)
+	#print(body.name)
 	if body == holding_item:
 		return
 	targeted_item = body
 
 
 func _on_interact_area_body_exited(body):
-	print(body.name)
+	#print(body.name)
 	if body == targeted_item:
 		targeted_item = null
