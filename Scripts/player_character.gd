@@ -49,8 +49,9 @@ func _enter_tree():
 func _ready():
 	if !is_multiplayer_authority():
 		return
-	global_position = Vector3(0,600,0)
-	GameManager.level.add_child(preload("res://Assets/Scenes/World.tscn").instantiate())
+	if GameManager.gameMode == "game":
+		global_position = Vector3(0,600,0)
+		GameManager.level.add_child(preload("res://Assets/Scenes/World.tscn").instantiate())
 	print("authority: "+str(get_multiplayer_authority())+"|system: "+str(multiplayer.get_unique_id()))
 	camera.reparent(get_node("/root"))
 	$Camera3Dtrack.reparent(get_node("/root"))
@@ -67,12 +68,14 @@ func _process(delta):
 	pass
 
 func toggle_held_item(holding):
-	drop_item()
+	if holding.holderID != -1:
+		return
 	if holding == holding_item:
 		return
+	drop_item()
 	if targeted_item == null:
 		targeted_item = holding
-	holding.rpc("update_holder",name.to_int())
+	holding.rpc("update_holder_id",name.to_int())
 	match holding.name_:
 		"":
 			leftHandIK.stop()
@@ -96,7 +99,7 @@ func drop_item():
 	if holding_item == null:
 		return
 	targeted_item = holding_item
-	holding_item.rpc("update_holder",-1)
+	holding_item.rpc("update_holder_id",-1)
 	holding_item = null
 	
 func _physics_process(delta):

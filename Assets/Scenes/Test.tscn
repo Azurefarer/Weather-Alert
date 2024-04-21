@@ -91,3 +91,5 @@ pixel_size = 0.035
 billboard = 1
 texture = SubResource("GradientTexture2D_36un5")
 script = ExtResource("5_4qkoh")
+
+[node name="Players" type="Node3D" parent="."]
