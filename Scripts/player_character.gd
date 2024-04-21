@@ -6,6 +6,7 @@ const FALL_SPEED = 200
 const TURN_SPEED = 1
 const DRAG = 10
 @export var jumpIndex = 1
+@export var gliding: bool
 @export var velocityExport: Vector3
 var mouseDelta: Vector2
 var runToggle = 10
@@ -167,8 +168,10 @@ func _input(event: InputEvent) -> void:
 		mouseDelta.y = event.relative.y
 
 func is_gliding():
+	gliding = false
 	if holding_item != null: 
 			if holding_item.name_=="Glider" and !is_on_floor():
+				gliding = true
 				return true
 
 func checkRun():
