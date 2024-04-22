@@ -17,12 +17,13 @@ var flattening = false
 @export var stats: Node
 var canSnap = false
 var jumping = false
-var flightAngle = 0
-var flightSpeed = 0
+var flightAngle: float
+var flightSpeed: float
 var landing = false
 var holding_item = null
 @export var landPower = 0
 @export var rotateCheckRay: RayCast3D
+@export var ceilCheckRay: RayCast3D
 @export var floorCheckRay: RayCast3D
 @export var snapCheckRay: RayCast3D
 var tilt = -.6
@@ -34,6 +35,10 @@ var targeted_item: Node3D
 @export var rightHandIK_active_target: Node3D
 @export var fire_extinguisher_IK_pos_left: Node3D
 @export var fire_extinguisher_IK_pos_right: Node3D
+@export var umbrella_hang_IK_pos_left: Node3D
+@export var umbrella_hang_IK_pos_right: Node3D
+@export var umbrella_IK_pos_left: Node3D
+@export var umbrella_IK_pos_right: Node3D
 @export var glider_extinguisher_IK_pos_left: Node3D
 @export var glider_extinguisher_IK_pos_right: Node3D
 @export var leftHandPhysicsBone: PhysicalBone3D
@@ -82,6 +87,11 @@ func toggle_held_item(holding):
 			leftHandIK.stop()
 			rightHandIK.stop()
 			return
+		"Umbrella":
+			leftHandIK_active_target.transform = umbrella_hang_IK_pos_left.transform
+			leftHandIK.start()
+			rightHandIK_active_target.transform = umbrella_hang_IK_pos_right.transform
+			rightHandIK.start()
 		"FireExtinguisher":
 			leftHandIK_active_target.transform = fire_extinguisher_IK_pos_left.transform
 			leftHandIK.start()
@@ -213,6 +223,8 @@ func gravity(delta):
 		if holding_item:
 			if holding_item.name_=="Glider":
 				velocity.y = clamp(velocity.y,-2,10)
+			elif holding_item.name_=="Umbrella":
+				velocity.y = clamp(velocity.y,-2,10)
 	else:
 		if !jumping:
 			canSnap = true
@@ -281,6 +293,8 @@ func moveInputs(delta):
 		if Input.is_action_pressed("left"):
 			moveDirection += basis.x
 		moveDirection += $RootScene/RootNode.global_basis.z
+		moveDirection += Vector3.UP*tilt
+		moveDirection = moveDirection.normalized()
 			
 	## rotate toward direction #############################
 	#rotateToNormal()
@@ -290,8 +304,8 @@ func moveInputs(delta):
 		$RootScene/RootNode.look_at($RootScene/RootNode.global_position-moveDirection*100)
 		if is_gliding():
 			$RootScene/RootNode.look_at(global_position+camera.global_basis.z*100-moveDirection*100)
-			flightAngle = $RootScene/RootNode.rotation.x*3
-			flightSpeed -= (flightAngle+.7)*delta
+			flightAngle = tilt
+			flightSpeed = lerp(flightSpeed,flightAngle,delta)
 		else:
 			flightSpeed = 0
 	var target_rotation = $RootScene/RootNode.rotation
@@ -300,11 +314,15 @@ func moveInputs(delta):
 	$RootScene/RootNode.rotation.x = lerp_angle($RootScene/RootNode.rotation.x,target_rotation.x,delta*14)
 	$RootScene/RootNode.rotation.z = lerp_angle($RootScene/RootNode.rotation.z,0,delta*14)
 	#$RootScene/RootNode.rotate(basis.y,target_rotation.y)
-	########################################################
+	####################velocity movement determine####################################
 	if !is_gliding():
-		velocity += moveDirection*runToggle/2
+		velocity += moveDirection*runToggle/2*delta*100
 	else:
-		velocity += 5/2.5*moveDirection.normalized()*(velocity.length()/200+1)*(clamp(-flightSpeed-2,0,7)+1)+5/2.5*Vector3.UP*(clamp(flightSpeed/2+flightAngle+1,-3,3)*(velocity.length()/200+1))
+		velocity+=$Stats.wind_vector/25*delta*(flightAngle+2)
+		velocity.y+=$Stats.wind_vector.y/25*delta*(flightAngle+2)
+		velocity += moveDirection.normalized()*(abs(flightAngle)*17)+moveDirection.normalized()*abs(4+flightSpeed*5)*delta*100-Vector3.UP*(abs(flightSpeed*22))*delta*100
+	if !is_on_floor():
+		velocity+=Vector3($Stats.wind_vector.x,$Stats.wind_vector.y/4,$Stats.wind_vector.z)/75*delta
 	velocity.x = clamp(velocity.x,-MAX_SPEED,MAX_SPEED)
 	velocity.z = clamp(velocity.z,-MAX_SPEED,MAX_SPEED)
 		
@@ -321,6 +339,14 @@ func fullyActionable():
 	return true
 
 func animate(delta):
+	if holding_item != null:
+		if holding_item.name_ == "Umbrella":
+			if is_on_floor():
+				leftHandIK_active_target.transform = umbrella_IK_pos_left.transform
+				rightHandIK_active_target.transform = umbrella_IK_pos_right.transform
+			else:
+				rightHandIK_active_target.transform = umbrella_hang_IK_pos_right.transform
+				leftHandIK_active_target.transform = umbrella_hang_IK_pos_left.transform
 	if is_gliding():
 		$RootScene/RootNode.global_rotate($RootScene/RootNode.global_basis.z,velocity.dot($RootScene/RootNode.global_basis.x)*delta)
 		$RootScene/AnimationPlayer.play("root|Gliding",.2)
@@ -352,9 +378,14 @@ func animate(delta):
 		$RootScene/AnimationPlayer.speed_scale = 1
 	elif $RootScene/AnimationPlayer.current_animation!="root|Jump"+str(jumpIndex):
 		rotateFlattenRootNode()
-		$RootScene/AnimationPlayer.play("root|Jump"+str(jumpIndex),.5)
-		$RootScene/AnimationPlayer.speed_scale = 1
-		$RootScene/AnimationPlayer.seek(.5)
+		if !rotateCheckRay.is_colliding():
+			$RootScene/RootNode.global_rotate($RootScene/RootNode.global_basis.z,velocity.dot($RootScene/RootNode.global_basis.x)*delta)
+			$RootScene/AnimationPlayer.play("root|Gliding",.2)
+			$RootScene/AnimationPlayer.speed_scale = velocityExport.length()/5
+		else:
+			$RootScene/AnimationPlayer.play("root|Jump"+str(jumpIndex),.5)
+			$RootScene/AnimationPlayer.speed_scale = 1
+			$RootScene/AnimationPlayer.seek(.5)
 	
  
 func _on_interact_area_body_entered(body):

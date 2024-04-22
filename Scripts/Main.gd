@@ -73,6 +73,7 @@ func change_level(scene :PackedScene):
 		#c.queue_free()
 	hide_UI()
 	level.add_child(scene.instantiate())
+	level.add_child(preload("res://Assets/Prefabs/time_and_weather.tscn").instantiate())
 
 
 func _on_start_pressed():

@@ -18,9 +18,6 @@ config/features=PackedStringArray("4.2", "Forward Plus")
 
 GameManager="*res://Scripts/Autoload/game_manager.gd"
 RippleManager="*res://Scripts/Autoload/ripple_manager.gd"
-GameUtilities="*res://Scripts/Autoload/game_utilities.gd"
-WeatherManager="*res://Scripts/Autoload/weather_manager.gd"
-WeatherData="*res://Scripts/Autoload/weather_data.gd"
 
 [display]
 

@@ -5,4 +5,5 @@ func _ready():
 	$grass1Scatter.enabled = true
 	$flower1Scatter.enabled = true
 	$tree2Scatter.enabled = true
+	GameManager.directional_light = $DirectionalLight3D
 	GameManager.stage = self

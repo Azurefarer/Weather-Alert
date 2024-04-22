@@ -1,3 +1,169 @@
-[gd_scene format=3 uid="uid://bvg87topw1dbf"]
+[gd_scene load_steps=8 format=3 uid="uid://bvg87topw1dbf"]
 
-[node name="TimeAndWeather" type="Node"]
+[ext_resource type="Script" path="res://Scripts/time_and_weather.gd" id="1_25afj"]
+[ext_resource type="FontFile" uid="uid://bsegnh8v4qc3c" path="res://Assets/Fonts/GmarketSansTTFBold.ttf" id="2_hnkd1"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_yavjt"]
+properties/0/path = NodePath(".:world_temperature")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:current_day")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath(".:time_of_day")
+properties/2/spawn = true
+properties/2/replication_mode = 1
+properties/3/path = NodePath(".:simulated_time_of_day")
+properties/3/spawn = true
+properties/3/replication_mode = 1
+properties/4/path = NodePath(".:general_hotness")
+properties/4/spawn = true
+properties/4/replication_mode = 1
+properties/5/path = NodePath(".:heat_variation")
+properties/5/spawn = true
+properties/5/replication_mode = 1
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_t7l05"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="Environment" id="Environment_nj7sw"]
+background_mode = 5
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_d7d3i"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7m3ms"]
+diffuse_mode = 3
+specular_mode = 1
+albedo_color = Color(1, 0, 0, 1)
+
+[node name="TimeAndWeather" type="Node" node_paths=PackedStringArray("wind_arrow_camera", "wind_arrow")]
+script = ExtResource("1_25afj")
+wind_arrow_camera = NodePath("SubViewport/WindArrowCam")
+wind_arrow = NodePath("WindArrowRotate")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_yavjt")
+
+[node name="Temperature" type="RichTextLabel" parent="."]
+offset_left = 14.0
+offset_top = 61.0
+offset_right = 421.0
+offset_bottom = 169.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_outline_size = 10
+theme_override_constants/outline_size = 2
+theme_override_fonts/normal_font = ExtResource("2_hnkd1")
+theme_override_font_sizes/normal_font_size = 24
+text = "TEMPERATURE"
+
+[node name="Pressure" type="RichTextLabel" parent="."]
+offset_left = 14.0
+offset_top = 86.0
+offset_right = 421.0
+offset_bottom = 194.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_outline_size = 10
+theme_override_constants/outline_size = 2
+theme_override_fonts/normal_font = ExtResource("2_hnkd1")
+theme_override_font_sizes/normal_font_size = 24
+text = "PRESSURE"
+
+[node name="Time" type="RichTextLabel" parent="."]
+offset_left = 14.0
+offset_top = 35.0
+offset_right = 421.0
+offset_bottom = 143.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_outline_size = 10
+theme_override_constants/outline_size = 2
+theme_override_fonts/normal_font = ExtResource("2_hnkd1")
+theme_override_font_sizes/normal_font_size = 24
+text = "TIME"
+
+[node name="Humidity" type="RichTextLabel" parent="."]
+offset_left = 14.0
+offset_top = 110.0
+offset_right = 421.0
+offset_bottom = 218.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_outline_size = 10
+theme_override_constants/outline_size = 2
+theme_override_fonts/normal_font = ExtResource("2_hnkd1")
+theme_override_font_sizes/normal_font_size = 24
+text = "HUMIDITY"
+
+[node name="Wind" type="RichTextLabel" parent="."]
+z_index = 1
+offset_left = 357.0
+offset_top = 2.0
+offset_right = 764.0
+offset_bottom = 110.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_outline_size = 10
+theme_override_constants/outline_size = 2
+theme_override_fonts/normal_font = ExtResource("2_hnkd1")
+theme_override_font_sizes/normal_font_size = 24
+bbcode_enabled = true
+text = "[center]MPH"
+
+[node name="Day" type="RichTextLabel" parent="."]
+offset_left = 14.0
+offset_top = 10.0
+offset_right = 421.0
+offset_bottom = 118.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_outline_size = 10
+theme_override_constants/outline_size = 2
+theme_override_fonts/normal_font = ExtResource("2_hnkd1")
+theme_override_font_sizes/normal_font_size = 24
+text = "DAY"
+
+[node name="UpdateTimer" type="Timer" parent="."]
+autostart = true
+
+[node name="WeatherEvent" type="Timer" parent="."]
+wait_time = 60.0
+autostart = true
+
+[node name="WeatherArrow" type="Sprite2D" parent="."]
+position = Vector2(570, 48)
+scale = Vector2(0.3, 0.3)
+texture = SubResource("ViewportTexture_t7l05")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+transparent_bg = true
+size = Vector2i(1024, 1025)
+
+[node name="WindArrowCam" type="Camera3D" parent="SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000977039, -0.162354, 0.25457)
+cull_mask = 2
+environment = SubResource("Environment_nj7sw")
+attributes = SubResource("CameraAttributesPractical_d7d3i")
+fov = 60.5
+
+[node name="WindArrowRotate" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.30129, -0.853623)
+
+[node name="WindArrow" type="CSGCylinder3D" parent="WindArrowRotate"]
+transform = Transform3D(-0.505, -1.1059e-07, 1.92979e-15, 0, -5.52949e-08, -0.505, 4.41485e-08, -1.265, 2.20742e-08, 0, 0, 0)
+layers = 2
+material_override = SubResource("StandardMaterial3D_7m3ms")
+radius = 0.191438
+height = 0.414106
+sides = 32
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="WindArrowRotate/WindArrow"]
+transform = Transform3D(1, 1.42109e-13, 8.47033e-22, 0, 1, 1.77636e-15, 0, 7.10543e-15, 1, -4.69955e-08, 0.214602, -4.17233e-07)
+layers = 2
+radius = 0.385732
+height = 0.316347
+sides = 32
+cone = true
+
+[node name="SpotLight3D" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -0.761776, 0.647841, 0, -0.647841, -0.761776, 0, 1.1418, -2.91701)
+layers = 2
+light_energy = 10.467
+
+[connection signal="timeout" from="UpdateTimer" to="." method="_on_update_timer_timeout"]
+[connection signal="timeout" from="WeatherEvent" to="." method="_on_weather_event_timeout"]
