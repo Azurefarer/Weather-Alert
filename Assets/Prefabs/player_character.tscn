@@ -468,7 +468,7 @@ height = 0.186206
 radius = 0.119
 height = 0.333
 
-[node name="PlayerCharacter" type="CharacterBody3D" node_paths=PackedStringArray("camera", "cameraTrack", "stats", "rotateCheckRay", "ceilCheckRay", "floorCheckRay", "snapCheckRay", "leftHandIK", "rightHandIK", "leftHandIK_active_target", "rightHandIK_active_target", "fire_extinguisher_IK_pos_left", "fire_extinguisher_IK_pos_right", "umbrella_hang_IK_pos_left", "umbrella_hang_IK_pos_right", "umbrella_IK_pos_left", "umbrella_IK_pos_right", "glider_extinguisher_IK_pos_left", "glider_extinguisher_IK_pos_right", "leftHandPhysicsBone", "rightHandPhysicsBone")]
+[node name="PlayerCharacter" type="CharacterBody3D" node_paths=PackedStringArray("camera", "cameraTrack", "stats", "rotateCheckRay", "ceilCheckRay", "floorCheckRay", "snapCheckRay", "leftHandIK", "rightHandIK", "leftHandIK_active_target", "rightHandIK_active_target", "fire_extinguisher_IK_pos_left", "fire_extinguisher_IK_pos_right", "umbrella_hang_IK_pos_left", "umbrella_hang_IK_pos_right", "umbrella_IK_pos_left", "umbrella_IK_pos_right", "glider_extinguisher_IK_pos_left", "glider_extinguisher_IK_pos_right", "leftHandPhysicsBone", "rightHandPhysicsBone", "rootPhysicsBone")]
 collision_layer = 512
 wall_min_slide_angle = 1.22173
 floor_max_angle = 1.22173
@@ -495,6 +495,7 @@ glider_extinguisher_IK_pos_left = NodePath("RootScene/RootNode/root/Skeleton3D/C
 glider_extinguisher_IK_pos_right = NodePath("RootScene/RootNode/root/Skeleton3D/CharacterIKTargets/Glider_IK_Target_r")
 leftHandPhysicsBone = NodePath("ActiveRagdoll/RootNode/root/Skeleton3D/Physical Bone hand_l")
 rightHandPhysicsBone = NodePath("ActiveRagdoll/RootNode/root/Skeleton3D/Physical Bone hand_r")
+rootPhysicsBone = NodePath("ActiveRagdollNoCollide/RootNode/root/Skeleton3D/Physical Bone root_x")
 
 [node name="Stats" type="Node" parent="."]
 script = ExtResource("5_sqca2")

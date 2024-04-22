@@ -43,6 +43,7 @@ var targeted_item: Node3D
 @export var glider_extinguisher_IK_pos_right: Node3D
 @export var leftHandPhysicsBone: PhysicalBone3D
 @export var rightHandPhysicsBone: PhysicalBone3D
+@export var rootPhysicsBone: PhysicalBone3D
 
 func _enter_tree():
 	set_multiplayer_authority(name.to_int())

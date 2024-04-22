@@ -21,7 +21,7 @@ func update_holder(id):
 		freeze = false
 		collision_layer = 17
 
-func _physics_process(delta):
+func _process(delta):
 	if holderID != 0:
 		if holder == null:
 			update_holder(holderID)
@@ -36,7 +36,7 @@ func _physics_process(delta):
 				global_rotation = holder.get_node("RootScene/RootNode").global_rotation
 				rotate(Vector3.UP,115)
 			"Glider":
-				global_position=holder.rightHandPhysicsBone.global_position+holder.get_node("RootScene/RootNode").global_basis.z*.3+holder.get_node("RootScene/RootNode").global_basis.z*5*Vector3(holder.velocity.x,0,holder.velocity.z).length()/350
-				global_position += holder.get_node("RootScene/RootNode").global_basis.x*.275+holder.get_node("RootScene/RootNode").global_basis.y*.5-holder.get_node("RootScene/RootNode").global_basis.y*(holder.flightAngle+.25)/2
+				global_position=holder.rightHandPhysicsBone.global_position+holder.get_node("RootScene/RootNode").global_basis.y*.35
+				global_position += holder.get_node("RootScene/RootNode").global_basis.x*.27+holder.get_node("RootScene/RootNode").global_basis.z*.27
 				global_rotation = holder.get_node("RootScene/RootNode").global_rotation
 				#rotate(Vector3.UP,115)
