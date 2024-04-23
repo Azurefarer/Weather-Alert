@@ -27,6 +27,10 @@ window/stretch/mode="canvas_items"
 
 enabled=PackedStringArray("res://addons/proton_scatter/plugin.cfg", "res://addons/terrain_3d/plugin.cfg")
 
+[gui]
+
+theme/custom_font="res://Assets/Fonts/GmarketSansTTFMedium.ttf"
+
 [input]
 
 forward={

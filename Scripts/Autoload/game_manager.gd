@@ -12,6 +12,7 @@ var weatherManager
 var weather_areas: Array
 var active_button: Button
 var directional_light
+var ship: Node3D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

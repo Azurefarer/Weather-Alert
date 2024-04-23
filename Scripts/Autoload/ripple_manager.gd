@@ -44,7 +44,7 @@ func _process(_delta: float) -> void:
 func set_pos(posArray : PackedVector2Array) -> void:
 	if BG != null:
 		# Send data to GPU
-		print(posArray)
+		#print(posArray)
 		BG.material.set("shader_parameter/hover", posArray)
 
 func check_timer(timer : Timer) -> void:

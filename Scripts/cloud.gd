@@ -23,7 +23,7 @@ func _on_update_timer_timeout():
 	update()
 
 func update():
-	if experienced_humidity>=50:
+	if experienced_humidity>=60:
 		$DropEmitter.emitting = true
 	else:
 		$DropEmitter.emitting = false

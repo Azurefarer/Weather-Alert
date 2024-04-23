@@ -12,6 +12,7 @@ var mouseDelta: Vector2
 var runToggle = 10
 var moveDirection = Vector3.ZERO
 var flattening = false
+var begunFalling = 0.0
 @export var camera: Camera3D
 @export var cameraTrack: RayCast3D
 @export var stats: Node
@@ -44,6 +45,8 @@ var targeted_item: Node3D
 @export var leftHandPhysicsBone: PhysicalBone3D
 @export var rightHandPhysicsBone: PhysicalBone3D
 @export var rootPhysicsBone: PhysicalBone3D
+@export var rightHandBoneAttach: BoneAttachment3D
+var diveBombMomentum:= 0.0
 
 func _enter_tree():
 	set_multiplayer_authority(name.to_int())
@@ -56,8 +59,10 @@ func _enter_tree():
 func _ready():
 	if !is_multiplayer_authority():
 		return
+	while GameManager.ship == null:
+		await get_tree().physics_frame
 	if GameManager.gameMode == "game":
-		global_position = Vector3(0,600,0)
+		GameManager.ship.get_node("Scalar/Players").global_position
 		GameManager.level.add_child(preload("res://Assets/Scenes/World.tscn").instantiate())
 	print("authority: "+str(get_multiplayer_authority())+"|system: "+str(multiplayer.get_unique_id()))
 	camera.reparent(get_node("/root"))
@@ -132,6 +137,7 @@ func _physics_process(delta):
 		checkJump()
 	velocity.x = lerpf(velocity.x,0.0,clamp(delta*DRAG,0,1))
 	velocity.z = lerpf(velocity.z,0.0,clamp(delta*DRAG,0,1))
+	velocity.y = lerpf(velocity.y,0.0,clamp(delta*DRAG/7,0,1))
 	move_and_slide()
 	velocityExport = velocity
 	if snapCheckRay.is_colliding() and canSnap:
@@ -150,16 +156,17 @@ func _physics_process(delta):
 	#var targetPos = global_position+(cameraTrack.get_node("SpringArm").get_node("target").global_position-global_position)*1
 	if cameraTrack.is_colliding() or cameraTrack.get_node("Ray2").is_colliding():
 		obstructionZoom+=delta/4
-		camera.global_position = lerp(camera.global_position,global_position+(cameraTrack.get_node("SpringArm").get_node("target").global_position-camera.global_position)*(.95+obstructionZoom),delta*3)
+		camera.global_position = lerp(camera.global_position,global_position+(cameraTrack.get_node("SpringArm").get_node("target").global_position-camera.global_position)*(.95+obstructionZoom),delta*7)
 	else:
 		obstructionZoom-=delta/4
-		camera.global_position = lerp(camera.global_position,cameraTrack.global_position,delta*3)
+		camera.global_position = lerp(camera.global_position,cameraTrack.global_position,delta*7)
 	obstructionZoom = clamp(obstructionZoom,0,1)
 	camera.look_at(self.global_position+Vector3.UP*1.2)
 	#camera.rotation.x = cameraTrack.rotation.x
-	if is_on_floor() and !landing:
+	if is_on_floor() and !landing and begunFalling>0.5:
 		land()
-		
+	if !is_on_floor():
+		begunFalling+=delta
 	if Input.is_action_just_pressed("pickup"):
 		if targeted_item !=null:
 			toggle_held_item(targeted_item)
@@ -181,7 +188,7 @@ func _input(event: InputEvent) -> void:
 func is_gliding():
 	gliding = false
 	if holding_item != null: 
-			if holding_item.name_=="Glider" and !is_on_floor():
+			if holding_item.name_=="Glider" and !is_on_floor() and begunFalling > .15:
 				gliding = true
 				return true
 
@@ -206,11 +213,13 @@ func jump():
 	jumping = true
 	await get_tree().create_timer(.1).timeout
 	canSnap = false
-	velocity.y = 11
+	velocity.y = 21
 	await get_tree().create_timer(.1).timeout
 	jumping = false
 
 func land():
+	diveBombMomentum = 0
+	begunFalling = 0.0
 	landing = true
 	await get_tree().create_timer(.005*landPower).timeout
 	landPower = 0
@@ -220,12 +229,16 @@ func gravity(delta):
 		landPower = abs(velocity.y)
 		landing = false
 		canSnap = false
-		velocity.y-=delta*FALL_SPEED/6
 		if holding_item:
-			if holding_item.name_=="Glider":
+			if holding_item.name_=="Umbrella":
+				velocity.y-=delta*FALL_SPEED
 				velocity.y = clamp(velocity.y,-2,10)
-			elif holding_item.name_=="Umbrella":
-				velocity.y = clamp(velocity.y,-2,10)
+			elif holding_item.name_=="Glider":
+				if velocity.y>0 and begunFalling>.75:
+					velocity.y-=delta*FALL_SPEED/4
+				#velocity.y = clamp(velocity.y,-2,10)
+		else:
+			velocity.y-=delta*FALL_SPEED/4
 	else:
 		if !jumping:
 			canSnap = true
@@ -285,16 +298,14 @@ func moveInputs(delta):
 		moveDirection += basis.x
 		moveDirection.y = 0
 		moveDirection = moveDirection.normalized()
+	var lookDirection = Vector3.ZERO
 	if is_gliding():
 		moveDirection = Vector3.ZERO
-		if Input.is_action_pressed("forward"):
-			moveDirection += $RootScene/RootNode.global_basis.z
-		if Input.is_action_pressed("right"):
-			moveDirection -= basis.x
-		if Input.is_action_pressed("left"):
-			moveDirection += basis.x
 		moveDirection += $RootScene/RootNode.global_basis.z
-		moveDirection += Vector3.UP*tilt
+		lookDirection += global_basis.z*4
+		moveDirection += Vector3.UP*tilt/2
+		lookDirection += Vector3.UP*tilt*4
+		lookDirection = lookDirection.normalized()
 		moveDirection = moveDirection.normalized()
 			
 	## rotate toward direction #############################
@@ -302,12 +313,17 @@ func moveInputs(delta):
 	var initial_rotation = $RootScene/RootNode.rotation
 	flightAngle = 0
 	if moveDirection != Vector3.ZERO:
-		$RootScene/RootNode.look_at($RootScene/RootNode.global_position-moveDirection*100)
 		if is_gliding():
-			$RootScene/RootNode.look_at(global_position+camera.global_basis.z*100-moveDirection*100)
+			$RootScene/RootNode.look_at(global_position-lookDirection*100)
+			#look_at(global_position-moveDirection*100)
 			flightAngle = tilt
 			flightSpeed = lerp(flightSpeed,flightAngle,delta)
+			if flightAngle<0:
+				diveBombMomentum+=delta*7*-flightAngle
+			else:
+				diveBombMomentum = lerp(diveBombMomentum,0.0,delta/3)
 		else:
+			$RootScene/RootNode.look_at($RootScene/RootNode.global_position-moveDirection*100)
 			flightSpeed = 0
 	var target_rotation = $RootScene/RootNode.rotation
 	$RootScene/RootNode.rotation = initial_rotation
@@ -319,11 +335,17 @@ func moveInputs(delta):
 	if !is_gliding():
 		velocity += moveDirection*runToggle/2*delta*100
 	else:
-		velocity+=$Stats.wind_vector/25*delta*(flightAngle+2)
-		velocity.y+=$Stats.wind_vector.y/25*delta*(flightAngle+2)
-		velocity += moveDirection.normalized()*(abs(flightAngle)*17)+moveDirection.normalized()*abs(4+flightSpeed*5)*delta*100-Vector3.UP*(abs(flightSpeed*22))*delta*100
+		if diveBombMomentum>3:
+			velocity = moveDirection.normalized()*delta*50 +Vector3(moveDirection.normalized().x,moveDirection.normalized().y/2,moveDirection.normalized().z)*diveBombMomentum*delta*80			
+		else:
+			velocity += moveDirection.normalized()*delta*50 +Vector3(moveDirection.normalized().x,moveDirection.normalized().y/2,moveDirection.normalized().z)*diveBombMomentum*delta*30
+		velocity+=$Stats.wind_vector/160*delta
+		velocity.y+=$Stats.wind_vector.y/110*delta
 	if !is_on_floor():
-		velocity+=Vector3($Stats.wind_vector.x,$Stats.wind_vector.y/4,$Stats.wind_vector.z)/75*delta
+		print(diveBombMomentum)
+		if !is_gliding():
+			pass
+			velocity+=Vector3($Stats.wind_vector.x,$Stats.wind_vector.y/4,$Stats.wind_vector.z)/125*delta
 	velocity.x = clamp(velocity.x,-MAX_SPEED,MAX_SPEED)
 	velocity.z = clamp(velocity.z,-MAX_SPEED,MAX_SPEED)
 		
@@ -359,10 +381,12 @@ func animate(delta):
 		rotateFlattenRootNode()
 		rotateFlatten()
 		if jumping:
+			#print("a")
 			$RootScene/AnimationPlayer.play("root|Crouch",.1)
 			$RootScene/AnimationPlayer.speed_scale = 3
 		elif landing and landPower>0:
 			#print(landPower)
+			#print("b")
 			$RootScene/AnimationPlayer.play("root|Crouch",.1)
 			$RootScene/AnimationPlayer.speed_scale = landPower*.2
 		elif velocityExport.length()>5:

@@ -13,9 +13,10 @@ curve = SubResource("Curve_605xl")
 emission_shape = 6
 emission_ring_axis = Vector3(0, 90, 1)
 emission_ring_height = 1.0
-emission_ring_radius = 500.0
+emission_ring_radius = 300.0
 emission_ring_inner_radius = 0.0
-scale_max = 12.05
+scale_min = 0.65
+scale_max = 3.6
 scale_curve = SubResource("CurveTexture_e2uu3")
 
 [sub_resource type="Gradient" id="Gradient_1eat8"]
@@ -27,14 +28,19 @@ fill_from = Vector2(0, 1)
 fill_to = Vector2(0, 0)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jis4b"]
+transparency = 1
+shading_mode = 2
 diffuse_mode = 3
-specular_mode = 1
+specular_mode = 2
 albedo_texture = SubResource("GradientTexture2D_8btou")
 billboard_mode = 2
+billboard_keep_scale = true
+distance_fade_max_distance = 0.0
 
 [sub_resource type="QuadMesh" id="QuadMesh_auts7"]
 material = SubResource("StandardMaterial3D_jis4b")
-size = Vector2(0.05, 3)
+flip_faces = true
+size = Vector2(0.5, 3)
 
 [sub_resource type="Curve" id="Curve_f10ub"]
 min_value = -360.0
@@ -88,6 +94,7 @@ alpha_hash_scale = 2.0
 alpha_antialiasing_mode = 0
 shading_mode = 2
 diffuse_mode = 3
+specular_mode = 2
 albedo_color = Color(0.92549, 0.921569, 1, 0.352941)
 emission = Color(0.407843, 0.32549, 1, 1)
 emission_energy_multiplier = 0.0
@@ -117,7 +124,7 @@ initial_velocity_min = 35.01
 initial_velocity_max = 163.28
 angular_velocity_min = -49.77
 angular_velocity_max = 71.55
-gravity = Vector3(0, 0, 0)
+gravity = Vector3(0, 0.085, 0)
 linear_accel_max = 1.45
 attractor_interaction_enabled = false
 scale_min = 20.0
@@ -150,18 +157,20 @@ script = ExtResource("1_ivh7q")
 
 [node name="DropEmitter" type="GPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 126.869, 0)
+extra_cull_margin = 1500.0
 visibility_range_end = 3000.0
 visibility_range_end_margin = 500.0
-visibility_range_fade_mode = 2
-amount = 10000
+visibility_range_fade_mode = 1
+amount = 20000
 lifetime = 10.0
 speed_scale = 5.0
+fixed_fps = 60
 process_material = SubResource("ParticleProcessMaterial_2yijd")
 draw_pass_1 = SubResource("QuadMesh_auts7")
 
 [node name="CloudEmitter" type="GPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.86729, 126.869, -1.37439)
-extra_cull_margin = 100.0
+extra_cull_margin = 1500.0
 visibility_range_end = 3000.0
 visibility_range_end_margin = 1000.0
 visibility_range_fade_mode = 1
@@ -176,12 +185,12 @@ draw_pass_1 = SubResource("CapsuleMesh_s8p3b")
 
 [node name="CloudEmitter2" type="GPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.86729, 126.869, -1.37439)
-extra_cull_margin = 100.0
+extra_cull_margin = 1500.0
 visibility_range_end = 3000.0
 visibility_range_end_margin = 1000.0
 visibility_range_fade_mode = 1
 emitting = false
-amount = 1490
+amount = 300
 lifetime = 6.63
 speed_scale = 0.5
 randomness = 1.0
