@@ -1,7 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://bvg87topw1dbf"]
+[gd_scene load_steps=14 format=3 uid="uid://bvg87topw1dbf"]
 
 [ext_resource type="Script" path="res://Scripts/time_and_weather.gd" id="1_25afj"]
 [ext_resource type="FontFile" uid="uid://bsegnh8v4qc3c" path="res://Assets/Fonts/GmarketSansTTFBold.ttf" id="2_hnkd1"]
+[ext_resource type="Texture2D" uid="uid://bkclt7ey5akgu" path="res://Assets/EtcImages/Clouds_PNG_Clipart-870.png" id="3_e2dc0"]
+[ext_resource type="Script" path="res://Scripts/Rotate.gd" id="4_kmdi6"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_yavjt"]
 properties/0/path = NodePath(".:world_temperature")
@@ -26,6 +28,16 @@ properties/5/replication_mode = 1
 [sub_resource type="ViewportTexture" id="ViewportTexture_t7l05"]
 viewport_path = NodePath("SubViewport")
 
+[sub_resource type="ViewportTexture" id="ViewportTexture_3nb4f"]
+viewport_path = NodePath("SubViewport2")
+
+[sub_resource type="Gradient" id="Gradient_3cy5i"]
+offsets = PackedFloat32Array(0, 0.100233, 0.899767, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_n84g7"]
+gradient = SubResource("Gradient_3cy5i")
+
 [sub_resource type="Environment" id="Environment_nj7sw"]
 background_mode = 5
 
@@ -35,6 +47,17 @@ background_mode = 5
 diffuse_mode = 3
 specular_mode = 1
 albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nrb20"]
+transparency = 1
+diffuse_mode = 3
+specular_mode = 1
+albedo_texture = ExtResource("3_e2dc0")
+emission_enabled = true
+emission_energy_multiplier = 4.68
+emission_texture = ExtResource("3_e2dc0")
+uv1_scale = Vector3(-0.26, -0.26, -0.26)
+uv1_offset = Vector3(-0.075, -0.23, -0.52)
 
 [node name="TimeAndWeather" type="Node" node_paths=PackedStringArray("wind_arrow_camera", "wind_arrow")]
 script = ExtResource("1_25afj")
@@ -53,6 +76,8 @@ offset_right = 54.0
 offset_bottom = 101.0
 
 [node name="Temperature" type="RichTextLabel" parent="UI"]
+visible = false
+layout_mode = 0
 offset_right = 407.0
 offset_bottom = 108.0
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
@@ -63,6 +88,8 @@ theme_override_font_sizes/normal_font_size = 24
 text = "TEMPERATURE"
 
 [node name="Pressure" type="RichTextLabel" parent="UI"]
+visible = false
+layout_mode = 0
 offset_top = 25.0
 offset_right = 407.0
 offset_bottom = 133.0
@@ -74,9 +101,11 @@ theme_override_font_sizes/normal_font_size = 24
 text = "PRESSURE"
 
 [node name="Time" type="RichTextLabel" parent="UI"]
-offset_top = -26.0
-offset_right = 407.0
-offset_bottom = 82.0
+layout_mode = 0
+offset_left = 2.0
+offset_top = 482.0
+offset_right = 409.0
+offset_bottom = 590.0
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_outline_size = 10
 theme_override_constants/outline_size = 2
@@ -85,6 +114,8 @@ theme_override_font_sizes/normal_font_size = 24
 text = "TIME"
 
 [node name="Humidity" type="RichTextLabel" parent="UI"]
+visible = false
+layout_mode = 0
 offset_top = 49.0
 offset_right = 407.0
 offset_bottom = 157.0
@@ -97,10 +128,11 @@ text = "HUMIDITY"
 
 [node name="Wind" type="RichTextLabel" parent="UI"]
 z_index = 1
-offset_left = 343.0
-offset_top = -59.0
-offset_right = 750.0
-offset_bottom = 49.0
+layout_mode = 0
+offset_left = 867.0
+offset_top = 481.75
+offset_right = 1274.0
+offset_bottom = 589.75
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_outline_size = 10
 theme_override_constants/outline_size = 2
@@ -110,9 +142,10 @@ bbcode_enabled = true
 text = "[center]MPH"
 
 [node name="Day" type="RichTextLabel" parent="UI"]
-offset_top = -51.0
+layout_mode = 0
+offset_top = 547.0
 offset_right = 407.0
-offset_bottom = 57.0
+offset_bottom = 655.0
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_outline_size = 10
 theme_override_constants/outline_size = 2
@@ -121,9 +154,127 @@ theme_override_font_sizes/normal_font_size = 24
 text = "DAY"
 
 [node name="WeatherArrow" type="Sprite2D" parent="UI"]
-position = Vector2(556, -13)
+position = Vector2(1073, 527.75)
 scale = Vector2(0.14, 0.14)
 texture = SubResource("ViewportTexture_t7l05")
+
+[node name="Sprite2D" type="Sprite2D" parent="UI"]
+z_index = 1
+texture_filter = 1
+texture_repeat = 2
+position = Vector2(43, -28)
+scale = Vector2(0.0566407, 0.0566407)
+texture = SubResource("ViewportTexture_3nb4f")
+
+[node name="Sprite2D3" type="Sprite2D" parent="UI"]
+z_index = 1
+texture_filter = 1
+texture_repeat = 2
+position = Vector2(124, -28)
+scale = Vector2(0.0566407, 0.0566407)
+texture = SubResource("ViewportTexture_3nb4f")
+
+[node name="Sprite2D5" type="Sprite2D" parent="UI"]
+z_index = 1
+texture_filter = 1
+texture_repeat = 2
+position = Vector2(205, -28)
+scale = Vector2(0.0566407, 0.0566407)
+texture = SubResource("ViewportTexture_3nb4f")
+
+[node name="Sprite2D7" type="Sprite2D" parent="UI"]
+z_index = 1
+texture_filter = 1
+texture_repeat = 2
+position = Vector2(286, -28)
+scale = Vector2(0.0566407, 0.0566407)
+texture = SubResource("ViewportTexture_3nb4f")
+
+[node name="Sprite2D2" type="Sprite2D" parent="UI"]
+z_index = 1
+texture_filter = 1
+texture_repeat = 2
+position = Vector2(362, -28)
+scale = Vector2(0.0566407, 0.0566407)
+texture = SubResource("ViewportTexture_3nb4f")
+
+[node name="Sprite2D4" type="Sprite2D" parent="UI"]
+z_index = 1
+texture_filter = 1
+texture_repeat = 2
+position = Vector2(443, -28)
+scale = Vector2(0.0566407, 0.0566407)
+texture = SubResource("ViewportTexture_3nb4f")
+
+[node name="Sprite2D6" type="Sprite2D" parent="UI"]
+z_index = 1
+texture_filter = 1
+texture_repeat = 2
+position = Vector2(524, -28)
+scale = Vector2(0.0566407, 0.0566407)
+texture = SubResource("ViewportTexture_3nb4f")
+
+[node name="Sprite2D8" type="Sprite2D" parent="UI"]
+z_index = 1
+texture_filter = 1
+texture_repeat = 2
+position = Vector2(605, -28)
+scale = Vector2(0.0566407, 0.0566407)
+texture = SubResource("ViewportTexture_3nb4f")
+
+[node name="Sprite2D9" type="Sprite2D" parent="UI"]
+z_index = 1
+texture_filter = 1
+texture_repeat = 2
+position = Vector2(678, -28)
+scale = Vector2(0.0566407, 0.0566407)
+texture = SubResource("ViewportTexture_3nb4f")
+
+[node name="Sprite2D10" type="Sprite2D" parent="UI"]
+z_index = 1
+texture_filter = 1
+texture_repeat = 2
+position = Vector2(759, -28)
+scale = Vector2(0.0566407, 0.0566407)
+texture = SubResource("ViewportTexture_3nb4f")
+
+[node name="Sprite2D11" type="Sprite2D" parent="UI"]
+z_index = 1
+texture_filter = 1
+texture_repeat = 2
+position = Vector2(840, -28)
+scale = Vector2(0.0566407, 0.0566407)
+texture = SubResource("ViewportTexture_3nb4f")
+
+[node name="Sprite2D12" type="Sprite2D" parent="UI"]
+z_index = 1
+texture_filter = 1
+texture_repeat = 2
+position = Vector2(921, -28)
+scale = Vector2(0.0566407, 0.0566407)
+texture = SubResource("ViewportTexture_3nb4f")
+
+[node name="Sprite2D13" type="Sprite2D" parent="UI"]
+z_index = 1
+texture_filter = 1
+texture_repeat = 2
+position = Vector2(1002, -28)
+scale = Vector2(0.0566407, 0.0566407)
+texture = SubResource("ViewportTexture_3nb4f")
+
+[node name="Sprite2D14" type="Sprite2D" parent="UI"]
+z_index = 1
+texture_filter = 1
+texture_repeat = 2
+position = Vector2(1083, -28)
+scale = Vector2(0.0566407, 0.0566407)
+texture = SubResource("ViewportTexture_3nb4f")
+
+[node name="DayTimeline" type="Sprite2D" parent="UI"]
+modulate = Color(0.886275, 0.843137, 1, 0.513726)
+position = Vector2(562, -21.75)
+scale = Vector2(17.625, 0.0390625)
+texture = SubResource("GradientTexture2D_n84g7")
 
 [node name="UpdateTimer" type="Timer" parent="."]
 autostart = true
@@ -138,6 +289,17 @@ size = Vector2i(1024, 1025)
 
 [node name="WindArrowCam" type="Camera3D" parent="SubViewport"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000977039, -0.162354, 0.25457)
+cull_mask = 2
+environment = SubResource("Environment_nj7sw")
+attributes = SubResource("CameraAttributesPractical_d7d3i")
+fov = 60.5
+
+[node name="SubViewport2" type="SubViewport" parent="."]
+transparent_bg = true
+size = Vector2i(1024, 1025)
+
+[node name="OrbCam" type="Camera3D" parent="SubViewport2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, -0.162, 0.255)
 cull_mask = 2
 environment = SubResource("Environment_nj7sw")
 attributes = SubResource("CameraAttributesPractical_d7d3i")
@@ -162,10 +324,27 @@ height = 0.316347
 sides = 32
 cone = true
 
+[node name="Orb" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, -0.301, -0.854)
+
+[node name="Orb" type="CSGSphere3D" parent="Orb"]
+transform = Transform3D(1.94707e-07, -1, 4.37114e-08, 0.680299, 1.00421e-07, -0.732935, 0.732935, 1.72444e-07, 0.680299, 0, 0, 0)
+layers = 2
+material_override = SubResource("StandardMaterial3D_nrb20")
+radius = 0.191438
+radial_segments = 24
+script = ExtResource("4_kmdi6")
+
 [node name="SpotLight3D" type="SpotLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -0.761776, 0.647841, 0, -0.647841, -0.761776, 0, 1.1418, -2.91701)
 layers = 2
 light_energy = 10.467
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.822928, 0.568145, 0, -0.568145, 0.822928, 5, 1.142, 2.40695)
+layers = 2
+light_color = Color(0.803922, 0.721569, 1, 1)
+light_energy = 5.997
 
 [connection signal="timeout" from="UpdateTimer" to="." method="_on_update_timer_timeout"]
 [connection signal="timeout" from="WeatherEvent" to="." method="_on_weather_event_timeout"]
