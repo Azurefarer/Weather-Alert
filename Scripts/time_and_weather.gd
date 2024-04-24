@@ -40,11 +40,11 @@ func _process(delta):
 	if is_multiplayer_authority():
 		GameManager.directional_light.rotation.x = lerp(GameManager.directional_light.rotation.x,deg_to_rad(200+(time_of_day/720)*180),delta)
 		if GameManager.playerStats.wind_vector == Vector3.ZERO:
-			$WeatherArrow.modulate.a = lerp($WeatherArrow.modulate.a,0.0,delta*10)
-			$Wind.modulate.a = lerp($Wind.modulate.a,0.0,delta*10)
+			$UI/WeatherArrow.modulate.a = lerp($UI/WeatherArrow.modulate.a,0.0,delta*10)
+			$UI/Wind.modulate.a = lerp($UI/Wind.modulate.a,0.0,delta*10)
 		else:
-			$WeatherArrow.modulate.a = lerp($WeatherArrow.modulate.a,1.0,delta*10)
-			$Wind.modulate.a = lerp($Wind.modulate.a,1.0,delta*10)
+			$UI/WeatherArrow.modulate.a = lerp($UI/WeatherArrow.modulate.a,1.0,delta*10)
+			$UI/Wind.modulate.a = lerp($UI/Wind.modulate.a,1.0,delta*10)
 			wind_arrow.look_at(wind_arrow.global_position+GameManager.playerStats.wind_vector)
 			wind_arrow.rotate(Vector3.UP,-GameManager.playerStats.get_parent().rotation.y+180-45)
 		time_of_day+=delta
@@ -80,12 +80,12 @@ func update():
 	world_humidity =  general_humidity*.85+humidity_variation*sin(time_of_day/10)*20
 	await get_tree().physics_frame
 	if is_multiplayer_authority():
-		$Temperature.text = str(GameManager.playerStats.experienced_temperature).pad_decimals(0)+" F"
-		$Pressure.text = str(GameManager.playerStats.experienced_pressure).pad_decimals(0)+" PSI"
-		$Humidity.text = str(GameManager.playerStats.experienced_humidity).pad_decimals(0)+" %HUMIDITY"
-		$Time.text = str(6+floor(simulated_time_of_day/60)).pad_zeros(2)+":"+str(floor(fmod(simulated_time_of_day,60))).pad_zeros(2)
-		$Day.text = "Day "+str(current_day)
-		$Wind.text = "[center] "+str(GameManager.playerStats.wind_vector.length()/200).pad_decimals(0)+" MPH"
+		$UI/Temperature.text = str(GameManager.playerStats.experienced_temperature).pad_decimals(0)+" F"
+		$UI/Pressure.text = str(GameManager.playerStats.experienced_pressure).pad_decimals(0)+" PSI"
+		$UI/Humidity.text = str(GameManager.playerStats.experienced_humidity).pad_decimals(0)+" % HUMIDITY"
+		$UI/Time.text = str(6+floor(simulated_time_of_day/60)).pad_zeros(2)+":"+str(floor(fmod(simulated_time_of_day,60))).pad_zeros(2)
+		$UI/Day.text = "Day "+str(current_day)
+		$UI/Wind.text = "[center] "+str(GameManager.playerStats.wind_vector.length()/200).pad_decimals(0)+" MPH"
 	#wind_arrow.look_at(wind_arrow.global_position+GameManager.playerStats.wind_vector)
 	#wind_arrow.rotate(Vector3.UP,-GameManager.playerStats.get_parent().rotation.y+180-45)
 

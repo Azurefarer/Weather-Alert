@@ -7,6 +7,7 @@ var global_delta: float
 var gameScreen =-1
 var gameMode = "menu"
 var level
+var player
 var playerStats: Node
 var weatherManager
 var weather_areas: Array
@@ -55,3 +56,25 @@ func buttonFeedback(button):
 	button.modulate = Color(1,1,1,0)  
 	await get_tree().create_timer(.02).timeout
 	button.modulate = Color(1,1,1,1)  
+
+func transition_camera(camera1,camera2):
+	var originFov = camera1.fov
+	camera1.fov = camera2.fov
+	var originPos = camera1.global_position
+	var origin_basis = camera1.global_basis
+	camera1.global_transform = camera2.global_transform
+	while(true):
+		await get_tree().physics_frame
+		camera1.global_position = lerp(camera1.global_position,originPos,GameManager.global_delta*10)
+		camera1.global_basis.y = lerp(camera1.global_basis.y,origin_basis.y,GameManager.global_delta*10) 
+		camera1.global_basis.x = lerp(camera1.global_basis.x,-origin_basis.z.cross(Vector3(0,1,0)),GameManager.global_delta*10)
+		camera1.fov = lerp(camera1.fov,originFov,GameManager.global_delta*10)
+		#camera1.global_basis.x = lerp(camera1.global_basis.x,origin_basis.x.cross(Vector3(0,1,0)),GameManager.global_delta*4)
+		camera1.global_basis = camera1.global_basis.orthonormalized()
+		#camera1.global_rotation = camera1.global_rotation.slerp(originRot,GameManager.global_delta*4)
+		if GameManager.player.interacting == null:
+			break
+	camera1.global_position = originPos
+	camera1.global_basis = origin_basis
+	camera1.fov = originFov
+		

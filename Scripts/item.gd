@@ -1,4 +1,5 @@
 extends RigidBody3D
+class_name Item
 
 @export var name_: String
 var holder

@@ -44,11 +44,17 @@ wind_arrow = NodePath("WindArrowRotate")
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_yavjt")
 
-[node name="Temperature" type="RichTextLabel" parent="."]
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
 offset_left = 14.0
 offset_top = 61.0
-offset_right = 421.0
-offset_bottom = 169.0
+offset_right = 54.0
+offset_bottom = 101.0
+
+[node name="Temperature" type="RichTextLabel" parent="UI"]
+offset_right = 407.0
+offset_bottom = 108.0
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_outline_size = 10
 theme_override_constants/outline_size = 2
@@ -56,11 +62,10 @@ theme_override_fonts/normal_font = ExtResource("2_hnkd1")
 theme_override_font_sizes/normal_font_size = 24
 text = "TEMPERATURE"
 
-[node name="Pressure" type="RichTextLabel" parent="."]
-offset_left = 14.0
-offset_top = 86.0
-offset_right = 421.0
-offset_bottom = 194.0
+[node name="Pressure" type="RichTextLabel" parent="UI"]
+offset_top = 25.0
+offset_right = 407.0
+offset_bottom = 133.0
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_outline_size = 10
 theme_override_constants/outline_size = 2
@@ -68,11 +73,10 @@ theme_override_fonts/normal_font = ExtResource("2_hnkd1")
 theme_override_font_sizes/normal_font_size = 24
 text = "PRESSURE"
 
-[node name="Time" type="RichTextLabel" parent="."]
-offset_left = 14.0
-offset_top = 35.0
-offset_right = 421.0
-offset_bottom = 143.0
+[node name="Time" type="RichTextLabel" parent="UI"]
+offset_top = -26.0
+offset_right = 407.0
+offset_bottom = 82.0
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_outline_size = 10
 theme_override_constants/outline_size = 2
@@ -80,11 +84,10 @@ theme_override_fonts/normal_font = ExtResource("2_hnkd1")
 theme_override_font_sizes/normal_font_size = 24
 text = "TIME"
 
-[node name="Humidity" type="RichTextLabel" parent="."]
-offset_left = 14.0
-offset_top = 110.0
-offset_right = 421.0
-offset_bottom = 218.0
+[node name="Humidity" type="RichTextLabel" parent="UI"]
+offset_top = 49.0
+offset_right = 407.0
+offset_bottom = 157.0
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_outline_size = 10
 theme_override_constants/outline_size = 2
@@ -92,12 +95,12 @@ theme_override_fonts/normal_font = ExtResource("2_hnkd1")
 theme_override_font_sizes/normal_font_size = 24
 text = "HUMIDITY"
 
-[node name="Wind" type="RichTextLabel" parent="."]
+[node name="Wind" type="RichTextLabel" parent="UI"]
 z_index = 1
-offset_left = 357.0
-offset_top = 2.0
-offset_right = 764.0
-offset_bottom = 110.0
+offset_left = 343.0
+offset_top = -59.0
+offset_right = 750.0
+offset_bottom = 49.0
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_outline_size = 10
 theme_override_constants/outline_size = 2
@@ -106,11 +109,10 @@ theme_override_font_sizes/normal_font_size = 24
 bbcode_enabled = true
 text = "[center]MPH"
 
-[node name="Day" type="RichTextLabel" parent="."]
-offset_left = 14.0
-offset_top = 10.0
-offset_right = 421.0
-offset_bottom = 118.0
+[node name="Day" type="RichTextLabel" parent="UI"]
+offset_top = -51.0
+offset_right = 407.0
+offset_bottom = 57.0
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_outline_size = 10
 theme_override_constants/outline_size = 2
@@ -118,17 +120,17 @@ theme_override_fonts/normal_font = ExtResource("2_hnkd1")
 theme_override_font_sizes/normal_font_size = 24
 text = "DAY"
 
+[node name="WeatherArrow" type="Sprite2D" parent="UI"]
+position = Vector2(556, -13)
+scale = Vector2(0.14, 0.14)
+texture = SubResource("ViewportTexture_t7l05")
+
 [node name="UpdateTimer" type="Timer" parent="."]
 autostart = true
 
 [node name="WeatherEvent" type="Timer" parent="."]
 wait_time = 60.0
 autostart = true
-
-[node name="WeatherArrow" type="Sprite2D" parent="."]
-position = Vector2(570, 48)
-scale = Vector2(0.3, 0.3)
-texture = SubResource("ViewportTexture_t7l05")
 
 [node name="SubViewport" type="SubViewport" parent="."]
 transparent_bg = true

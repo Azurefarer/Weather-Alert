@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://cy4kybitqrbjh" path="res://Assets/EtcImages/DeebugTexture.png" id="1_h2p26"]
 [ext_resource type="PackedScene" uid="uid://ei5ein17lo4y" path="res://Assets/Prefabs/fire_extinguisher.tscn" id="2_chjk6"]
 [ext_resource type="PackedScene" uid="uid://om2lr6ft6tf6" path="res://Assets/Prefabs/glider.tscn" id="3_vvk2g"]
-[ext_resource type="Script" path="res://Scripts/Invisible.gd" id="5_4qkoh"]
+[ext_resource type="Script" path="res://Scripts/invisible.gd" id="5_4qkoh"]
 
 [sub_resource type="GDScript" id="GDScript_dd624"]
 script/source = "extends Node3D

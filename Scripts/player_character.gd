@@ -22,6 +22,7 @@ var flightAngle: float
 var flightSpeed: float
 var landing = false
 var holding_item = null
+var interacting = null
 @export var landPower = 0
 @export var rotateCheckRay: RayCast3D
 @export var ceilCheckRay: RayCast3D
@@ -59,6 +60,7 @@ func _enter_tree():
 func _ready():
 	if !is_multiplayer_authority():
 		return
+	GameManager.player = self
 	while GameManager.ship == null:
 		await get_tree().physics_frame
 	if GameManager.gameMode == "game":
@@ -145,7 +147,8 @@ func _physics_process(delta):
 		apply_floor_snap()
 	
 	camera.fov = clamp(camera.fov,10,70)	
-	tilt -= mouseDelta.y * TURN_SPEED * delta
+	if fullyActionable() and playerFocus():
+		tilt -= mouseDelta.y * TURN_SPEED * delta
 	tilt = clamp(tilt,-2.1,2.1)
 	#print(tilt)
 
@@ -163,14 +166,16 @@ func _physics_process(delta):
 	obstructionZoom = clamp(obstructionZoom,0,1)
 	camera.look_at(self.global_position+Vector3.UP*1.2)
 	#camera.rotation.x = cameraTrack.rotation.x
-	if is_on_floor() and !landing and begunFalling>0.5:
+	if is_on_floor() and !landing:
 		land()
-	if !is_on_floor():
-		begunFalling+=delta
 	if Input.is_action_just_pressed("pickup"):
 		if targeted_item !=null:
-			toggle_held_item(targeted_item)
-			
+			if targeted_item is Item:
+				toggle_held_item(targeted_item)
+	if Input.is_action_just_pressed("interact"):
+		if targeted_item !=null:	
+			if targeted_item is Interactable:
+				targeted_item.use(self)
 	if Input.is_action_just_pressed("drop"):
 		drop_item()
 		leftHandIK.stop()
@@ -194,7 +199,7 @@ func is_gliding():
 
 func checkRun():
 	if Input.is_action_pressed("run"):
-		runToggle =4
+		runToggle =2
 	else:
 		runToggle = 1
 		
@@ -218,14 +223,16 @@ func jump():
 	jumping = false
 
 func land():
+	print("land start "+str(landPower))	
 	diveBombMomentum = 0
-	begunFalling = 0.0
 	landing = true
 	await get_tree().create_timer(.005*landPower).timeout
 	landPower = 0
+	print("land end "+str(landPower))
 		
 func gravity(delta):
 	if !is_on_floor():
+		begunFalling+=delta
 		landPower = abs(velocity.y)
 		landing = false
 		canSnap = false
@@ -240,6 +247,7 @@ func gravity(delta):
 		else:
 			velocity.y-=delta*FALL_SPEED/4
 	else:
+		begunFalling = 0.0
 		if !jumping:
 			canSnap = true
 			velocity.y= 0
@@ -319,9 +327,9 @@ func moveInputs(delta):
 			flightAngle = tilt
 			flightSpeed = lerp(flightSpeed,flightAngle,delta)
 			if flightAngle<0:
-				diveBombMomentum+=delta*7*-flightAngle
+				diveBombMomentum+=delta*27*-flightAngle
 			else:
-				diveBombMomentum = lerp(diveBombMomentum,0.0,delta/3)
+				diveBombMomentum = lerp(diveBombMomentum,0.0,delta/2)
 		else:
 			$RootScene/RootNode.look_at($RootScene/RootNode.global_position-moveDirection*100)
 			flightSpeed = 0
@@ -335,11 +343,10 @@ func moveInputs(delta):
 	if !is_gliding():
 		velocity += moveDirection*runToggle/2*delta*100
 	else:
-		if diveBombMomentum>3:
-			velocity = moveDirection.normalized()*delta*50 +Vector3(moveDirection.normalized().x,moveDirection.normalized().y/2,moveDirection.normalized().z)*diveBombMomentum*delta*80			
-		else:
-			velocity += moveDirection.normalized()*delta*50 +Vector3(moveDirection.normalized().x,moveDirection.normalized().y/2,moveDirection.normalized().z)*diveBombMomentum*delta*30
-		velocity+=$Stats.wind_vector/160*delta
+		velocity = velocity.lerp(moveDirection.normalized()*delta*50 +Vector3(moveDirection.normalized().x,moveDirection.normalized().y/2,moveDirection.normalized().z)*diveBombMomentum*delta*180,delta*5)
+		if flightAngle>0:
+			velocity.y-=(flightAngle+1)*70*clamp(begunFalling-1,0,3)/(diveBombMomentum+1)*delta
+		velocity+=$Stats.wind_vector/110*delta
 		velocity.y+=$Stats.wind_vector.y/110*delta
 	if !is_on_floor():
 		print(diveBombMomentum)
@@ -359,7 +366,9 @@ func playerFocus():
 				return false
 	
 func fullyActionable():
-	return true
+	if interacting == null:
+		return true
+	return false 
 
 func animate(delta):
 	if holding_item != null:
@@ -423,4 +432,13 @@ func _on_interact_area_body_entered(body):
 func _on_interact_area_body_exited(body):
 	#print(body.name)
 	if body == targeted_item:
+		targeted_item = null
+
+
+func _on_interact_area_area_entered(area):
+	targeted_item = area.get_parent()
+
+
+func _on_interact_area_area_exited(area):
+	if area.get_parent() == targeted_item:
 		targeted_item = null
