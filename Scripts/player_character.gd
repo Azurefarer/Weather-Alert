@@ -1,4 +1,5 @@
 extends CharacterBody3D
+class_name PlayerCharacter
 
 const MOVE_SPEED = 10
 const MAX_SPEED = 200
@@ -8,6 +9,10 @@ const DRAG = 10
 @export var jumpIndex = 1
 @export var gliding: bool
 @export var velocityExport: Vector3
+var run_force : float = 7000.0 # In newtons
+var walk_force : float = 3500.0 # In newtons
+var player_move_force : float
+
 var mouseDelta: Vector2
 var runToggle = 10
 var moveDirection = Vector3.ZERO
@@ -63,9 +68,10 @@ func _ready():
 	GameManager.player = self
 	while GameManager.ship == null:
 		await get_tree().physics_frame
-	if GameManager.gameMode == "game":
-		GameManager.ship.get_node("Scalar/Players").global_position
-		GameManager.level.add_child(preload("res://Assets/Scenes/World.tscn").instantiate())
+	#if GameManager.gameMode == "game":
+		#GameManager.ship.get_node("Scalar/Players").global_position
+		#GameManager.level.add_child(preload("res://Assets/Scenes/World.tscn").instantiate())
+		# NOTE: maybe makes desync between world weather systems
 	print("authority: "+str(get_multiplayer_authority())+"|system: "+str(multiplayer.get_unique_id()))
 	camera.reparent(get_node("/root"))
 	$Camera3Dtrack.reparent(get_node("/root"))
@@ -73,6 +79,7 @@ func _ready():
 	cameraTrack.global_position = global_position + Vector3(basis.z.x,0,basis.z.z)*(-12-tilt*5)
 	cameraTrack.global_position.y = 4+ global_position.y-tilt*10
 	camera.global_position = lerp(camera.global_position,cameraTrack.global_position,1)
+	GameManager.main.clear_black()
 	#while GameManager.stage == null:
 	#	global_position = Vector3(280,115,-153)
 	#	await get_tree().physics_frame
@@ -143,10 +150,11 @@ func _physics_process(delta):
 	move_and_slide()
 	velocityExport = velocity
 	if snapCheckRay.is_colliding() and canSnap:
-		pass
 		apply_floor_snap()
 	
-	camera.fov = clamp(camera.fov,10,70)	
+	camera.fov = clamp(camera.fov,10,70)
+	
+	# Merge into other identical check Maybe
 	if fullyActionable() and playerFocus():
 		tilt -= mouseDelta.y * TURN_SPEED * delta
 	tilt = clamp(tilt,-2.1,2.1)
@@ -199,9 +207,9 @@ func is_gliding():
 
 func checkRun():
 	if Input.is_action_pressed("run"):
-		runToggle =2
+		player_move_force = run_force
 	else:
-		runToggle = 1
+		player_move_force = walk_force
 		
 func checkJump():
 	if Input.is_action_pressed("jump") and !jumping:
@@ -209,7 +217,7 @@ func checkJump():
 			return
 		match jumpIndex:
 			1:
-				jumpIndex = 2
+				jumpIndex = 2 # left and right knee jump stuff
 			2:
 				jumpIndex = 1
 		jump()
@@ -238,11 +246,11 @@ func gravity(delta):
 		canSnap = false
 		if holding_item:
 			if holding_item.name_=="Umbrella":
-				velocity.y-=delta*FALL_SPEED
-				velocity.y = clamp(velocity.y,-2,10)
-			elif holding_item.name_=="Glider":
-				if velocity.y>0 and begunFalling>.75:
-					velocity.y-=delta*FALL_SPEED/4
+				velocity.y-=delta*FALL_SPEED/4
+				velocity.y = clamp(velocity.y,-2,100000)
+			#elif holding_item.name_=="Glider":
+				#if velocity.y>0 and begunFalling>.75:
+					#velocity.y-=delta*FALL_SPEED/4
 				#velocity.y = clamp(velocity.y,-2,10)
 		else:
 			velocity.y-=delta*FALL_SPEED/4
@@ -304,8 +312,8 @@ func moveInputs(delta):
 		moveDirection -= basis.x
 	if Input.is_action_pressed("left"):
 		moveDirection += basis.x
-		moveDirection.y = 0
-		moveDirection = moveDirection.normalized()
+	moveDirection.y = 0
+	moveDirection = moveDirection.normalized()
 	var lookDirection = Vector3.ZERO
 	if is_gliding():
 		moveDirection = Vector3.ZERO
@@ -341,18 +349,18 @@ func moveInputs(delta):
 	#$RootScene/RootNode.rotate(basis.y,target_rotation.y)
 	####################velocity movement determine####################################
 	if !is_gliding():
-		velocity += moveDirection*runToggle/2*delta*100
+		# normalized direction * F/m * dt (we handle drag in physics process)
+		velocity += moveDirection*player_move_force/stats.mass*delta
 	else:
 		velocity = velocity.lerp(moveDirection.normalized()*delta*50 +Vector3(moveDirection.normalized().x,moveDirection.normalized().y/2,moveDirection.normalized().z)*diveBombMomentum*delta*180,delta*5)
 		if flightAngle>0:
 			velocity.y-=(flightAngle+1)*70*clamp(begunFalling-1,0,3)/(diveBombMomentum+1)*delta
-		velocity+=$Stats.wind_vector/110*delta
-		velocity.y+=$Stats.wind_vector.y/110*delta
+		velocity+=stats.wind_vector/110*delta
+		velocity.y+=stats.wind_vector.y/110*delta
 	if !is_on_floor():
 		print(diveBombMomentum)
 		if !is_gliding():
-			pass
-			velocity+=Vector3($Stats.wind_vector.x,$Stats.wind_vector.y/4,$Stats.wind_vector.z)/125*delta
+			velocity+=Vector3(stats.wind_vector.x,stats.wind_vector.y/4,stats.wind_vector.z)/125*delta
 	velocity.x = clamp(velocity.x,-MAX_SPEED,MAX_SPEED)
 	velocity.z = clamp(velocity.z,-MAX_SPEED,MAX_SPEED)
 		
@@ -380,7 +388,7 @@ func animate(delta):
 				rightHandIK_active_target.transform = umbrella_hang_IK_pos_right.transform
 				leftHandIK_active_target.transform = umbrella_hang_IK_pos_left.transform
 	if is_gliding():
-		$RootScene/RootNode.global_rotate($RootScene/RootNode.global_basis.z,velocity.dot($RootScene/RootNode.global_basis.x)*delta)
+		#$RootScene/RootNode.global_rotate($RootScene/RootNode.global_basis.z,velocity.dot($RootScene/RootNode.global_basis.x)*delta)
 		$RootScene/AnimationPlayer.play("root|Gliding",.2)
 		$RootScene/AnimationPlayer.speed_scale = velocityExport.length()/5
 		return
@@ -428,16 +436,13 @@ func _on_interact_area_body_entered(body):
 		return
 	targeted_item = body
 
-
 func _on_interact_area_body_exited(body):
 	#print(body.name)
 	if body == targeted_item:
 		targeted_item = null
 
-
 func _on_interact_area_area_entered(area):
 	targeted_item = area.get_parent()
-
 
 func _on_interact_area_area_exited(area):
 	if area.get_parent() == targeted_item:

@@ -10,7 +10,9 @@ var external_ip
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	$BlackOverlay.self_modulate.a = 0
 	portMap()
+	GameManager.main = self
 	GameManager.level = $Level
 	GameManager.gameScreen = -1
 	multiplayer.connected_to_server.connect(_on_connected_ok)
@@ -62,17 +64,20 @@ func _on_debug_pressed():
 	
 func hide_UI():
 	$Main_UI.visible = false
+	$Stuff.queue_free()
 	
 func show_UI():
 	$Main_UI.visible = true
 	
 func change_level(scene :PackedScene):
+	await blackout()
 	print("called change level")
 	#for c in level.get_children():
 		#level.remove_child(c)
 		#c.queue_free()
 	hide_UI()
 	level.add_child(scene.instantiate())
+	GameManager.level.add_child(preload("res://Assets/Scenes/World.tscn").instantiate())
 	level.add_child(preload("res://Assets/Prefabs/time_and_weather.tscn").instantiate())
 
 
@@ -110,4 +115,14 @@ func _on_start_2_pressed():
 func _on_connected_ok():
 	GameManager.gameMode = "game"
 	hide_UI()
+	
+func blackout():
+	while $BlackOverlay.self_modulate.a<1:
+		$BlackOverlay.self_modulate.a+=GameManager.global_delta*3 
+		await get_tree().physics_frame
+
+func clear_black():
+	while $BlackOverlay.self_modulate.a>0:
+		$BlackOverlay.self_modulate.a-=GameManager.global_delta*3
+		await get_tree().physics_frame
 

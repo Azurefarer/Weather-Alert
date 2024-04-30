@@ -1,19 +1,16 @@
 extends Node
+class_name Stats
 
 var weather_modifiers: Array
 var experienced_temperature: float
 var experienced_pressure: float
 var experienced_humidity: float
 var wind_vector: Vector3
+var mass:= 70
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	if !is_multiplayer_authority():
-		return
-	GameManager.playerStats = self
-	while GameManager.weatherManager == null:
-		await get_tree().physics_frame
 	experienced_temperature = 50
 	experienced_pressure = 15
 	experienced_humidity = 50

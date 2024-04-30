@@ -7,6 +7,7 @@ var global_delta: float
 var gameScreen =-1
 var gameMode = "menu"
 var level
+var main
 var player
 var playerStats: Node
 var weatherManager
@@ -78,3 +79,10 @@ func transition_camera(camera1,camera2):
 	camera1.global_basis = origin_basis
 	camera1.fov = originFov
 		
+@rpc("any_peer","call_local","reliable")
+func shoot(path,pos,velocity):
+	var instance = load(path).instantiate()
+	instance.global_position = pos
+	instance.global_basis.y = velocity
+	instance.linear_velocity = velocity
+	

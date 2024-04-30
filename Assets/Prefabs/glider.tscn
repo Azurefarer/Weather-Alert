@@ -22,9 +22,10 @@ properties/2/spawn = true
 properties/2/replication_mode = 1
 
 [node name="Glider" type="RigidBody3D"]
-collision_layer = 17
+collision_layer = 16
 mass = 0.1
 physics_material_override = SubResource("PhysicsMaterial_tmec8")
+continuous_cd = true
 script = ExtResource("1_e214t")
 name_ = "Glider"
 

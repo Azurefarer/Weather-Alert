@@ -1,12 +1,9 @@
 #Cloud
-extends Node3D
+extends Stats
 
-var experienced_temperature: float
-var experienced_pressure: float
-var experienced_humidity: float
-var wind_vector: Vector3
-var weather_modifiers: Array
 var velocity: Vector3
+@export var dropEmitter: GPUParticles3D
+@export var cloudEmitter: GPUParticles3D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -17,16 +14,17 @@ func _ready():
 
 func _process(delta):
 	velocity= velocity.lerp(wind_vector,delta/5)
-	global_position += velocity*delta/30		
+	#print("velocity:"+str(velocity))
+	get_parent().global_position += velocity*delta/30		
 
 func _on_update_timer_timeout():
 	update()
 
 func update():
 	if experienced_humidity>=60:
-		$DropEmitter.emitting = true
+		dropEmitter.emitting = true
 	else:
-		$DropEmitter.emitting = false
+		dropEmitter.emitting = false
 	if !is_multiplayer_authority():
 		return
 	if GameManager.weather_areas.size()>0:
@@ -34,9 +32,10 @@ func update():
 		if true:
 			for area in GameManager.weather_areas:
 				#await get_tree().physics_frame
-				wind_vector+= GameManager.get_vector_from_pressure_difference(area,experienced_pressure,global_position)
+				wind_vector+= GameManager.get_vector_from_pressure_difference(area,experienced_pressure,get_parent().global_position)
 			wind_vector = wind_vector/GameManager.weather_areas.size()*3
 			wind_vector.y = wind_vector.y/2
+			#print(wind_vector)
 			await get_tree().process_frame
 			#print("wind vector:"+str(wind_vector))
 	var worldTemperatureOffset = 0
@@ -64,5 +63,5 @@ func update():
 
 
 func _on_reposition_timer_timeout():
-	global_position.x = GameManager.rng.randi_range(-2500,2500)
-	global_position.y = GameManager.rng.randi_range(-2500,2500)
+	get_parent().global_position.x = GameManager.rng.randi_range(-2500,2500)
+	get_parent().global_position.y = GameManager.rng.randi_range(-2500,2500)

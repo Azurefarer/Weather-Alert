@@ -56,3 +56,7 @@ surface_material_override/1 = SubResource("StandardMaterial3D_vyoj3")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Tree2/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_nx8am")
+
+[node name="NavigationObstacle3D" type="NavigationObstacle3D" parent="."]
+radius = 3.81
+height = 18.38

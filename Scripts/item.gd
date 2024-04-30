@@ -32,7 +32,7 @@ func _physics_process(delta):
 		match name_:
 			"Umbrella",\
 			"FireExtinguisher":
-				global_position=holder.rightHandPhysicsBone.global_position+holder.get_node("RootScene/RootNode").global_basis.z*.1+holder.get_node("RootScene/RootNode").global_basis.z*5*Vector3(holder.velocity.x,0,holder.velocity.z).length()/250
+				global_position=holder.rightHandBoneAttach.global_position+holder.get_node("RootScene/RootNode").global_basis.z*.1#+holder.get_node("RootScene/RootNode").global_basis.z*5*Vector3(holder.velocity.x,0,holder.velocity.z).length()/250
 				global_position += holder.get_node("RootScene/RootNode").global_basis.x*.12
 				global_rotation = holder.get_node("RootScene/RootNode").global_rotation
 				rotate(Vector3.UP,115)

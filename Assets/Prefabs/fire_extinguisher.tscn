@@ -52,6 +52,7 @@ radius = 0.113584
 collision_layer = 17
 mass = 0.1
 physics_material_override = SubResource("PhysicsMaterial_tmec8")
+continuous_cd = true
 script = ExtResource("1_gakqg")
 name_ = "FireExtinguisher"
 

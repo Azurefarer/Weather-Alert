@@ -24,8 +24,8 @@ func _on_body_exited(body):
 
 
 func _on_area_entered(area):#cloud entering or other weather entity
-	area.get_parent().weather_modifiers.append(self)
+	area.get_node("Stats").weather_modifiers.append(self)
 
 
 func _on_area_exited(area):
-	area.get_parent().weather_modifiers.erase(self)
+	area.get_node("Stats").weather_modifiers.erase(self)
