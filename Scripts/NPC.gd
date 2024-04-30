@@ -1,7 +1,7 @@
 extends CharacterBody3D
 class_name NPC
 
-const SPEED = 8.0
+const SPEED = 5.0
 const JUMP_VELOCITY = 4.5  
 
 @export var velocityExport: Vector3
