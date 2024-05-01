@@ -567,7 +567,7 @@ _data = {
 }
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_umsuy"]
-animation = &"root|idle"
+animation = &"root|walk"
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_dxn3f"]
 nodes/Animation/node = SubResource("AnimationNodeAnimation_umsuy")
@@ -578,7 +578,6 @@ node_connections = [&"output", 0, &"Animation"]
 blend_mode = 1
 
 [sub_resource type="Gradient" id="Gradient_uockt"]
-offsets = PackedFloat32Array(0.571429, 1)
 colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_hyloy"]
@@ -677,8 +676,8 @@ joinField = NodePath("Main_UI/Sprite2D")
 [node name="Stuff" type="Node3D" parent="."]
 
 [node name="Camera3D" type="Camera3D" parent="Stuff"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 19.1815, 20.7149)
-h_offset = -8.32
+transform = Transform3D(0.803857, 0.197577, 0.56105, 0, 0.943223, -0.332161, -0.594823, 0.26701, 0.758216, 0, 13.0374, 20.7149)
+h_offset = 3.825
 
 [node name="Cloud" type="Area3D" parent="Stuff"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.5284, -4.32109, 0)
@@ -731,48 +730,45 @@ autostart = true
 [node name="Root Scene" parent="Stuff" instance=ExtResource("2_3foj5")]
 
 [node name="Skeleton3D" parent="Stuff/Root Scene/RootNode/root" index="0"]
-bones/0/position = Vector3(1.04308e-06, -0.0213065, -3.3519)
-bones/0/rotation = Quaternion(0.707555, 0.0596999, -0.0407269, 0.702953)
+bones/0/position = Vector3(1.77334e-06, -0.137577, -3.62303)
+bones/0/rotation = Quaternion(0.747143, -2.22933e-06, -2.57419e-06, 0.664664)
 bones/0/scale = Vector3(1, 1, 1)
-bones/1/rotation = Quaternion(0.000261576, -0.00367826, 0.095103, 0.995461)
 bones/2/rotation = Quaternion(-0.01702, 0.00344735, 0.0133315, 0.99976)
-bones/3/rotation = Quaternion(0.174835, -0.0113222, -0.137678, 0.974859)
 bones/4/rotation = Quaternion(-0.0829239, -0.00766268, 0.00706174, 0.996501)
 bones/4/scale = Vector3(1, 1, 1)
 bones/5/rotation = Quaternion(0.498926, 0.482833, 0.526308, -0.490862)
-bones/6/rotation = Quaternion(-0.643933, 0.13929, -0.0100775, 0.752228)
+bones/6/rotation = Quaternion(-0.478652, 0.256851, -0.196964, 0.816165)
 bones/6/scale = Vector3(1, 1, 1)
-bones/7/rotation = Quaternion(3.78868e-08, -0.195224, -1.26454e-08, 0.980759)
-bones/8/rotation = Quaternion(2.95513e-08, -8.23982e-09, -0.104321, 0.994544)
+bones/7/rotation = Quaternion(5.60742e-08, -0.351511, 1.38818e-08, 0.936184)
+bones/8/rotation = Quaternion(-5.0298e-08, -1.64844e-08, -0.429066, 0.903273)
 bones/8/scale = Vector3(1, 0.999999, 1)
-bones/9/rotation = Quaternion(-1.49187e-08, -0.0866575, -9.62899e-09, 0.996238)
-bones/10/rotation = Quaternion(0.634293, -0.0761908, 0.0834911, 0.764785)
+bones/9/rotation = Quaternion(-2.96309e-08, -0.415883, -1.13265e-08, 0.909418)
+bones/10/rotation = Quaternion(0.710123, -0.0313109, 0.473057, 0.52054)
 bones/10/scale = Vector3(1, 1, 1)
 bones/11/rotation = Quaternion(-0.485848, 0.495986, 0.513171, 0.504584)
-bones/12/rotation = Quaternion(-0.620864, -0.0898957, -0.0432108, 0.777547)
-bones/13/rotation = Quaternion(-3.08807e-08, 0.125463, 3.32225e-09, 0.992098)
-bones/14/rotation = Quaternion(7.3462e-08, 7.65456e-08, 0.164301, 0.98641)
-bones/15/rotation = Quaternion(-1.89219e-08, 0.0864041, 9.78144e-09, 0.99626)
-bones/16/rotation = Quaternion(-0.12769, 0.0744206, 0.0490777, 0.9878)
-bones/17/rotation = Quaternion(0.731592, 0.141849, 0.666739, -0.0105455)
+bones/12/rotation = Quaternion(-0.593478, -0.415371, 0.0888694, 0.683632)
+bones/13/rotation = Quaternion(-2.1051e-09, 0.497939, -2.94461e-08, 0.867212)
+bones/14/rotation = Quaternion(8.45802e-08, 6.1073e-08, 0.0713951, 0.997448)
+bones/15/rotation = Quaternion(-3.36093e-08, 0.374941, -2.71467e-08, 0.927049)
+bones/16/rotation = Quaternion(0.62721, 0.416895, -0.110386, 0.648553)
+bones/17/rotation = Quaternion(0.79845, 0.182681, 0.569628, 0.0680392)
 bones/17/scale = Vector3(1, 1, 1)
-bones/18/rotation = Quaternion(-8.25219e-08, -7.24259e-08, 0.172168, 0.985068)
-bones/19/rotation = Quaternion(0.463028, 0.496983, -0.430692, 0.594237)
+bones/18/rotation = Quaternion(1.22352e-08, -1.32488e-07, 0.547933, 0.836522)
+bones/19/rotation = Quaternion(0.432682, 0.664236, -0.4188, 0.442926)
 bones/19/scale = Vector3(1, 1, 1)
-bones/20/rotation = Quaternion(0.0405758, 0.982605, 0.180896, 0.0108868)
+bones/20/rotation = Quaternion(0.0405687, 0.982636, 0.180724, 0.010893)
 bones/20/scale = Vector3(1, 1, 1)
-bones/21/rotation = Quaternion(-6.52665e-08, -0.28082, -5.49655e-08, 0.959761)
-bones/22/rotation = Quaternion(-1.34665e-07, -0.206248, 2.7116e-07, 0.9785)
-bones/23/rotation = Quaternion(0.784876, 0.0264611, -0.618967, 0.0122621)
+bones/21/rotation = Quaternion(1.27426e-07, -0.0956888, -4.49665e-08, 0.995411)
+bones/22/rotation = Quaternion(3.43839e-09, -0.0892331, 1.28592e-07, 0.996011)
+bones/23/rotation = Quaternion(0.85337, -0.171206, -0.472371, 0.138977)
 bones/23/scale = Vector3(1, 1, 1)
-bones/24/position = Vector3(1.41144e-06, 7.07227, -3.8147e-08)
-bones/24/rotation = Quaternion(-1.41646e-08, -2.87323e-08, -0.00263, 0.999997)
-bones/25/rotation = Quaternion(-0.380272, 0.556026, -0.369823, -0.63989)
+bones/24/rotation = Quaternion(3.21987e-08, -3.52892e-09, -0.276533, 0.961004)
+bones/25/rotation = Quaternion(-0.408671, 0.636227, -0.557319, -0.342928)
 bones/25/scale = Vector3(1, 1, 1)
-bones/26/rotation = Quaternion(-0.0434778, 0.973503, 0.224308, -0.00941803)
+bones/26/rotation = Quaternion(-0.0405764, 0.982641, 0.1807, -0.0108955)
 bones/26/scale = Vector3(1, 1, 1)
-bones/27/rotation = Quaternion(-1.32893e-07, 0.26801, -2.8551e-07, 0.963416)
-bones/28/rotation = Quaternion(-3.21323e-08, 0.139345, -1.34205e-08, 0.990244)
+bones/27/rotation = Quaternion(1.33048e-08, -0.0188953, 9.25798e-08, 0.999821)
+bones/28/rotation = Quaternion(3.78567e-08, -0.0256114, -3.26983e-07, 0.999672)
 
 [node name="Cylinder_003" parent="Stuff/Root Scene/RootNode/root/Skeleton3D" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_ds3q8")
@@ -784,7 +780,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_81xss")
 surface_material_override/0 = SubResource("StandardMaterial3D_pjdth")
 
 [node name="AnimationPlayer" parent="Stuff/Root Scene" index="1"]
-speed_scale = 0.01
+speed_scale = 3.404
 
 [node name="AnimationTree" type="AnimationTree" parent="Stuff/Root Scene"]
 libraries = {
@@ -812,7 +808,7 @@ scale = Vector2(0.269441, 0.269441)
 texture = ExtResource("2_6wsx3")
 
 [node name="BG" type="TextureRect" parent="Main_UI"]
-modulate = Color(0.647059, 0.658824, 1, 1)
+visible = false
 material = ExtResource("3_r12pu")
 layout_mode = 0
 offset_left = -747.0

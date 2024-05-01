@@ -1,6 +1,17 @@
 extends Node3D
 
+var crash_sites: Array
 
+func _enter_tree():
+	crash_sites =\
+	[\
+	#plateau
+	Vector3(288.383,98.206,-171.664),\
+	#valley switchbacks
+	Vector3(1616.134,-173.773,381.013),\
+	#desert
+	Vector3(2372.082,23.134,-826.909)\
+	]
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	GameManager.ship = self
@@ -9,6 +20,7 @@ func _ready():
 	if not multiplayer.is_server():
 		return
 
+	global_position = crash_sites[GameManager.rng.randi_range(0,2)]
 	multiplayer.peer_connected.connect(add_player)
 	multiplayer.peer_disconnected.connect(del_player)
 
