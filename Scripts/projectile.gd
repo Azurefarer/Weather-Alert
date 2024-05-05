@@ -11,6 +11,5 @@ func _process(delta):
 	pass
 
 
-func _on_body_entered(body):
-	if body is PlayerCharacter:
-		queue_free()
+func play_local(path, volume, pitch, pitch_range):
+	

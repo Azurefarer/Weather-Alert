@@ -18,6 +18,7 @@ config/features=PackedStringArray("4.2", "Forward Plus")
 
 GameManager="*res://Scripts/Autoload/game_manager.gd"
 RippleManager="*res://Scripts/Autoload/ripple_manager.gd"
+SoundManager="*res://Scripts/Autoload/sound_manager.gd"
 
 [display]
 

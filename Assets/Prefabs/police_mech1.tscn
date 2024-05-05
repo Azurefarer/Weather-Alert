@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://d4dwfc0a6ki16"]
+[gd_scene load_steps=34 format=3 uid="uid://d4dwfc0a6ki16"]
 
 [ext_resource type="Script" path="res://Scripts/police_robot.gd" id="1_8stj0"]
 [ext_resource type="PackedScene" uid="uid://21fmdpahl8k" path="res://Assets/Character/PoliceModel1.glb" id="2_lp8ug"]
@@ -9,16 +9,16 @@
 offsets = PackedFloat32Array(0, 0.564972, 1)
 colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 0.027451, 1, 1, 1, 0.219608)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_r3qxc"]
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_bpof5"]
 gradient = SubResource("Gradient_cglgu")
-fill_from = Vector2(1, 0.970085)
+fill_from = Vector2(0.995726, 0.594017)
 fill_to = Vector2(1, 1)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dtpme"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ju8dy"]
 transparency = 1
 cull_mode = 2
 albedo_color = Color(1, 1, 0, 1)
-albedo_texture = SubResource("GradientTexture2D_r3qxc")
+albedo_texture = SubResource("GradientTexture2D_bpof5")
 emission_enabled = true
 emission = Color(1, 1, 0, 1)
 distance_fade_min_distance = 39.55
@@ -33,11 +33,79 @@ albedo_color = Color(1, 1, 1, 0)
 height = 25.437
 radius = 33.066
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fgvkq"]
-albedo_color = Color(0.266667, 0.266667, 0.266667, 1)
-metallic_specular = 1.0
-roughness = 0.3
-emission = Color(1, 1, 0, 1)
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_20ubw"]
+noise_type = 4
+frequency = 0.054
+domain_warp_enabled = true
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_f63rl"]
+noise = SubResource("FastNoiseLite_20ubw")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mee4u"]
+albedo_color = Color(0.505882, 0.447059, 0.47451, 1)
+metallic = 1.0
+roughness = 0.68
+normal_enabled = true
+normal_scale = 1.6
+normal_texture = SubResource("NoiseTexture2D_f63rl")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xobp4"]
+albedo_color = Color(0.431373, 0.227451, 0.184314, 1)
+metallic = 1.0
+normal_enabled = true
+normal_scale = 1.6
+normal_texture = SubResource("NoiseTexture2D_f63rl")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d451c"]
+albedo_color = Color(0.431373, 0.227451, 0.184314, 1)
+normal_enabled = true
+normal_scale = 1.6
+normal_texture = SubResource("NoiseTexture2D_f63rl")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_udr28"]
+albedo_color = Color(0.505882, 0.447059, 0.47451, 1)
+metallic = 0.75
+roughness = 0.44
+normal_enabled = true
+normal_scale = 1.6
+normal_texture = SubResource("NoiseTexture2D_f63rl")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c46bh"]
+albedo_color = Color(0.431373, 0.227451, 0.184314, 1)
+normal_enabled = true
+normal_scale = 1.6
+normal_texture = SubResource("NoiseTexture2D_f63rl")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pmrmt"]
+albedo_color = Color(0.431373, 0.227451, 0.184314, 1)
+metallic = 0.39
+normal_enabled = true
+normal_scale = 1.6
+normal_texture = SubResource("NoiseTexture2D_f63rl")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ojnob"]
+albedo_color = Color(0.431373, 0.227451, 0.184314, 1)
+metallic = 0.95
+roughness = 0.45
+normal_enabled = true
+normal_scale = 1.6
+normal_texture = SubResource("NoiseTexture2D_f63rl")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_biofo"]
+albedo_color = Color(0.505882, 0.447059, 0.47451, 1)
+metallic = 0.27
+roughness = 0.74
+normal_enabled = true
+normal_scale = 1.6
+normal_texture = SubResource("NoiseTexture2D_f63rl")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sp541"]
+albedo_color = Color(0.431373, 0.227451, 0.184314, 1)
+metallic = 0.58
+roughness = 0.8
+normal_enabled = true
+normal_scale = 1.6
+normal_texture = SubResource("NoiseTexture2D_f63rl")
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_l34rj"]
 properties/0/path = NodePath(".:position")
@@ -79,31 +147,31 @@ properties/11/replication_mode = 1
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_jx57f"]
 radius = 2.02
-height = 10.788
+height = 7.5385
 
 [sub_resource type="SeparationRayShape3D" id="SeparationRayShape3D_5s08b"]
 length = 0.75
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_bpof5"]
-gradient = SubResource("Gradient_cglgu")
-fill_from = Vector2(0.995726, 0.594017)
-fill_to = Vector2(1, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ju8dy"]
-transparency = 1
-cull_mode = 2
-albedo_color = Color(1, 1, 0, 1)
-albedo_texture = SubResource("GradientTexture2D_bpof5")
-emission_enabled = true
-emission = Color(1, 1, 0, 1)
-distance_fade_min_distance = 39.55
-distance_fade_max_distance = 54.15
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_52nsh"]
 transparency = 1
 cull_mode = 2
 albedo_color = Color(1, 1, 0, 0.294118)
 albedo_texture = SubResource("GradientTexture2D_bpof5")
+emission_enabled = true
+emission = Color(1, 1, 0, 1)
+distance_fade_min_distance = 39.55
+distance_fade_max_distance = 54.15
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_r3qxc"]
+gradient = SubResource("Gradient_cglgu")
+fill_from = Vector2(1, 0.970085)
+fill_to = Vector2(1, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dtpme"]
+transparency = 1
+cull_mode = 2
+albedo_color = Color(1, 1, 0, 1)
+albedo_texture = SubResource("GradientTexture2D_r3qxc")
 emission_enabled = true
 emission = Color(1, 1, 0, 1)
 distance_fade_min_distance = 39.55
@@ -222,6 +290,12 @@ tracks/7/keys = {
 "update": 0,
 "values": [204.519, 292.169, 0.001, 204.519, 292.169, 0.001]
 }
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fgvkq"]
+albedo_color = Color(0.266667, 0.266667, 0.266667, 1)
+metallic_specular = 1.0
+roughness = 0.3
+emission = Color(1, 1, 0, 1)
 
 [sub_resource type="Animation" id="Animation_pldqk"]
 resource_name = "on"
@@ -350,7 +424,7 @@ height = 1.5
 debug_path_custom_color = Color(1, 0, 1, 1)
 
 [node name="PoliceModel1" parent="." instance=ExtResource("2_lp8ug")]
-transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
+transform = Transform3D(0.18, 0, 0, 0, 0.18, 0, 0, 0, 0.18, 0, 0, 0)
 
 [node name="Skeleton3D" parent="PoliceModel1/Armature" index="0"]
 bones/0/position = Vector3(-5.67924e-16, 4.64727, -2.73106)
@@ -395,9 +469,9 @@ bones/21/rotation = Quaternion(0.633417, 0.351191, 0.314297, 0.61373)
 transform = Transform3D(1, -7.9396e-18, -5.58267e-18, 8.48852e-18, 0.936703, 0.00341368, 4.49819e-18, -0.00258985, 1.23465, 0.107279, 4.64117, -2.74955)
 
 [node name="SpotLight3D" type="SpotLight3D" parent="PoliceModel1/Armature/Skeleton3D/Cube_008" index="0"]
-transform = Transform3D(4, -2.96215e-07, -1.6384e-07, -3.61295e-07, -3.78088, -1.98501, -5.96898e-09, 1.50599, -2.86848, -0.107277, 15.9026, 18.9593)
+transform = Transform3D(5.55556, -4.11411e-07, -2.27557e-07, -5.01799e-07, -5.25122, -2.75696, -8.29024e-09, 2.09165, -3.98399, -0.107277, 15.9026, 18.9593)
 light_color = Color(0.945098, 0.854902, 0.698039, 1)
-light_energy = 0.0
+light_energy = 0.6
 light_indirect_energy = 0.814
 light_volumetric_fog_energy = 600.0
 light_size = 1.0
@@ -411,21 +485,21 @@ spot_angle = 13.7515
 spot_angle_attenuation = 0.0149012
 
 [node name="CSGCylinder3D" type="CSGCylinder3D" parent="PoliceModel1/Armature/Skeleton3D/Cube_008" index="1"]
-transform = Transform3D(0.675, -4.09601e-08, 7.40538e-08, -6.09685e-08, -0.496252, 0.94522, -1.00728e-09, -0.717119, -0.376496, -5.05281e-06, 12.6141, 4.48134)
+transform = Transform3D(0.675, -4.09601e-08, 7.40538e-08, -6.09685e-08, -0.496252, 0.94522, -1.00728e-09, -0.717119, -0.376496, -4.79072e-06, 15.5967, 8.96926)
 radius = 69.7646
-height = 0.001
+height = 6.80006
 cone = true
-material = SubResource("StandardMaterial3D_dtpme")
+material = SubResource("StandardMaterial3D_ju8dy")
 
 [node name="CSGCylinder3D1" type="CSGCylinder3D" parent="PoliceModel1/Armature/Skeleton3D/Cube_008/CSGCylinder3D"]
-transform = Transform3D(1, -6.68354e-14, 7.99361e-14, 3.88578e-15, 0.999999, 8.9407e-08, 5.32907e-15, 2.98023e-08, 0.999999, -1.49012e-08, -148.478, 1.90735e-06)
+transform = Transform3D(1, -6.68354e-14, 7.99361e-14, 3.88578e-15, 0.999999, 8.9407e-08, 5.32907e-15, 2.98023e-08, 0.999999, -1.49012e-08, -107.343, 3.8147e-07)
 operation = 2
 radius = 104.234
 height = 117.812
 material = SubResource("StandardMaterial3D_7wtao")
 
 [node name="CSGCylinder3D2" type="CSGCylinder3D" parent="PoliceModel1/Armature/Skeleton3D/Cube_008/CSGCylinder3D"]
-transform = Transform3D(1, -8.81517e-14, 1.86517e-13, -8.21565e-15, 0.999999, 8.9407e-08, 4.32987e-15, 2.98023e-08, 0.999999, 0, 27.4488, 1.71661e-05)
+transform = Transform3D(1, -8.81517e-14, 1.86517e-13, -8.21565e-15, 0.999999, 8.9407e-08, 4.32987e-15, 2.98023e-08, 0.999999, 0, 61.9602, 1.71661e-05)
 operation = 2
 radius = 104.234
 height = 66.9341
@@ -438,31 +512,60 @@ target_position = Vector3(0, 200, 0)
 collision_mask = 512
 
 [node name="Cube_008" parent="PoliceModel1/Armature/Skeleton3D/Cube_008" index="3"]
-surface_material_override/1 = SubResource("StandardMaterial3D_fgvkq")
+transform = Transform3D(1, 4.1359e-25, 0, 4.1359e-25, 1, -5.96046e-08, 0, -2.98023e-08, 1, 0, 0, 0)
+surface_material_override/0 = SubResource("StandardMaterial3D_mee4u")
 
 [node name="Cube_005" parent="PoliceModel1/Armature/Skeleton3D" index="1"]
 transform = Transform3D(1, 1.67638e-07, 1.30059e-06, -6.74278e-07, 0.854664, 0.519181, -9.96515e-07, -0.519182, 0.854664, -8.10623e-06, -16.0139, 14.9736)
 
+[node name="Cube_005" parent="PoliceModel1/Armature/Skeleton3D/Cube_005" index="0"]
+transform = Transform3D(1, -3.55271e-15, 1.13687e-13, 1.24345e-14, 1, -1.86265e-09, -1.13687e-13, -9.31323e-10, 1, 0, 0, 0)
+surface_material_override/0 = SubResource("StandardMaterial3D_xobp4")
+
 [node name="Cube_007" parent="PoliceModel1/Armature/Skeleton3D" index="2"]
 transform = Transform3D(1, 4.69387e-07, 4.3842e-07, -5.66244e-07, 0.804636, 0.593768, -7.45058e-08, -0.593768, 0.804637, -8.10623e-06, -15.982, 14.9716)
+
+[node name="Cube_007" parent="PoliceModel1/Armature/Skeleton3D/Cube_007" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_d451c")
 
 [node name="Cylinder_005" parent="PoliceModel1/Armature/Skeleton3D" index="3"]
 transform = Transform3D(1, 1.56462e-07, 2.23517e-08, -1.3411e-07, 0.996897, 0.0787087, -2.98023e-08, -0.0787088, 0.996898, 5.72205e-06, 17.15, 12.2805)
 
+[node name="Cylinder_005" parent="PoliceModel1/Armature/Skeleton3D/Cylinder_005" index="0"]
+transform = Transform3D(1, -3.55271e-15, 0, -1.06581e-14, 1, -2.98023e-08, -7.10543e-15, 0, 1, 0, 0, 0)
+surface_material_override/0 = SubResource("StandardMaterial3D_udr28")
+
 [node name="Cylinder_004" parent="PoliceModel1/Armature/Skeleton3D" index="4"]
 transform = Transform3D(-2.05636e-06, 6.48804, -8.19564e-07, -1.44238, 8.9407e-08, 2.78943, 2.78943, 3.78489e-06, 1.44238, 0.107281, 5.20126, -3.07104)
+
+[node name="Cylinder_004" parent="PoliceModel1/Armature/Skeleton3D/Cylinder_004" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_c46bh")
 
 [node name="Cube_004" parent="PoliceModel1/Armature/Skeleton3D" index="5"]
 transform = Transform3D(1, -1.52737e-07, -1.85985e-06, -2.38419e-07, 0.984825, -0.173553, 1.69687e-06, 0.173552, 0.984825, -2.86102e-06, -18.0991, 5.4945)
 
+[node name="Cube_004" parent="PoliceModel1/Armature/Skeleton3D/Cube_004" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_pmrmt")
+
 [node name="Cube_006" parent="PoliceModel1/Armature/Skeleton3D" index="6"]
 transform = Transform3D(1, -6.70552e-08, -7.91159e-07, 6.57514e-07, 0.520435, 0.853901, 3.65078e-07, -0.853901, 0.520435, -3.8147e-06, -17.7005, 5.53597)
+
+[node name="Cube_006" parent="PoliceModel1/Armature/Skeleton3D/Cube_006" index="0"]
+transform = Transform3D(1, -2.84217e-14, 0, 0, 1, 0, 5.68434e-14, 2.98023e-08, 1, 0, 0, 0)
+surface_material_override/0 = SubResource("StandardMaterial3D_ojnob")
 
 [node name="Cylinder_003" parent="PoliceModel1/Armature/Skeleton3D" index="7"]
 transform = Transform3D(1, 4.47035e-08, -7.71135e-07, -7.45058e-08, 0.999732, -0.0231408, 7.15256e-07, 0.0231407, 0.999732, -1.04904e-05, 15.3665, 6.27297)
 
+[node name="Cylinder_003" parent="PoliceModel1/Armature/Skeleton3D/Cylinder_003" index="0"]
+transform = Transform3D(1, 0, 0, 5.68434e-14, 1, 5.96046e-08, -5.68434e-14, 0, 1, 0, 0, 0)
+surface_material_override/0 = SubResource("StandardMaterial3D_biofo")
+
 [node name="Cylinder_002" parent="PoliceModel1/Armature/Skeleton3D" index="8"]
 transform = Transform3D(1.22935e-06, 6.48804, -6.85453e-07, -3.05469, 3.02494e-06, 0.728156, 0.728155, 4.17233e-07, 3.0547, 0.107278, 5.2103, -3.08451)
+
+[node name="Cylinder_002" parent="PoliceModel1/Armature/Skeleton3D/Cylinder_002" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_sp541")
 
 [node name="BoneAttachment3D" type="BoneAttachment3D" parent="PoliceModel1/Armature/Skeleton3D" index="9"]
 transform = Transform3D(1, 1.68194e-16, -9.46542e-17, -1.92986e-16, 0.865705, -0.500554, -2.24775e-18, 0.500554, 0.865705, -5.67924e-16, 4.64727, -2.73106)
@@ -508,7 +611,7 @@ debug_shape_custom_color = Color(0.305882, 0, 0.909804, 1)
 debug_shape_thickness = 5
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.46176, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.82354, -0.324331)
 shape = SubResource("CapsuleShape3D_jx57f")
 
 [node name="Behavior" type="Node" parent="." node_paths=PackedStringArray("nav", "navCheckRay", "head", "shoot_timer")]
@@ -537,7 +640,7 @@ speed_scale = 2.0
 [node name="Probe" type="CSGSphere3D" parent="Node"]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -3.63302, 10.8504, -4.04043)
 radius = 0.401472
-material = SubResource("StandardMaterial3D_7gmim")
+material = SubResource("StandardMaterial3D_mee4u")
 
 [node name="Probe2" type="CSGSphere3D" parent="Node/Probe"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.374023)

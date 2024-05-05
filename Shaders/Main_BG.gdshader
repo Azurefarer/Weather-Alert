@@ -108,7 +108,7 @@ void fragment() {
 			float ripple_data = wave_packet(time_since_hover[i], _wave_ripple);
 			// Send ripple instances to output
 			// Have ripple amplitude decay over time(parabolic) as f(t) = (amp/wave_time^2)*(time-wave_time)^2
-			COLOR += vec4(vec3((clamp(ripple_data, -0.5, 10.0) / pow(wave_time, 2.0)) * pow(time_since_hover[i] - wave_time, 2.0))*intensity, 0.5);
+			COLOR += vec4(vec3((clamp(ripple_data, -0.5, 10.0) / pow(wave_time, 2.0)) * pow(time_since_hover[i] - wave_time, 2.0))*intensity, (wave_time - time_since_hover[i])/(wave_time));
 		}
 	}
 }

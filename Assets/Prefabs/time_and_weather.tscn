@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bvg87topw1dbf"]
+[gd_scene load_steps=11 format=3 uid="uid://bvg87topw1dbf"]
 
 [ext_resource type="Script" path="res://Scripts/time_and_weather.gd" id="1_25afj"]
 [ext_resource type="FontFile" uid="uid://bsegnh8v4qc3c" path="res://Assets/Fonts/GmarketSansTTFBold.ttf" id="2_hnkd1"]
@@ -27,16 +27,6 @@ properties/5/replication_mode = 1
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_t7l05"]
 viewport_path = NodePath("SubViewport")
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_3nb4f"]
-viewport_path = NodePath("SubViewport2")
-
-[sub_resource type="Gradient" id="Gradient_3cy5i"]
-offsets = PackedFloat32Array(0, 0.100233, 0.899767, 1)
-colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_n84g7"]
-gradient = SubResource("Gradient_3cy5i")
 
 [sub_resource type="Environment" id="Environment_nj7sw"]
 background_mode = 5
@@ -101,6 +91,7 @@ theme_override_font_sizes/normal_font_size = 24
 text = "PRESSURE"
 
 [node name="Time" type="RichTextLabel" parent="UI"]
+visible = false
 layout_mode = 0
 offset_left = 2.0
 offset_top = 482.0
@@ -157,124 +148,6 @@ text = "DAY"
 position = Vector2(1073, 527.75)
 scale = Vector2(0.14, 0.14)
 texture = SubResource("ViewportTexture_t7l05")
-
-[node name="Sprite2D" type="Sprite2D" parent="UI"]
-z_index = 1
-texture_filter = 1
-texture_repeat = 2
-position = Vector2(43, -28)
-scale = Vector2(0.0566407, 0.0566407)
-texture = SubResource("ViewportTexture_3nb4f")
-
-[node name="Sprite2D3" type="Sprite2D" parent="UI"]
-z_index = 1
-texture_filter = 1
-texture_repeat = 2
-position = Vector2(124, -28)
-scale = Vector2(0.0566407, 0.0566407)
-texture = SubResource("ViewportTexture_3nb4f")
-
-[node name="Sprite2D5" type="Sprite2D" parent="UI"]
-z_index = 1
-texture_filter = 1
-texture_repeat = 2
-position = Vector2(205, -28)
-scale = Vector2(0.0566407, 0.0566407)
-texture = SubResource("ViewportTexture_3nb4f")
-
-[node name="Sprite2D7" type="Sprite2D" parent="UI"]
-z_index = 1
-texture_filter = 1
-texture_repeat = 2
-position = Vector2(286, -28)
-scale = Vector2(0.0566407, 0.0566407)
-texture = SubResource("ViewportTexture_3nb4f")
-
-[node name="Sprite2D2" type="Sprite2D" parent="UI"]
-z_index = 1
-texture_filter = 1
-texture_repeat = 2
-position = Vector2(362, -28)
-scale = Vector2(0.0566407, 0.0566407)
-texture = SubResource("ViewportTexture_3nb4f")
-
-[node name="Sprite2D4" type="Sprite2D" parent="UI"]
-z_index = 1
-texture_filter = 1
-texture_repeat = 2
-position = Vector2(443, -28)
-scale = Vector2(0.0566407, 0.0566407)
-texture = SubResource("ViewportTexture_3nb4f")
-
-[node name="Sprite2D6" type="Sprite2D" parent="UI"]
-z_index = 1
-texture_filter = 1
-texture_repeat = 2
-position = Vector2(524, -28)
-scale = Vector2(0.0566407, 0.0566407)
-texture = SubResource("ViewportTexture_3nb4f")
-
-[node name="Sprite2D8" type="Sprite2D" parent="UI"]
-z_index = 1
-texture_filter = 1
-texture_repeat = 2
-position = Vector2(605, -28)
-scale = Vector2(0.0566407, 0.0566407)
-texture = SubResource("ViewportTexture_3nb4f")
-
-[node name="Sprite2D9" type="Sprite2D" parent="UI"]
-z_index = 1
-texture_filter = 1
-texture_repeat = 2
-position = Vector2(678, -28)
-scale = Vector2(0.0566407, 0.0566407)
-texture = SubResource("ViewportTexture_3nb4f")
-
-[node name="Sprite2D10" type="Sprite2D" parent="UI"]
-z_index = 1
-texture_filter = 1
-texture_repeat = 2
-position = Vector2(759, -28)
-scale = Vector2(0.0566407, 0.0566407)
-texture = SubResource("ViewportTexture_3nb4f")
-
-[node name="Sprite2D11" type="Sprite2D" parent="UI"]
-z_index = 1
-texture_filter = 1
-texture_repeat = 2
-position = Vector2(840, -28)
-scale = Vector2(0.0566407, 0.0566407)
-texture = SubResource("ViewportTexture_3nb4f")
-
-[node name="Sprite2D12" type="Sprite2D" parent="UI"]
-z_index = 1
-texture_filter = 1
-texture_repeat = 2
-position = Vector2(921, -28)
-scale = Vector2(0.0566407, 0.0566407)
-texture = SubResource("ViewportTexture_3nb4f")
-
-[node name="Sprite2D13" type="Sprite2D" parent="UI"]
-z_index = 1
-texture_filter = 1
-texture_repeat = 2
-position = Vector2(1002, -28)
-scale = Vector2(0.0566407, 0.0566407)
-texture = SubResource("ViewportTexture_3nb4f")
-
-[node name="Sprite2D14" type="Sprite2D" parent="UI"]
-z_index = 1
-texture_filter = 1
-texture_repeat = 2
-position = Vector2(1083, -28)
-scale = Vector2(0.0566407, 0.0566407)
-texture = SubResource("ViewportTexture_3nb4f")
-
-[node name="DayTimeline" type="Sprite2D" parent="UI"]
-modulate = Color(0.886275, 0.843137, 1, 0.513726)
-position = Vector2(562, -21.75)
-scale = Vector2(17.625, 0.0390625)
-texture = SubResource("GradientTexture2D_n84g7")
 
 [node name="UpdateTimer" type="Timer" parent="."]
 autostart = true

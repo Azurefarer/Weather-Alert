@@ -35,7 +35,8 @@ func _physics_process(delta):
 		b.angular_velocity += (torque*delta)
 		
 		if is_multiplayer_authority():
-			character_controller.velocity-=relative_position_difference*.25*character_controller.player_move_force+relative_position_difference*.5
+			pass
+			character_controller.velocity-=relative_position_difference*.02*character_controller.velocity.length()+relative_position_difference*.5
 		
 func hookes_law(displacement: Vector3, current_velocity: Vector3, stiffness: float, damping: float) -> Vector3:
 	return (stiffness * displacement) - (damping * current_velocity)

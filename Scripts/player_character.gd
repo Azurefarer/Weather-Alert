@@ -14,12 +14,12 @@ var walk_force : float = 3500.0 # In newtons
 var player_move_force : float
 
 var mouseDelta: Vector2
-var runToggle = 10
 var moveDirection = Vector3.ZERO
 var flattening = false
 var begunFalling = 0.0
 @export var camera: Camera3D
 @export var cameraTrack: RayCast3D
+@export var cameraTrack2: RayCast3D
 @export var stats: Node
 var canSnap = false
 var jumping = false
@@ -76,8 +76,8 @@ func _ready():
 	camera.reparent(get_node("/root"))
 	$Camera3Dtrack.reparent(get_node("/root"))
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	cameraTrack.global_position = global_position + Vector3(basis.z.x,0,basis.z.z)*(-12-tilt*5)
-	cameraTrack.global_position.y = 4+ global_position.y-tilt*10
+	cameraTrack.global_position = global_position + Vector3(basis.z.x,0,basis.z.z)*(-12-tilt*5)*1.2
+	cameraTrack.global_position.y = 4+ global_position.y-tilt*5
 	camera.global_position = lerp(camera.global_position,cameraTrack.global_position,1)
 	GameManager.main.clear_black()
 	#while GameManager.stage == null:
@@ -86,6 +86,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	#print (global_position)
 	pass
 
 func toggle_held_item(holding):
@@ -157,7 +158,10 @@ func _physics_process(delta):
 	# Merge into other identical check Maybe
 	if fullyActionable() and playerFocus():
 		tilt -= mouseDelta.y * TURN_SPEED * delta
-	tilt = clamp(tilt,-2.1,2.1)
+		if is_on_floor():
+			tilt = clamp(tilt,-2.1,.5)
+		else:
+			tilt = clamp(tilt,-2.1,2.1)
 	#print(tilt)
 
 	cameraTrack.global_position = global_position + Vector3(basis.z.x,0,basis.z.z)*(-12-tilt*5)
@@ -165,9 +169,17 @@ func _physics_process(delta):
 	cameraTrack.look_at(self.global_position)
 	#cameraTrack.get_node("SpringArm").spring_length = (cameraTrack.global_position-global_position).length()*.9
 	#var targetPos = global_position+(cameraTrack.get_node("SpringArm").get_node("target").global_position-global_position)*1
-	if cameraTrack.is_colliding() or cameraTrack.get_node("Ray2").is_colliding():
+	if cameraTrack.is_colliding():
 		obstructionZoom+=delta/4
 		camera.global_position = lerp(camera.global_position,global_position+(cameraTrack.get_node("SpringArm").get_node("target").global_position-camera.global_position)*(.95+obstructionZoom),delta*7)
+	elif cameraTrack2.is_colliding():
+		obstructionZoom-=delta/4
+		camera.global_position.x = lerp(camera.global_position.x,cameraTrack.global_position.x,delta*4)
+		camera.global_position.z = lerp(camera.global_position.z,cameraTrack.global_position.z,delta*4)
+		camera.global_position.y = lerp(camera.global_position.y,cameraTrack2.get_collision_point().y+cameraTrack2.global_basis.y.y*3,delta*2)
+		if tilt <0:
+			camera.global_position.y = lerp(camera.global_position.y,cameraTrack.global_position.y,delta*2)
+		
 	else:
 		obstructionZoom-=delta/4
 		camera.global_position = lerp(camera.global_position,cameraTrack.global_position,delta*7)

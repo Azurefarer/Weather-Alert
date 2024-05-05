@@ -82,6 +82,7 @@ func transition_camera(camera1,camera2):
 @rpc("any_peer","call_local","reliable")
 func shoot(path,pos,velocity):
 	var instance = load(path).instantiate()
+	get_node("/root").add_child(instance)
 	instance.global_position = pos
 	instance.global_basis.y = velocity
 	instance.linear_velocity = velocity
