@@ -268,6 +268,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_vsol8")
 shape = SubResource("ConcavePolygonShape3D_s5h6x")
 
 [node name="Cube_001" parent="Scalar/Ship" index="13"]
+transform = Transform3D(0.0643178, 2.12822e-10, 2.91038e-11, -5.05679e-10, 0.0923206, -1.86265e-09, 0, 9.31323e-10, 0.209262, 1.04772, -0.682943, 0)
 surface_material_override/0 = SubResource("StandardMaterial3D_qwy24")
 
 [node name="Cube_002" parent="Scalar/Ship" index="14"]

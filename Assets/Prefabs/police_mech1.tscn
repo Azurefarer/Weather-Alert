@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Scripts/police_robot.gd" id="1_8stj0"]
 [ext_resource type="PackedScene" uid="uid://21fmdpahl8k" path="res://Assets/Character/PoliceModel1.glb" id="2_lp8ug"]
 [ext_resource type="Script" path="res://Scripts/stats.gd" id="3_g68lo"]
-[ext_resource type="Script" path="res://Scripts/Behavior.gd" id="4_uoxt7"]
+[ext_resource type="Script" path="res://Scripts/behavior.gd" id="4_fetkr"]
 
 [sub_resource type="Gradient" id="Gradient_cglgu"]
 offsets = PackedFloat32Array(0, 0.564972, 1)
@@ -615,7 +615,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.82354, -0.324331)
 shape = SubResource("CapsuleShape3D_jx57f")
 
 [node name="Behavior" type="Node" parent="." node_paths=PackedStringArray("nav", "navCheckRay", "head", "shoot_timer")]
-script = ExtResource("4_uoxt7")
+script = ExtResource("4_fetkr")
 nav = NodePath("../NavigationAgent3D")
 navCheckRay = NodePath("../NavigationPointCheck")
 head = NodePath("../PoliceModel1/Armature/Skeleton3D/Cube_008")
