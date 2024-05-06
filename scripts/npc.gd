@@ -4,10 +4,10 @@ class_name NPC
 const SPEED = 5.0
 const JUMP_VELOCITY = 4.5  
 
-@export var velocityExport: Vector3
+@export var velocity_export: Vector3
 @export var animation_player: AnimationPlayer
 @export var current_animation: String
-@export var ceilCheckRay: RayCast3D
+@export var ceil_check_ray: RayCast3D
 @export var nav: NavigationAgent3D
 @onready var stats: Node = $Stats
 
@@ -26,7 +26,7 @@ func _physics_process(delta):
 	else:
 		velocity.y = 0
 		apply_floor_snap()
-	velocityExport = velocity
+	velocity_export = velocity
 	move_and_slide()
 
 func navigation_path(delta):
@@ -46,9 +46,9 @@ func navigation_path(delta):
 
 func animate():
 	if is_on_floor():
-		if velocityExport.length()>1:
+		if velocity_export.length()>1:
 			animation_player.play("walk",.1)
-			animation_player.speed_scale = velocityExport.length()/5
+			animation_player.speed_scale = velocity_export.length()/5
 		else:
 			animation_player.play("idle",.1)
 			animation_player.speed_scale = 1

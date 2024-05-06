@@ -9,8 +9,8 @@ extends NPC
 @export var watching: Node3D
 @export var behavior: Node
 @export var detector: Node3D
-@export var floorRayCast: RayCast3D
-@export var navCheckRay: RayCast3D
+@export var floor_ray_cast: RayCast3D
+@export var nav_check_ray: RayCast3D
 @export var head: BoneAttachment3D
 
 
@@ -41,7 +41,7 @@ func _physics_process(delta):
 			probe.rotate(probe.basis.x,2*PI)
 			velocity = velocity.lerp(Vector3(0,velocity.y,0),delta*15)
 			#print(velocity)
-	elif GameManager.weatherManager.time_of_day>power_on_time:
+	elif GameManager.weather_manager.time_of_day>power_on_time:
 		powered_on = true
 		
 	# Add the gravity.
@@ -50,7 +50,7 @@ func _physics_process(delta):
 	else:
 		velocity.y =0
 		#apply_floor_snap()
-	velocityExport = velocity
+	velocity_export = velocity
 	#print(velocity)
 	move_and_slide()
 
@@ -84,11 +84,11 @@ func animate():
 		light_control.play(light_animation,.1)
 		return
 	elif is_on_floor() and powered_on:
-		if velocityExport.length()>2 and current_animation != "walk":
+		if velocity_export.length()>2 and current_animation != "walk":
 			current_animation = "walk"
 			animation_player.play(current_animation,.1,1.0,false)
-			animation_player.speed_scale = velocityExport.length()/4
-		elif velocityExport.length()<=2 and current_animation != "idle":
+			animation_player.speed_scale = velocity_export.length()/4
+		elif velocity_export.length()<=2 and current_animation != "idle":
 			current_animation = "idle"
 			animation_player.play(current_animation,.1,1.0,false)
 			animation_player.speed_scale = 1
@@ -112,4 +112,4 @@ func detect_player(body):
 
 func _on_shoot_timer_timeout():
 	#$ShootTimer.start(0.5)
-	GameManager.rpc("shoot","res://Assets/Prefabs/laser.tscn",probe.global_position,probe.global_basis.z)
+	GameManager.rpc("shoot","res://Assets/prefabs/laser.tscn",probe.global_position,probe.global_basis.z)

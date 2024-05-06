@@ -1,7 +1,7 @@
 extends Node
 
 @export var nav: NavigationAgent3D
-@export var navCheckRay: RayCast3D
+@export var nav_check_ray: RayCast3D
 @export var head: BoneAttachment3D
 @export var shoot_timer: Timer
 var origin: Vector3
@@ -13,10 +13,10 @@ func _ready():
 
 func wander():
 	current_behavior = "wander"
-	navCheckRay.position.x = GameManager.rng.randi_range(-250,250)
-	navCheckRay.position.z = GameManager.rng.randi_range(-250,250)
-	if navCheckRay.is_colliding():
-		nav.target_position = navCheckRay.get_collision_point()
+	nav_check_ray.position.x = GameManager.rng.randi_range(-250,250)
+	nav_check_ray.position.z = GameManager.rng.randi_range(-250,250)
+	if nav_check_ray.is_colliding():
+		nav.target_position = nav_check_ray.get_collision_point()
 		#print("wander update:"+str(nav.target_position))
 	#nav.target_position = origin + Vector3(GameManager.rng.randi_range(-250,250),origin.y,GameManager.rng.randi_range(-250,250))
 	

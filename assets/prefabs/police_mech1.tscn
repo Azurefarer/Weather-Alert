@@ -398,7 +398,7 @@ emission_enabled = true
 emission = Color(1, 0, 1, 1)
 emission_energy_multiplier = 1.6
 
-[node name="PoliceMech1" type="CharacterBody3D" node_paths=PackedStringArray("light_control", "probe", "behavior", "detector", "floorRayCast", "navCheckRay", "head", "animation_player", "ceilCheckRay", "nav")]
+[node name="PoliceMech1" type="CharacterBody3D" node_paths=PackedStringArray("light_control", "probe", "behavior", "detector", "floor_ray_cast", "nav_check_ray", "head", "animation_player", "ceil_check_ray", "nav")]
 collision_layer = 512
 collision_mask = 513
 wall_min_slide_angle = 1.22173
@@ -409,11 +409,11 @@ light_control = NodePath("LightControl")
 probe = NodePath("Node/Probe")
 behavior = NodePath("Behavior")
 detector = NodePath("PoliceModel1/Armature/Skeleton3D/Cube_008/Detector")
-floorRayCast = NodePath("FloorCheck")
-navCheckRay = NodePath("NavigationPointCheck")
+floor_ray_cast = NodePath("FloorCheck")
+nav_check_ray = NodePath("NavigationPointCheck")
 head = NodePath("PoliceModel1/Armature/Skeleton3D/Cube_008")
 animation_player = NodePath("PoliceModel1/AnimationPlayer")
-ceilCheckRay = NodePath("CeilCheck")
+ceil_check_ray = NodePath("CeilCheck")
 nav = NodePath("NavigationAgent3D")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
@@ -463,7 +463,7 @@ bones/20/scale = Vector3(1, 1, 1)
 bones/21/rotation = Quaternion(0.633417, 0.351191, 0.314297, 0.61373)
 
 [node name="Cube_008" parent="PoliceModel1/Armature/Skeleton3D" index="0"]
-transform = Transform3D(1, -1.0538e-16, -3.77921e-17, 1.12501e-16, 0.807579, 0.625547, -3.06095e-17, -0.47459, 1.06445, 0.107279, -0.0145862, -0.0128868)
+transform = Transform3D(1, -1.0538e-16, -3.77921e-17, 1.12501e-16, 0.807579, 0.625547, -3.06096e-17, -0.47459, 1.06445, 0.107279, -0.0145862, -0.0128868)
 
 [node name="SpotLight3D" type="SpotLight3D" parent="PoliceModel1/Armature/Skeleton3D/Cube_008" index="0"]
 transform = Transform3D(5.55556, -4.11411e-07, -2.27557e-07, -5.01799e-07, -5.25122, -2.75696, -8.29024e-09, 2.09165, -3.98399, -0.107277, 15.9026, 18.9593)
@@ -513,59 +513,59 @@ transform = Transform3D(1, 4.1359e-25, 0, 4.1359e-25, 1, -5.96046e-08, 0, -2.980
 surface_material_override/0 = SubResource("StandardMaterial3D_mee4u")
 
 [node name="Cube_005" parent="PoliceModel1/Armature/Skeleton3D" index="1"]
-transform = Transform3D(1, -2.01166e-07, 1.07801e-06, -1.93715e-07, 0.862147, 0.506658, -9.62988e-07, -0.506659, 0.862147, 0, -15.4364, 17.0899)
+transform = Transform3D(1, 3.01749e-07, 1.56509e-06, -8.90344e-07, 0.862146, 0.506659, -1.1418e-06, -0.506659, 0.862147, -9.53674e-06, -15.4364, 17.0899)
 
 [node name="Cube_005" parent="PoliceModel1/Armature/Skeleton3D/Cube_005" index="0"]
 transform = Transform3D(1, -3.55271e-15, 1.13687e-13, 1.24345e-14, 1, -1.86265e-09, -1.13687e-13, -9.31323e-10, 1, 0, 0, 0)
 surface_material_override/0 = SubResource("StandardMaterial3D_xobp4")
 
 [node name="Cube_007" parent="PoliceModel1/Armature/Skeleton3D" index="2"]
-transform = Transform3D(1, 1.3411e-07, 9.05711e-08, -5.96046e-08, 0.862147, 0.506658, 3.35276e-08, -0.506658, 0.862147, 0, -15.4364, 17.0899)
+transform = Transform3D(1, 6.85453e-07, 4.87547e-07, -7.37607e-07, 0.862147, 0.506658, -4.09782e-08, -0.506658, 0.862147, -9.05991e-06, -15.4364, 17.0899)
 
 [node name="Cube_007" parent="PoliceModel1/Armature/Skeleton3D/Cube_007" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_d451c")
 
 [node name="Cylinder_005" parent="PoliceModel1/Armature/Skeleton3D" index="3"]
-transform = Transform3D(1, -2.49594e-07, -8.56817e-08, 3.09199e-07, 0.862148, 0.506657, -3.35276e-08, -0.506657, 0.862147, 0, 13.372, 0.129212)
+transform = Transform3D(1, 2.98023e-07, 3.12924e-07, -3.72529e-07, 0.862147, 0.506658, -1.11759e-07, -0.506658, 0.862147, 9.05991e-06, 13.372, 0.129196)
 
 [node name="Cylinder_005" parent="PoliceModel1/Armature/Skeleton3D/Cylinder_005" index="0"]
 transform = Transform3D(1, -3.55271e-15, 0, -1.06581e-14, 1, -2.98023e-08, -7.10543e-15, 0, 1, 0, 0, 0)
 surface_material_override/0 = SubResource("StandardMaterial3D_udr28")
 
 [node name="Cylinder_004" parent="PoliceModel1/Armature/Skeleton3D" index="4"]
-transform = Transform3D(-1.73599e-06, 6.48804, -2.02656e-06, -2.70738, -7.45058e-08, 1.59105, 1.59105, 5.30481e-06, 2.70738, 0.107282, -0.0145856, -0.0128793)
+transform = Transform3D(-3.38256e-06, 6.48804, -7.7486e-07, -2.70738, -4.353e-06, 1.59105, 1.59105, 4.73857e-06, 2.70738, 0.107281, -0.014589, -0.0128798)
 
 [node name="Cylinder_004" parent="PoliceModel1/Armature/Skeleton3D/Cylinder_004" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_c46bh")
 
 [node name="Cube_004" parent="PoliceModel1/Armature/Skeleton3D" index="5"]
-transform = Transform3D(1, 2.08616e-07, -1.08127e-06, 1.86265e-07, 0.862147, 0.506658, 9.66713e-07, -0.506659, 0.862147, 0, -15.4364, 17.0899)
+transform = Transform3D(1, -3.01749e-07, -1.56509e-06, 8.90344e-07, 0.862146, 0.506659, 1.1418e-06, -0.506659, 0.862147, 9.53674e-06, -15.4364, 17.0899)
 
 [node name="Cube_004" parent="PoliceModel1/Armature/Skeleton3D/Cube_004" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_pmrmt")
 
 [node name="Cube_006" parent="PoliceModel1/Armature/Skeleton3D" index="6"]
-transform = Transform3D(1, -5.96046e-07, -3.16417e-07, 5.84871e-07, 0.862147, 0.506658, -2.6077e-08, -0.506658, 0.862147, -9.53674e-07, -15.4364, 17.0899)
+transform = Transform3D(1, -1.11386e-06, -6.9011e-07, 1.21817e-06, 0.862147, 0.506658, 5.96046e-08, -0.506658, 0.862147, 8.58307e-06, -15.4364, 17.0899)
 
 [node name="Cube_006" parent="PoliceModel1/Armature/Skeleton3D/Cube_006" index="0"]
 transform = Transform3D(1, -2.84217e-14, 0, 0, 1, 0, 5.68434e-14, 2.98023e-08, 1, 0, 0, 0)
 surface_material_override/0 = SubResource("StandardMaterial3D_ojnob")
 
 [node name="Cylinder_003" parent="PoliceModel1/Armature/Skeleton3D" index="7"]
-transform = Transform3D(1, 2.6077e-07, 8.56817e-08, -3.1665e-07, 0.862148, 0.506657, 3.72529e-08, -0.506657, 0.862147, 0, 13.372, 0.129212)
+transform = Transform3D(1, -2.98023e-07, -3.12924e-07, 3.72529e-07, 0.862147, 0.506658, 1.11759e-07, -0.506658, 0.862147, -9.05991e-06, 13.372, 0.129196)
 
 [node name="Cylinder_003" parent="PoliceModel1/Armature/Skeleton3D/Cylinder_003" index="0"]
 transform = Transform3D(1, 0, 0, 5.68434e-14, 1, 5.96046e-08, -5.68434e-14, 0, 1, 0, 0, 0)
 surface_material_override/0 = SubResource("StandardMaterial3D_biofo")
 
 [node name="Cylinder_002" parent="PoliceModel1/Armature/Skeleton3D" index="8"]
-transform = Transform3D(1.69873e-06, 6.48804, 2.04146e-06, -2.70738, 8.71718e-07, 1.59105, 1.59105, -5.66244e-06, 2.70738, 0.107277, -0.0145856, -0.0128793)
+transform = Transform3D(3.34531e-06, 6.48804, 7.7486e-07, -2.70738, 5.15021e-06, 1.59105, 1.59105, -5.06639e-06, 2.70739, 0.107278, -0.0145889, -0.0128798)
 
 [node name="Cylinder_002" parent="PoliceModel1/Armature/Skeleton3D/Cylinder_002" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_sp541")
 
 [node name="BoneAttachment3D" type="BoneAttachment3D" parent="PoliceModel1/Armature/Skeleton3D" index="9"]
-transform = Transform3D(1, 6.51633e-17, -6.48837e-17, -6.48837e-17, 0.999991, 0.00430083, 6.51633e-17, -0.00430083, 0.999991, -5.29396e-23, 7.15256e-07, 9.53674e-07)
+transform = Transform3D(1, 6.51633e-17, -6.48836e-17, -6.48836e-17, 0.999991, 0.00430083, 6.51633e-17, -0.00430083, 0.999991, -5.29396e-23, 7.15256e-07, 9.53674e-07)
 bone_name = "Bone"
 bone_idx = 0
 
@@ -611,10 +611,10 @@ debug_shape_thickness = 5
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.82354, -0.324331)
 shape = SubResource("CapsuleShape3D_jx57f")
 
-[node name="Behavior" type="Node" parent="." node_paths=PackedStringArray("nav", "navCheckRay", "head", "shoot_timer")]
+[node name="Behavior" type="Node" parent="." node_paths=PackedStringArray("nav", "nav_check_ray", "head", "shoot_timer")]
 script = ExtResource("4_fetkr")
 nav = NodePath("../NavigationAgent3D")
-navCheckRay = NodePath("../NavigationPointCheck")
+nav_check_ray = NodePath("../NavigationPointCheck")
 head = NodePath("../PoliceModel1/Armature/Skeleton3D/Cube_008")
 shoot_timer = NodePath("../ShootTimer")
 

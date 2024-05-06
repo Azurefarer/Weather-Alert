@@ -4,14 +4,14 @@ var crash_sites: Array
 
 func _enter_tree():
 	crash_sites =\
-	[\
-	#plateau
-	Vector3(288.383,98.206,-171.664),\
-	#valley switchbacks
-	Vector3(1616.134,-173.773,381.013),\
-	#desert
-	Vector3(2372.082,23.134,-826.909)\
-	]
+			[\
+			#plateau
+			Vector3(288.383,98.206,-171.664),\
+			#valley switchbacks
+			Vector3(1616.134,-173.773,381.013),\
+			#desert
+			Vector3(2372.082,23.134,-826.909)\
+			]
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	GameManager.ship = self
@@ -29,7 +29,7 @@ func _ready():
 	add_player(1)#host
 	
 func add_player(id: int):
-	var player =preload("res://Assets_/Prefabs/player_character.tscn").instantiate()
+	var player =preload("res://assets/prefabs/player_character.tscn").instantiate()
 	player.name = str(id)
 	print ("Spawned client player "+player.name)
 	#player.stats.ign = GameManager.activePlayerName

@@ -10,12 +10,9 @@ var indicies : Dictionary = {
 	"chaos" : 1.0 # Likelyhood for spontaneity
 }
 
-
-
 func _ready() -> void:
 	pass
 	
-
 func _process(delta: float) -> void:
 	pass
 	

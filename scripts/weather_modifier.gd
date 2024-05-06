@@ -1,6 +1,5 @@
 extends Area3D
 
-
 @export var temperature_degrees: float 
 @export var pressure_psi: float
 @export var humidity: float
@@ -8,7 +7,6 @@ extends Area3D
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	GameManager.weather_areas.append(self)
-
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

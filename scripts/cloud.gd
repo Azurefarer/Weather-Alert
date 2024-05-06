@@ -2,8 +2,8 @@
 extends Stats
 
 var velocity: Vector3
-@export var dropEmitter: GPUParticles3D
-@export var cloudEmitter: GPUParticles3D
+@export var drop_emitter: GPUParticles3D
+@export var cloud_emitter: GPUParticles3D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -22,9 +22,9 @@ func _on_update_timer_timeout():
 
 func update():
 	if experienced_humidity>=60:
-		dropEmitter.emitting = true
+		drop_emitter.emitting = true
 	else:
-		dropEmitter.emitting = false
+		drop_emitter.emitting = false
 	if !is_multiplayer_authority():
 		return
 	if GameManager.weather_areas.size()>0:
@@ -38,28 +38,28 @@ func update():
 			#print(wind_vector)
 			await get_tree().process_frame
 			#print("wind vector:"+str(wind_vector))
-	var worldTemperatureOffset = 0
-	var worldPressureOffset = 0
-	var worldHumidityOffset = 0
+	var world_temperature_offset = 0
+	var world_pressure_offset = 0
+	var world_humidty_offset = 0
 	await get_tree().process_frame
 	for modifier in weather_modifiers:
-		worldTemperatureOffset += modifier.temperature_degrees
-		worldPressureOffset += modifier.pressure_psi
-		worldHumidityOffset += modifier.humidity
+		world_temperature_offset += modifier.temperature_degrees
+		world_pressure_offset += modifier.pressure_psi
+		world_humidty_offset += modifier.humidity
 		await get_tree().process_frame
 	if weather_modifiers.size()>0:
 		await get_tree().process_frame
-		worldTemperatureOffset = worldTemperatureOffset/weather_modifiers.size()
+		world_temperature_offset = world_temperature_offset/weather_modifiers.size()
 		await get_tree().process_frame
-		worldPressureOffset = worldPressureOffset/weather_modifiers.size()
+		world_pressure_offset = world_pressure_offset/weather_modifiers.size()
 		await get_tree().process_frame
-		worldHumidityOffset = worldHumidityOffset/weather_modifiers.size()
+		world_humidty_offset = world_humidty_offset/weather_modifiers.size()
 	await get_tree().process_frame
-	experienced_temperature = lerp(experienced_temperature,GameManager.weatherManager.world_temperature+worldTemperatureOffset,GameManager.global_delta*10)
+	experienced_temperature = lerp(experienced_temperature,GameManager.weather_manager.world_temperature+world_temperature_offset,GameManager.global_delta*10)
 	await get_tree().process_frame
-	experienced_pressure = lerp(experienced_pressure,GameManager.weatherManager.world_pressure+worldPressureOffset,GameManager.global_delta*3)
+	experienced_pressure = lerp(experienced_pressure,GameManager.weather_manager.world_pressure+world_pressure_offset,GameManager.global_delta*3)
 	await get_tree().process_frame
-	experienced_humidity = lerp(experienced_humidity,GameManager.weatherManager.world_humidity+worldHumidityOffset,GameManager.global_delta*3)
+	experienced_humidity = lerp(experienced_humidity,GameManager.weather_manager.world_humidity+world_humidty_offset,GameManager.global_delta*3)
 
 
 func _on_reposition_timer_timeout():

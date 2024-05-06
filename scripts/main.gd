@@ -17,15 +17,15 @@ var external_ip
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$BlackOverlay.self_modulate.a = 0
-	portMap()
+	port_map()
 	GameManager.main = self
 	GameManager.level = $Level
-	GameManager.gameScreen = -1
+	GameManager.game_screen = -1
 	multiplayer.connected_to_server.connect(_on_connected_ok)
 	$Main_UI/BG.material.set("shader_parameter/wave_time", RippleManager.ripple_time)
 
 	
-func portMap():
+func port_map():
 	var upnp = UPNP.new()
 	
 	upnp.delete_port_mapping(9999,"UDP")
@@ -56,11 +56,11 @@ func _process(delta):
 	pass
 
 func _on_debug_pressed():
-	if multiplayer.multiplayer_peer == peer or GameManager.gameMode != "menu":
+	if multiplayer.multiplayer_peer == peer or GameManager.game_mode != "menu":
 		return
-	GameManager.gameMode = "debug"
-	await GameManager.buttonFeedback(GameManager.active_button)
-	change_level(preload("res://assets/scenes/test.tscn"))
+	GameManager.game_mode = "debug"
+	await GameManager.button_feedback(GameManager.active_button)
+	change_level(preload("res://assets/scenes/debug.tscn"))
 	var player = preload("res://assets/prefabs/player_character.tscn").instantiate()
 	print ("Spawned client player "+player.name)
 	player.name = "1"
@@ -68,11 +68,11 @@ func _on_debug_pressed():
 	#player.global_position = $StartingPositions.get_child(RandomNumberGenerator.new().randi_range(0,1)).global_position
 	$Level/Test/Players.add_child(player)
 	
-func hide_UI():
+func hide_ui():
 	$Main_UI.visible = false
 	$Stuff.queue_free()
 	
-func show_UI():
+func show_ui():
 	$Main_UI.visible = true
 	
 func change_level(scene :PackedScene):
@@ -81,36 +81,36 @@ func change_level(scene :PackedScene):
 	#for c in level.get_children():
 		#level.remove_child(c)
 		#c.queue_free()
-	hide_UI()
+	hide_ui()
 	level.add_child(scene.instantiate())
-	GameManager.level.add_child(preload("res://assets/scenes/World.tscn").instantiate())
+	GameManager.level.add_child(preload("res://assets/scenes/world.tscn").instantiate())
 	level.add_child(preload("res://assets/prefabs/time_and_weather.tscn").instantiate())
 
 
 func _on_start_pressed():
-	if multiplayer.multiplayer_peer == peer or GameManager.gameMode != "menu":
+	if multiplayer.multiplayer_peer == peer or GameManager.game_mode != "menu":
 		return
-	GameManager.gameMode = "game"
-	await GameManager.buttonFeedback(GameManager.active_button)
-	change_level.call_deferred(preload("res://assets/prefabs/Ship.tscn"))
+	GameManager.game_mode = "game"
+	await GameManager.button_feedback(GameManager.active_button)
+	change_level.call_deferred(preload("res://assets/prefabs/ship.tscn"))
 
 func _on_host_pressed():
-	if multiplayer.multiplayer_peer == peer or GameManager.gameMode != "menu":
+	if multiplayer.multiplayer_peer == peer or GameManager.game_mode != "menu":
 		return
-	GameManager.gameMode = "game"
-	await GameManager.buttonFeedback(GameManager.active_button)
+	GameManager.game_mode = "game"
+	await GameManager.button_feedback(GameManager.active_button)
 	peer.create_server(9999)
 	multiplayer.multiplayer_peer = peer
-	change_level.call_deferred(preload("res://assets/prefabs/Ship.tscn"))
+	change_level.call_deferred(preload("res://assets/prefabs/ship.tscn"))
 
 func _on_join_pressed():
 	join_field.visible  = !join_field.visible
-	await GameManager.buttonFeedback(GameManager.active_button)
+	await GameManager.button_feedback(GameManager.active_button)
 
 func _on_start_2_pressed():
-	if multiplayer.multiplayer_peer == peer or GameManager.gameMode != "menu":
+	if multiplayer.multiplayer_peer == peer or GameManager.game_mode != "menu":
 		return
-	await GameManager.buttonFeedback(GameManager.active_button)
+	await GameManager.button_feedback(GameManager.active_button)
 	if host_ip.text == "":
 		peer.create_client("localhost",9999)
 	else:
@@ -119,8 +119,8 @@ func _on_start_2_pressed():
 	#change_level("res://Assets/Scenes/World.tscn")
 	
 func _on_connected_ok():
-	GameManager.gameMode = "game"
-	hide_UI()
+	GameManager.game_mode = "game"
+	hide_ui()
 	
 func blackout():
 	while $BlackOverlay.self_modulate.a<1:

@@ -19,7 +19,7 @@ func _process(delta):
 	pass
 
 func use(user):
-	if !user.fullyActionable():
+	if !user.fully_actionable():
 		return
 	#transition to interraction state
 	if occupied:

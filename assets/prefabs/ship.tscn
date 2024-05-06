@@ -3,9 +3,6 @@
 [ext_resource type="Script" path="res://scripts/ship.gd" id="1_ual5m"]
 [ext_resource type="PackedScene" uid="uid://cbrtdha06ehqo" path="res://assets/prop_models/Ship.glb" id="2_dydfy"]
 
-
-
-
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_0v55n"]
 properties/0/path = NodePath("Scalar:position")
 properties/0/spawn = true
