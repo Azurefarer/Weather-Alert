@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://scripts/console.gd" id="1_snvo6"]
 
 
+
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_hdw1r"]
 noise_type = 5
 seed = 240

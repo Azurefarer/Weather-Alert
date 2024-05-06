@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://scripts/projectile.gd" id="1_6hyro"]
 
 
+
 [node name="Laser" type="RigidBody3D"]
 gravity_scale = 0.1
 script = ExtResource("1_6hyro")

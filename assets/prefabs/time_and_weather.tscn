@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://scripts/rotate.gd" id="4_kmdi6"]
 
 
+
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_yavjt"]
 properties/0/path = NodePath(".:world_temperature")
 properties/0/spawn = true

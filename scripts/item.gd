@@ -1,4 +1,4 @@
-
+class_name Item
 extends RigidBody3D
 
 @export var name_: String
