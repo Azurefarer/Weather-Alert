@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Scripts/police_robot.gd" id="1_8stj0"]
 [ext_resource type="PackedScene" uid="uid://21fmdpahl8k" path="res://Assets/Character/PoliceModel1.glb" id="2_lp8ug"]
-[ext_resource type="Script" path="res://Scripts/stats.gd" id="3_tlgkc"]
+[ext_resource type="Script" path="res://Scripts/stats.gd" id="3_g68lo"]
 [ext_resource type="Script" path="res://Scripts/behavior.gd" id="4_fetkr"]
 
 [sub_resource type="Gradient" id="Gradient_cglgu"]
@@ -573,7 +573,7 @@ bone_name = "Bone"
 bone_idx = 0
 
 [node name="Stats" type="Node" parent="."]
-script = ExtResource("3_tlgkc")
+script = ExtResource("3_g68lo")
 
 [node name="UpdateTimer" type="Timer" parent="Stats"]
 autostart = true
