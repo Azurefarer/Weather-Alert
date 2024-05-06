@@ -65,7 +65,11 @@ func initialize_day():
 	var heat_variation = rng.randf_range(0,1)
 	var pressure_variation = rng.randf_range(0,1)
 	var humidity_variation = rng.randf_range(0,1)
+	rpc("initialize_player_flags")
 
+@rpc("any_peer","call_local","reliable")
+func initialize_player_flags():
+	GameManager.player.stats.initialize_flags()
 
 func _on_update_timer_timeout():
 	update()

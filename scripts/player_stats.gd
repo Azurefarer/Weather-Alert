@@ -1,10 +1,13 @@
 #PlayerStats
 extends Stats
 
+var flags := {}
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	if !is_multiplayer_authority():
 		return
+	initialize_flags()
 	GameManager.player_stats = self
 	while GameManager.weather_manager == null:
 		await get_tree().physics_frame
@@ -12,6 +15,18 @@ func _ready():
 	experienced_pressure = 15
 	experienced_humidity = 50
 
+func initialize_flags():
+	flags["outside_check_morning"] = false
+	flags["outside_check_afternoon"] = false
+	flags["outside_check_evening"] = false
+
+func outside_check():
+	if GameManager.weather_manager.time_of_day < 250 and flags["outside_check_morning"] == false:
+		SoundManager.play_sound("res://assets/sounds/melodies/day_break.mp3",-15,1,0,30)
+		flags["outside_check_morning"] = true
+	elif GameManager.weather_manager.time_of_day >= 250 and GameManager.weather_manager.time_of_day < 500 and flags["outside_check_afternoon"] == false:
+		SoundManager.play_sound("res://assets/sounds/melodies/mid_day.mp3",-15,1,0,30)
+		flags["outside_check_afternoon"] = true
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -30,6 +45,8 @@ func update():
 	if GameManager.weather_areas.size()>0:
 		wind_vector = Vector3.ZERO
 		if !get_parent().ceil_check_ray.is_colliding():
+			if wind_vector == Vector3.ZERO:
+				outside_check()
 			for area in GameManager.weather_areas:
 				#await get_tree().physics_frame
 				wind_vector+= GameManager.get_vector_from_pressure_difference(area,experienced_pressure,get_parent().global_position)
