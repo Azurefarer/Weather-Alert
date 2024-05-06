@@ -1,0 +1,34 @@
+[remap]
+
+importer="scene"
+importer_version=1
+type="PackedScene"
+uid="uid://djg5vgfwit2kk"
+path="res://.godot/imported/Can of Candy.glb-0a4cf337ca66663aa9301a4ce1c7a101.scn"
+
+[deps]
+
+source_file="res://assets/Cans/Can of Candy.glb"
+dest_files=["res://.godot/imported/Can of Candy.glb-0a4cf337ca66663aa9301a4ce1c7a101.scn"]
+
+[params]
+
+nodes/root_type=""
+nodes/root_name=""
+nodes/apply_root_scale=true
+nodes/root_scale=1.0
+meshes/ensure_tangents=true
+meshes/generate_lods=true
+meshes/create_shadow_meshes=true
+meshes/light_baking=1
+meshes/lightmap_texel_size=0.2
+meshes/force_disable_compression=false
+skins/use_named_skins=true
+animation/import=true
+animation/fps=30
+animation/trimming=false
+animation/remove_immutable_tracks=true
+import_script/path=""
+_subresources={}
+gltf/naming_version=1
+gltf/embedded_image_handling=1

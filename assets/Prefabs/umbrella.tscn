@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://dy7bk7txpw1cw"]
+
+[ext_resource type="Script" path="res://Scripts/item.gd" id="1_quc6s"]
+[ext_resource type="PackedScene" uid="uid://jtd2lscy4u17" path="res://assets/Props/Umbrella/umbrella.glb" id="2_upvqb"]
+
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_tmec8"]
+friction = 0.3
+bounce = 0.06
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_shdon"]
+height = 0.862251
+radius = 0.0419854
+
+[node name="Umbrella" type="RigidBody3D"]
+collision_layer = 17
+mass = 0.1
+physics_material_override = SubResource("PhysicsMaterial_tmec8")
+script = ExtResource("1_quc6s")
+name_ = "Umbrella"
+
+[node name="umbrella" parent="." instance=ExtResource("2_upvqb")]
+transform = Transform3D(-2.25114e-08, 0, -0.515, 0, 0.515, 0, 0.515, 0, -2.25114e-08, 0, 0.480432, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000515521, 0.33476, -0.00756621)
+shape = SubResource("CylinderShape3D_shdon")
