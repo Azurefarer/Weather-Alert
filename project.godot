@@ -11,14 +11,14 @@ config_version=5
 [application]
 
 config/name="Weather Alert"
-run/main_scene="res://Assets/Scenes/Main.tscn"
+run/main_scene="res://Assets_/Scenes_/Main_.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 
 [autoload]
 
-GameManager="*res://Scripts/Autoload/game_manager.gd"
-RippleManager="*res://Scripts/Autoload/ripple_manager.gd"
-SoundManager="*res://Scripts/Autoload/sound_manager.gd"
+GameManager="*res://Scripts_/Autoload/game_manager.gd"
+RippleManager="*res://Scripts_/Autoload/ripple_manager.gd"
+SoundManager="*res://Scripts_/Autoload/sound_manager.gd"
 
 [display]
 
@@ -30,7 +30,7 @@ enabled=PackedStringArray("res://addons/proton_scatter/plugin.cfg", "res://addon
 
 [gui]
 
-theme/custom_font="res://Assets/Fonts/GmarketSansTTFMedium.ttf"
+theme/custom_font="res://Assets_/Fonts_/GmarketSansTTFMedium.ttf"
 
 [input]
 
