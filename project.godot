@@ -30,7 +30,7 @@ enabled=PackedStringArray("res://addons/proton_scatter/plugin.cfg", "res://addon
 
 [gui]
 
-theme/custom_font="res://assets/onts/GmarketSansTTFMedium.ttf"
+theme/custom_font="res://assets/fonts/GmarketSansTTFMedium.ttf"
 
 [input]
 

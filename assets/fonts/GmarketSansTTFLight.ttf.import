@@ -3,12 +3,12 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://diyl4h4a00hli"
-path="res://.godot/imported/GmarketSansTTFLight.ttf-3c32cca4856ebe59488aed3992fcd290.fontdata"
+path="res://.godot/imported/GmarketSansTTFLight.ttf-ad81ae7e4fc8500f5a21bdcb21616b2d.fontdata"
 
 [deps]
 
-source_file="res://assets/onts/GmarketSansTTFLight.ttf"
-dest_files=["res://.godot/imported/GmarketSansTTFLight.ttf-3c32cca4856ebe59488aed3992fcd290.fontdata"]
+source_file="res://assets/fonts/GmarketSansTTFLight.ttf"
+dest_files=["res://.godot/imported/GmarketSansTTFLight.ttf-ad81ae7e4fc8500f5a21bdcb21616b2d.fontdata"]
 
 [params]
 
