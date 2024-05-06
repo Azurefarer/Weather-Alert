@@ -1,7 +1,7 @@
 [gd_scene load_steps=44 format=3 uid="uid://c2ei7wexs7rb7"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_36uvr"]
-[ext_resource type="FontFile" uid="uid://diyl4h4a00hli" path="res://assets/Fonts/GmarketSansTTFLight.ttf" id="1_oieq6"]
+[ext_resource type="FontFile" uid="uid://diyl4h4a00hli" path="res://assets/onts/GmarketSansTTFLight.ttf" id="1_oieq6"]
 [ext_resource type="PackedScene" uid="uid://n2nl24mm6ijc" path="res://assets/character/GiantRobot1.fbx" id="2_3foj5"]
 [ext_resource type="Texture2D" uid="uid://htvxvd3tlalj" path="res://assets/EtcImages/WeatherAlertIconBig.png" id="2_6wsx3"]
 [ext_resource type="Material" uid="uid://upnpj06x081t" path="res://shaders/materials/ripple_ring.tres" id="3_r12pu"]
@@ -172,7 +172,7 @@ normal_enabled = true
 normal_texture = SubResource("NoiseTexture2D_f325g")
 clearcoat_enabled = true
 
-[sub_resource type="Animation" id="Animation_g5wpv"]
+[sub_resource type="Animation" id="Animation_cx534"]
 resource_name = "root|idle"
 length = 8.33333
 loop_mode = 1
@@ -366,7 +366,7 @@ tracks/26/interp = 1
 tracks/26/loop_wrap = true
 tracks/26/keys = PackedFloat32Array(0, 1, -3.09036e-07, 0.263206, 3.18896e-07, 0.96474, 0.6, 1, -2.31873e-07, 0.264272, 2.30205e-07, 0.964448, 0.866667, 1, -2.00533e-07, 0.265311, 1.86746e-07, 0.964163, 1.1, 1, -1.87844e-07, 0.266352, 1.55294e-07, 0.963876, 1.23333, 1, -7.81668e-08, 0.266968, 5.60661e-08, 0.963705, 1.26667, 1, -2.49474e-07, 0.269714, 1.99279e-07, 0.962941, 1.3, 1, -2.79668e-07, 0.277248, 2.3092e-07, 0.960798, 1.33333, 1, -4.77337e-08, 0.29135, 3.2062e-08, 0.956616, 1.36667, 1, -2.57688e-07, 0.311848, 1.79694e-07, 0.950132, 1.4, 1, -2.96106e-07, 0.335199, 2.06815e-07, 0.942147, 1.43333, 1, -2.92485e-07, 0.360008, 1.94391e-07, 0.932949, 1.46667, 1, -2.72963e-07, 0.384893, 1.772e-07, 0.922961, 1.5, 1, -1.63259e-07, 0.408496, 1.32244e-07, 0.91276, 1.53333, 1, -3.54865e-08, 0.42798, 4.15386e-08, 0.903788, 1.56667, 1, -2.48462e-07, 0.442686, 1.40565e-07, 0.896677, 1.6, 1, -3.20838e-07, 0.451662, 1.7699e-07, 0.892189, 1.63333, 1, -1.22113e-07, 0.453746, 7.01221e-08, 0.891131, 1.66667, 1, 1.38957e-07, 0.447522, -6.33255e-08, 0.894273, 1.7, 1, -1.92281e-07, 0.428411, 9.57199e-08, 0.903584, 1.73333, 1, -1.35709e-07, 0.398978, 7.13434e-08, 0.91696, 1.76667, 1, -7.7992e-08, 0.358869, 5.10317e-08, 0.933388, 1.8, 1, -1.22784e-07, 0.314512, 6.36118e-08, 0.949254, 1.83333, 1, -6.83672e-08, 0.279715, 3.15589e-08, 0.960083, 1.86667, 1, -4.12704e-07, 0.301397, 2.39857e-07, 0.953499, 1.9, 1, -2.63804e-07, 0.3129, 1.5278e-07, 0.949786, 1.93333, 1, -1.42289e-07, 0.314228, 8.03775e-08, 0.949347, 1.96667, 1, -2.09909e-07, 0.305382, 1.22384e-07, 0.95223, 2, 1, -2.69102e-07, 0.286358, 1.52358e-07, 0.958123, 2.03333, 1, -3.32043e-07, 0.280045, 1.98087e-07, 0.959987, 2.06667, 1, -6.84146e-08, 0.279903, 4.93373e-08, 0.960028, 2.1, 1, -1.08569e-08, 0.277269, 1.60608e-08, 0.960792, 2.13333, 1, -1.33264e-07, 0.271587, 8.71787e-08, 0.962414, 2.16667, 1, 1.48864e-07, 0.270442, -6.50341e-08, 0.962736, 3, 1, -4.16063e-07, 0.269347, 2.98174e-07, 0.963043, 3.2, 1, -2.63049e-07, 0.268229, 2.26753e-07, 0.963355, 3.36667, 1, -3.57049e-07, 0.267197, 3.21484e-07, 0.963642, 3.53333, 1, -1.93891e-08, 0.266143, 1.56029e-08, 0.963934, 3.7, 1, -1.15381e-08, 0.265134, 3.35064e-08, 0.964211, 3.9, 1, -1.03964e-07, 0.26409, 1.25796e-07, 0.964498, 4.23333, 1, -1.8732e-07, 0.263099, 2.02641e-07, 0.964769, 5.23333, 1, -2.30028e-08, 0.264186, 2.82385e-09, 0.964472, 5.43333, 1, -5.02833e-09, 0.265386, 5.29771e-09, 0.964142, 5.56667, 1, -4.79829e-07, 0.26638, -4.29358e-07, 0.963868, 5.93333, 1, -1.92068e-07, 0.267371, -2.94064e-07, 0.963594, 6.5, 1, -1.46226e-07, 0.268337, -3.56615e-07, 0.963325, 7.26667, 1, -1.0386e-07, 0.267299, -1.30679e-07, 0.963614, 7.43333, 1, -4.93679e-09, 0.265922, 1.1239e-08, 0.963995, 7.56667, 1, -3.23858e-07, 0.264933, 8.31841e-08, 0.964267, 7.83333, 1, -3.79675e-08, 0.26392, 2.58376e-08, 0.964545, 8.33333, 1, -3.13493e-07, 0.263206, 3.21077e-07, 0.96474)
 
-[sub_resource type="Animation" id="Animation_asihp"]
+[sub_resource type="Animation" id="Animation_obkfq"]
 resource_name = "root|walk"
 length = 5.83333
 loop_mode = 1
@@ -560,10 +560,10 @@ tracks/26/interp = 1
 tracks/26/loop_wrap = true
 tracks/26/keys = PackedFloat32Array(0, 1, 0.100011, 0.00650041, -0.0201436, 0.994761)
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_ltfab"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_sygiy"]
 _data = {
-"root|idle": SubResource("Animation_g5wpv"),
-"root|walk": SubResource("Animation_asihp")
+"root|idle": SubResource("Animation_cx534"),
+"root|walk": SubResource("Animation_obkfq")
 }
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_umsuy"]
@@ -734,45 +734,45 @@ autostart = true
 [node name="Root Scene" parent="Stuff" instance=ExtResource("2_3foj5")]
 
 [node name="Skeleton3D" parent="Stuff/Root Scene/RootNode/root" index="0"]
-bones/0/position = Vector3(3.24272e-06, -0.0805136, -3.19505)
-bones/0/rotation = Quaternion(0.728032, -3.17643e-06, -1.67165e-06, 0.685543)
+bones/0/position = Vector3(2.30015e-06, -0.108775, -3.40701)
+bones/0/rotation = Quaternion(0.737576, -3.42471e-06, -1.41322e-06, 0.675264)
 bones/0/scale = Vector3(1, 1, 1)
 bones/2/rotation = Quaternion(-0.01702, 0.00344735, 0.0133315, 0.99976)
 bones/4/rotation = Quaternion(-0.0829239, -0.00766268, 0.00706174, 0.996501)
 bones/4/scale = Vector3(1, 1, 1)
 bones/5/rotation = Quaternion(0.498926, 0.482833, 0.526308, -0.490862)
-bones/6/rotation = Quaternion(-0.551446, 0.446377, -0.0412206, 0.703531)
+bones/6/rotation = Quaternion(-0.562926, 0.442997, -0.0506744, 0.695917)
 bones/6/scale = Vector3(1, 1, 1)
-bones/7/rotation = Quaternion(6.32047e-09, -0.50573, 2.37871e-08, 0.862692)
-bones/8/rotation = Quaternion(-8.15834e-08, -3.96363e-08, -0.241107, 0.970499)
+bones/7/rotation = Quaternion(4.0259e-08, -0.507514, 2.4339e-09, 0.861644)
+bones/8/rotation = Quaternion(-4.649e-08, -1.16704e-08, -0.191945, 0.981406)
 bones/8/scale = Vector3(1, 0.999999, 1)
-bones/9/rotation = Quaternion(6.91998e-09, -0.353106, 1.81464e-10, 0.935583)
-bones/10/rotation = Quaternion(0.659429, -0.330335, 0.198071, 0.6456)
+bones/9/rotation = Quaternion(2.33091e-09, -0.359212, 9.56916e-09, 0.933256)
+bones/10/rotation = Quaternion(0.647062, -0.365405, 0.162101, 0.649241)
 bones/10/scale = Vector3(1, 1, 1)
 bones/11/rotation = Quaternion(-0.485848, 0.495986, 0.513171, 0.504584)
-bones/12/rotation = Quaternion(-0.527358, -0.334616, 0.131131, 0.76989)
-bones/13/rotation = Quaternion(5.68435e-08, 0.412924, 2.84446e-09, 0.910766)
-bones/14/rotation = Quaternion(1.51177e-07, 6.6932e-08, 0.389785, 0.920906)
-bones/15/rotation = Quaternion(-4.30585e-08, 0.37736, -3.98206e-09, 0.926067)
-bones/16/rotation = Quaternion(0.738267, 0.0584408, -0.422474, 0.522554)
-bones/17/rotation = Quaternion(0.857789, 0.0468707, 0.511189, -0.0262168)
+bones/12/rotation = Quaternion(-0.506756, -0.299414, 0.159349, 0.792564)
+bones/13/rotation = Quaternion(-1.38667e-08, 0.384003, 1.01335e-08, 0.923332)
+bones/14/rotation = Quaternion(2.2714e-08, 1.69049e-07, 0.413725, 0.910402)
+bones/15/rotation = Quaternion(-6.55783e-09, 0.39437, -4.91991e-09, 0.918952)
+bones/16/rotation = Quaternion(0.725513, 0.0361957, -0.449196, 0.520138)
+bones/17/rotation = Quaternion(0.864605, 0.0765751, 0.496565, 0.00420881)
 bones/17/scale = Vector3(1, 1, 1)
-bones/18/rotation = Quaternion(-2.64886e-08, -5.45506e-08, 0.193351, 0.98113)
-bones/19/rotation = Quaternion(0.380847, 0.66177, -0.514229, 0.390621)
+bones/18/rotation = Quaternion(-2.84095e-08, -5.37754e-08, 0.22181, 0.97509)
+bones/19/rotation = Quaternion(0.391747, 0.648993, -0.541192, 0.363942)
 bones/19/scale = Vector3(1, 1, 1)
 bones/20/rotation = Quaternion(0.0405687, 0.982636, 0.180724, 0.010893)
 bones/20/scale = Vector3(1, 1, 1)
-bones/21/rotation = Quaternion(2.43167e-08, -0.00382329, -2.39051e-07, 0.999993)
-bones/22/rotation = Quaternion(-1.14105e-08, -0.00838749, 7.30369e-09, 0.999965)
-bones/23/rotation = Quaternion(0.760299, -0.316549, -0.509272, 0.249767)
+bones/21/rotation = Quaternion(1.44584e-09, 0.0127147, -7.94944e-08, 0.999919)
+bones/22/rotation = Quaternion(-8.78977e-08, 0.00813401, 1.94834e-07, 0.999967)
+bones/23/rotation = Quaternion(0.7587, -0.315482, -0.518793, 0.236005)
 bones/23/scale = Vector3(1, 1, 1)
-bones/24/rotation = Quaternion(2.49438e-08, -3.10771e-08, -0.570978, 0.820966)
-bones/25/rotation = Quaternion(-0.447468, 0.652405, -0.436508, -0.428486)
+bones/24/rotation = Quaternion(-5.36882e-08, 1.63647e-08, -0.604948, 0.796265)
+bones/25/rotation = Quaternion(-0.448145, 0.655213, -0.423707, -0.436273)
 bones/25/scale = Vector3(1, 1, 1)
 bones/26/rotation = Quaternion(-0.0405764, 0.982641, 0.1807, -0.0108955)
 bones/26/scale = Vector3(1, 1, 1)
-bones/27/rotation = Quaternion(8.45118e-08, 0.0922941, 9.89464e-08, 0.995732)
-bones/28/rotation = Quaternion(2.52685e-08, 0.0567406, -9.21047e-08, 0.998389)
+bones/27/rotation = Quaternion(5.07469e-08, 0.100925, 5.54311e-08, 0.994894)
+bones/28/rotation = Quaternion(2.00439e-08, 0.0664466, -1.29619e-07, 0.99779)
 
 [node name="Cylinder_003" parent="Stuff/Root Scene/RootNode/root/Skeleton3D" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_ds3q8")
@@ -788,7 +788,7 @@ speed_scale = 3.404
 
 [node name="AnimationTree" type="AnimationTree" parent="Stuff/Root Scene"]
 libraries = {
-"": SubResource("AnimationLibrary_ltfab")
+"": SubResource("AnimationLibrary_sygiy")
 }
 tree_root = SubResource("AnimationNodeBlendTree_dxn3f")
 anim_player = NodePath("../AnimationPlayer")

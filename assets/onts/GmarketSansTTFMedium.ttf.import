@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://diyl4h4a00hli"
-path="res://.godot/imported/GmarketSansTTFLight.ttf-dac9a558d3ac89c8a11616073aeec000.fontdata"
+uid="uid://crlej3crummc1"
+path="res://.godot/imported/GmarketSansTTFMedium.ttf-d27c219a018c022dc5c6309e3f159a96.fontdata"
 
 [deps]
 
-source_file="res://assets/Fonts/GmarketSansTTFLight.ttf"
-dest_files=["res://.godot/imported/GmarketSansTTFLight.ttf-dac9a558d3ac89c8a11616073aeec000.fontdata"]
+source_file="res://assets/onts/GmarketSansTTFMedium.ttf"
+dest_files=["res://.godot/imported/GmarketSansTTFMedium.ttf-d27c219a018c022dc5c6309e3f159a96.fontdata"]
 
 [params]
 

@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://id5fktiec8nh"
-path="res://.godot/imported/SpiderMech1.fbx-0e899d6ac98be9f7e478c02a3cc9dbc2.scn"
+path="res://.godot/imported/SpiderMech1.fbx-adbf649cfd3e21e71a2f3c2ec49c5cee.scn"
 
 [deps]
 
-source_file="res://assets/Mechs/SpiderMech1.fbx"
-dest_files=["res://.godot/imported/SpiderMech1.fbx-0e899d6ac98be9f7e478c02a3cc9dbc2.scn"]
+source_file="res://assets/echs/SpiderMech1.fbx"
+dest_files=["res://.godot/imported/SpiderMech1.fbx-adbf649cfd3e21e71a2f3c2ec49c5cee.scn"]
 
 [params]
 
