@@ -1,7 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://cyucaogmr7d2r"]
 
-[ext_resource type="ArrayMesh" uid="uid://ct10h0nhj8t6l" path="res://assets/props/grass_mesh1.obj" id="1_gwtci"]
+[ext_resource type="ArrayMesh" uid="uid://ct10h0nhj8t6l" path="res://assets/prop_models/grass_mesh1.obj" id="1_gwtci"]
 [ext_resource type="Texture2D" uid="uid://bmie04sbcunqn" path="res://assets/etc_images/grass1.png" id="2_t5le5"]
+
 
 
 

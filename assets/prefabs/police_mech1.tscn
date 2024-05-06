@@ -1,11 +1,9 @@
 [gd_scene load_steps=34 format=3 uid="uid://d4dwfc0a6ki16"]
 
 [ext_resource type="Script" path="res://scripts/police_robot.gd" id="1_8stj0"]
-[ext_resource type="PackedScene" uid="uid://21fmdpahl8k" path="res://assets/character/PoliceModel1.glb" id="2_lp8ug"]
+[ext_resource type="PackedScene" uid="uid://21fmdpahl8k" path="res://assets/entity_models/mechs/police_model_1.glb" id="2_lp8ug"]
 [ext_resource type="Script" path="res://scripts/stats.gd" id="3_g68lo"]
 [ext_resource type="Script" path="res://Scripts/behavior.gd" id="4_fetkr"]
-
-
 
 [sub_resource type="Gradient" id="Gradient_cglgu"]
 offsets = PackedFloat32Array(0, 0.564972, 1)
@@ -429,14 +427,12 @@ debug_path_custom_color = Color(1, 0, 1, 1)
 transform = Transform3D(0.18, 0, 0, 0, 0.18, 0, 0, 0, 0.18, 0, 0, 0)
 
 [node name="Skeleton3D" parent="PoliceModel1/Armature" index="0"]
-bones/0/position = Vector3(-5.67924e-16, 4.64727, -2.73106)
-bones/0/rotation = Quaternion(0.259128, -2.39186e-17, -9.34885e-17, 0.965843)
+bones/0/rotation = Quaternion(-0.00215042, -3.25118e-17, -3.25118e-17, 0.999998)
 bones/1/rotation = Quaternion(-0.260463, 2.27104e-17, 9.82021e-17, 0.965484)
-bones/2/position = Vector3(-5.92013e-16, 5.22047, -3.06792)
-bones/2/rotation = Quaternion(0.501774, -0.501774, -0.498219, -0.498219)
-bones/3/rotation = Quaternion(-0.690305, 0.193767, 0.153228, 0.68004)
-bones/4/rotation = Quaternion(-0.00859918, 1.67638e-08, 0.145212, 0.989363)
-bones/5/rotation = Quaternion(-0.0344479, 4.19095e-09, 0.581712, 0.812665)
+bones/2/rotation = Quaternion(0.5, -0.5, -0.5, -0.5)
+bones/3/rotation = Quaternion(-0.70587, -5.9269e-09, -0.0418003, 0.707107)
+bones/4/rotation = Quaternion(-0.035934, 1.09895e-08, 0.606807, 0.794037)
+bones/5/rotation = Quaternion(-0.0223946, 9.18422e-09, 0.37817, 0.925465)
 bones/5/scale = Vector3(1, 1, 1)
 bones/6/rotation = Quaternion(0.534098, -0.465861, -0.503405, -0.494264)
 bones/6/scale = Vector3(1, 1, 1)
@@ -444,22 +440,21 @@ bones/7/rotation = Quaternion(0.534098, -0.465861, -0.503405, -0.494264)
 bones/7/scale = Vector3(1, 1, 1)
 bones/8/rotation = Quaternion(0.534098, -0.465861, -0.503405, -0.494264)
 bones/8/scale = Vector3(1, 1, 1)
-bones/9/rotation = Quaternion(-0.0437243, 2.60771e-08, 0.738359, -0.672989)
+bones/9/rotation = Quaternion(-0.0529758, 1.6657e-08, 0.894587, -0.443743)
 bones/10/rotation = Quaternion(0.531026, 0.46897, -0.50051, 0.497563)
 bones/10/scale = Vector3(1, 1, 1)
 bones/11/rotation = Quaternion(0.681532, -0.240432, -0.642367, -0.255091)
 bones/11/scale = Vector3(1, 1, 1)
 bones/12/rotation = Quaternion(0.351191, 0.633417, -0.61373, -0.314297)
 bones/12/scale = Vector3(3.14028, 6.48804, 3.14028)
-bones/13/position = Vector3(5.23736e-16, 5.22047, -3.06792)
-bones/13/rotation = Quaternion(0.501774, 0.501774, 0.498219, -0.498219)
-bones/14/rotation = Quaternion(-0.691372, 0.10721, 0.148339, 0.698932)
-bones/15/rotation = Quaternion(-0.0296188, -1.21072e-08, -0.500165, 0.865424)
-bones/16/rotation = Quaternion(-0.0181959, -3.72529e-09, -0.307269, 0.951449)
+bones/13/rotation = Quaternion(0.5, 0.5, 0.5, -0.5)
+bones/14/rotation = Quaternion(-0.70587, 5.9292e-09, 0.0418003, 0.707107)
+bones/15/rotation = Quaternion(-0.035934, -1.12956e-08, -0.606807, 0.794037)
+bones/16/rotation = Quaternion(-0.0223946, -8.60884e-09, -0.37817, 0.925465)
 bones/16/scale = Vector3(1, 1, 1)
 bones/17/rotation = Quaternion(0.534098, 0.465861, 0.503405, -0.494264)
 bones/17/scale = Vector3(1, 1, 1)
-bones/18/rotation = Quaternion(0.0327946, 2.98023e-08, 0.553794, 0.832008)
+bones/18/rotation = Quaternion(0.0529847, 5.47873e-08, 0.894739, 0.443435)
 bones/18/scale = Vector3(1, 1, 1)
 bones/19/rotation = Quaternion(0.530855, -0.469142, 0.500349, 0.497745)
 bones/19/scale = Vector3(1, 1, 1)
@@ -468,12 +463,12 @@ bones/20/scale = Vector3(1, 1, 1)
 bones/21/rotation = Quaternion(0.633417, 0.351191, 0.314297, 0.61373)
 
 [node name="Cube_008" parent="PoliceModel1/Armature/Skeleton3D" index="0"]
-transform = Transform3D(1, -7.9396e-18, -5.58267e-18, 8.48852e-18, 0.936703, 0.00341368, 4.49819e-18, -0.00258985, 1.23465, 0.107279, 4.64117, -2.74955)
+transform = Transform3D(1, -1.0538e-16, -3.77921e-17, 1.12501e-16, 0.807579, 0.625547, -3.06095e-17, -0.47459, 1.06445, 0.107279, -0.0145862, -0.0128868)
 
 [node name="SpotLight3D" type="SpotLight3D" parent="PoliceModel1/Armature/Skeleton3D/Cube_008" index="0"]
 transform = Transform3D(5.55556, -4.11411e-07, -2.27557e-07, -5.01799e-07, -5.25122, -2.75696, -8.29024e-09, 2.09165, -3.98399, -0.107277, 15.9026, 18.9593)
 light_color = Color(0.945098, 0.854902, 0.698039, 1)
-light_energy = 0.6
+light_energy = 6.0
 light_indirect_energy = 0.814
 light_volumetric_fog_energy = 600.0
 light_size = 1.0
@@ -487,21 +482,21 @@ spot_angle = 13.7515
 spot_angle_attenuation = 0.0149012
 
 [node name="CSGCylinder3D" type="CSGCylinder3D" parent="PoliceModel1/Armature/Skeleton3D/Cube_008" index="1"]
-transform = Transform3D(0.675, -4.09601e-08, 7.40538e-08, -6.09685e-08, -0.496252, 0.94522, -1.00728e-09, -0.717119, -0.376496, -4.79072e-06, 15.5967, 8.96926)
+transform = Transform3D(0.675, -4.09601e-08, 7.40538e-08, -6.09685e-08, -0.496252, 0.94522, -1.00728e-09, -0.717119, -0.376496, -1.51247e-06, 54.0068, 71.5879)
 radius = 69.7646
-height = 6.80006
+height = 204.519
 cone = true
 material = SubResource("StandardMaterial3D_ju8dy")
 
 [node name="CSGCylinder3D1" type="CSGCylinder3D" parent="PoliceModel1/Armature/Skeleton3D/Cube_008/CSGCylinder3D"]
-transform = Transform3D(1, -6.68354e-14, 7.99361e-14, 3.88578e-15, 0.999999, 8.9407e-08, 5.32907e-15, 2.98023e-08, 0.999999, -1.49012e-08, -107.343, 3.8147e-07)
+transform = Transform3D(1, -6.68354e-14, 7.99361e-14, 3.88578e-15, 0.999999, 8.9407e-08, 5.32907e-15, 2.98023e-08, 0.999999, 0, -195.982, 7.6294e-06)
 operation = 2
 radius = 104.234
 height = 117.812
 material = SubResource("StandardMaterial3D_7wtao")
 
 [node name="CSGCylinder3D2" type="CSGCylinder3D" parent="PoliceModel1/Armature/Skeleton3D/Cube_008/CSGCylinder3D"]
-transform = Transform3D(1, -8.81517e-14, 1.86517e-13, -8.21565e-15, 0.999999, 8.9407e-08, 4.32987e-15, 2.98023e-08, 0.999999, 0, 61.9602, 1.71661e-05)
+transform = Transform3D(1, -8.81517e-14, 1.86517e-13, -8.21565e-15, 0.999999, 8.9407e-08, 4.32987e-15, 2.98023e-08, 0.999999, 9.09495e-13, 122.127, 1.95503e-05)
 operation = 2
 radius = 104.234
 height = 66.9341
@@ -518,59 +513,59 @@ transform = Transform3D(1, 4.1359e-25, 0, 4.1359e-25, 1, -5.96046e-08, 0, -2.980
 surface_material_override/0 = SubResource("StandardMaterial3D_mee4u")
 
 [node name="Cube_005" parent="PoliceModel1/Armature/Skeleton3D" index="1"]
-transform = Transform3D(1, 1.67638e-07, 1.30059e-06, -6.74278e-07, 0.854664, 0.519181, -9.96515e-07, -0.519182, 0.854664, -8.10623e-06, -16.0139, 14.9736)
+transform = Transform3D(1, -2.01166e-07, 1.07801e-06, -1.93715e-07, 0.862147, 0.506658, -9.62988e-07, -0.506659, 0.862147, 0, -15.4364, 17.0899)
 
 [node name="Cube_005" parent="PoliceModel1/Armature/Skeleton3D/Cube_005" index="0"]
 transform = Transform3D(1, -3.55271e-15, 1.13687e-13, 1.24345e-14, 1, -1.86265e-09, -1.13687e-13, -9.31323e-10, 1, 0, 0, 0)
 surface_material_override/0 = SubResource("StandardMaterial3D_xobp4")
 
 [node name="Cube_007" parent="PoliceModel1/Armature/Skeleton3D" index="2"]
-transform = Transform3D(1, 4.69387e-07, 4.3842e-07, -5.66244e-07, 0.804636, 0.593768, -7.45058e-08, -0.593768, 0.804637, -8.10623e-06, -15.982, 14.9716)
+transform = Transform3D(1, 1.3411e-07, 9.05711e-08, -5.96046e-08, 0.862147, 0.506658, 3.35276e-08, -0.506658, 0.862147, 0, -15.4364, 17.0899)
 
 [node name="Cube_007" parent="PoliceModel1/Armature/Skeleton3D/Cube_007" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_d451c")
 
 [node name="Cylinder_005" parent="PoliceModel1/Armature/Skeleton3D" index="3"]
-transform = Transform3D(1, 1.56462e-07, 2.23517e-08, -1.3411e-07, 0.996897, 0.0787087, -2.98023e-08, -0.0787088, 0.996898, 5.72205e-06, 17.15, 12.2805)
+transform = Transform3D(1, -2.49594e-07, -8.56817e-08, 3.09199e-07, 0.862148, 0.506657, -3.35276e-08, -0.506657, 0.862147, 0, 13.372, 0.129212)
 
 [node name="Cylinder_005" parent="PoliceModel1/Armature/Skeleton3D/Cylinder_005" index="0"]
 transform = Transform3D(1, -3.55271e-15, 0, -1.06581e-14, 1, -2.98023e-08, -7.10543e-15, 0, 1, 0, 0, 0)
 surface_material_override/0 = SubResource("StandardMaterial3D_udr28")
 
 [node name="Cylinder_004" parent="PoliceModel1/Armature/Skeleton3D" index="4"]
-transform = Transform3D(-2.05636e-06, 6.48804, -8.19564e-07, -1.44238, 8.9407e-08, 2.78943, 2.78943, 3.78489e-06, 1.44238, 0.107281, 5.20126, -3.07104)
+transform = Transform3D(-1.73599e-06, 6.48804, -2.02656e-06, -2.70738, -7.45058e-08, 1.59105, 1.59105, 5.30481e-06, 2.70738, 0.107282, -0.0145856, -0.0128793)
 
 [node name="Cylinder_004" parent="PoliceModel1/Armature/Skeleton3D/Cylinder_004" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_c46bh")
 
 [node name="Cube_004" parent="PoliceModel1/Armature/Skeleton3D" index="5"]
-transform = Transform3D(1, -1.52737e-07, -1.85985e-06, -2.38419e-07, 0.984825, -0.173553, 1.69687e-06, 0.173552, 0.984825, -2.86102e-06, -18.0991, 5.4945)
+transform = Transform3D(1, 2.08616e-07, -1.08127e-06, 1.86265e-07, 0.862147, 0.506658, 9.66713e-07, -0.506659, 0.862147, 0, -15.4364, 17.0899)
 
 [node name="Cube_004" parent="PoliceModel1/Armature/Skeleton3D/Cube_004" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_pmrmt")
 
 [node name="Cube_006" parent="PoliceModel1/Armature/Skeleton3D" index="6"]
-transform = Transform3D(1, -6.70552e-08, -7.91159e-07, 6.57514e-07, 0.520435, 0.853901, 3.65078e-07, -0.853901, 0.520435, -3.8147e-06, -17.7005, 5.53597)
+transform = Transform3D(1, -5.96046e-07, -3.16417e-07, 5.84871e-07, 0.862147, 0.506658, -2.6077e-08, -0.506658, 0.862147, -9.53674e-07, -15.4364, 17.0899)
 
 [node name="Cube_006" parent="PoliceModel1/Armature/Skeleton3D/Cube_006" index="0"]
 transform = Transform3D(1, -2.84217e-14, 0, 0, 1, 0, 5.68434e-14, 2.98023e-08, 1, 0, 0, 0)
 surface_material_override/0 = SubResource("StandardMaterial3D_ojnob")
 
 [node name="Cylinder_003" parent="PoliceModel1/Armature/Skeleton3D" index="7"]
-transform = Transform3D(1, 4.47035e-08, -7.71135e-07, -7.45058e-08, 0.999732, -0.0231408, 7.15256e-07, 0.0231407, 0.999732, -1.04904e-05, 15.3665, 6.27297)
+transform = Transform3D(1, 2.6077e-07, 8.56817e-08, -3.1665e-07, 0.862148, 0.506657, 3.72529e-08, -0.506657, 0.862147, 0, 13.372, 0.129212)
 
 [node name="Cylinder_003" parent="PoliceModel1/Armature/Skeleton3D/Cylinder_003" index="0"]
 transform = Transform3D(1, 0, 0, 5.68434e-14, 1, 5.96046e-08, -5.68434e-14, 0, 1, 0, 0, 0)
 surface_material_override/0 = SubResource("StandardMaterial3D_biofo")
 
 [node name="Cylinder_002" parent="PoliceModel1/Armature/Skeleton3D" index="8"]
-transform = Transform3D(1.22935e-06, 6.48804, -6.85453e-07, -3.05469, 3.02494e-06, 0.728156, 0.728155, 4.17233e-07, 3.0547, 0.107278, 5.2103, -3.08451)
+transform = Transform3D(1.69873e-06, 6.48804, 2.04146e-06, -2.70738, 8.71718e-07, 1.59105, 1.59105, -5.66244e-06, 2.70738, 0.107277, -0.0145856, -0.0128793)
 
 [node name="Cylinder_002" parent="PoliceModel1/Armature/Skeleton3D/Cylinder_002" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_sp541")
 
 [node name="BoneAttachment3D" type="BoneAttachment3D" parent="PoliceModel1/Armature/Skeleton3D" index="9"]
-transform = Transform3D(1, 1.68194e-16, -9.46542e-17, -1.92986e-16, 0.865705, -0.500554, -2.24775e-18, 0.500554, 0.865705, -5.67924e-16, 4.64727, -2.73106)
+transform = Transform3D(1, 6.51633e-17, -6.48837e-17, -6.48837e-17, 0.999991, 0.00430083, 6.51633e-17, -0.00430083, 0.999991, -5.29396e-23, 7.15256e-07, 9.53674e-07)
 bone_name = "Bone"
 bone_idx = 0
 

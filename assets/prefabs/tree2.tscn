@@ -1,6 +1,7 @@
 [gd_scene load_steps=12 format=3 uid="uid://2fdk6j282ae4"]
 
-[ext_resource type="ArrayMesh" uid="uid://cq7k2qc8ektmy" path="res://assets/props/Tree2.obj" id="1_pjd7i"]
+[ext_resource type="ArrayMesh" uid="uid://cq7k2qc8ektmy" path="res://assets/prop_models/Tree2.obj" id="1_pjd7i"]
+
 
 
 

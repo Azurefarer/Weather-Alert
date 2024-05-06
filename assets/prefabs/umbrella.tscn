@@ -1,7 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://dy7bk7txpw1cw"]
 
 [ext_resource type="Script" path="res://scripts/item.gd" id="1_quc6s"]
-[ext_resource type="PackedScene" uid="uid://jtd2lscy4u17" path="res://assets/props/umbrella/umbrella.glb" id="2_upvqb"]
+[ext_resource type="PackedScene" uid="uid://jtd2lscy4u17" path="res://assets/prop_models/umbrella/umbrella.glb" id="2_upvqb"]
+
 
 
 
