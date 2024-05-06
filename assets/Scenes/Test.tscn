@@ -1,8 +1,8 @@
 [gd_scene load_steps=12 format=3 uid="uid://bav6q7bmslqvx"]
 
 [ext_resource type="Texture2D" uid="uid://cy4kybitqrbjh" path="res://assets/etc_images/DeebugTexture.png" id="1_h2p26"]
-[ext_resource type="PackedScene" uid="uid://ei5ein17lo4y" path="res://assets/Prefabs/fire_extinguisher.tscn" id="2_chjk6"]
-[ext_resource type="PackedScene" uid="uid://om2lr6ft6tf6" path="res://assets/Prefabs/glider.tscn" id="3_vvk2g"]
+[ext_resource type="PackedScene" uid="uid://ei5ein17lo4y" path="res://assets/refabs/fire_extinguisher.tscn" id="2_chjk6"]
+[ext_resource type="PackedScene" uid="uid://om2lr6ft6tf6" path="res://assets/refabs/glider.tscn" id="3_vvk2g"]
 [ext_resource type="Script" path="res://Scripts/invisible.gd" id="5_4qkoh"]
 
 
