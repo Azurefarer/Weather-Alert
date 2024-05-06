@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://dmkkoiuoo7jf5"]
 
-[ext_resource type="Script" path="res://Observer_/ObserverController.gd" id="1_ahowe"]
+[ext_resource type="Script" path="res://observer/ObserverController.gd" id="1_ahowe"]
 [ext_resource type="Shader" path="res://shaders/screen_space.gdshader" id="2_fddii"]
 
 
