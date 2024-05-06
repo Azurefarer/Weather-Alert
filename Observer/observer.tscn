@@ -1,7 +1,8 @@
 [gd_scene load_steps=9 format=3 uid="uid://dmkkoiuoo7jf5"]
 
 [ext_resource type="Script" path="res://Observer/ObserverController.gd" id="1_ahowe"]
-[ext_resource type="Shader" path="res://Shaders/ScreenSpace.gdshader" id="2_fddii"]
+[ext_resource type="Shader" path="res://haders/ScreenSpace.gdshader" id="2_fddii"]
+
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_43tuv"]
 
