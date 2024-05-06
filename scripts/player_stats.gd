@@ -76,3 +76,7 @@ func update():
 	experienced_pressure = lerp(experienced_pressure,GameManager.weather_manager.world_pressure+world_pressure_offset,GameManager.global_delta*3)
 	await get_tree().process_frame
 	experienced_humidity = lerp(experienced_humidity,GameManager.weather_manager.world_humidity+world_humidty_offset,GameManager.global_delta*3)
+
+
+func _on_area_3d_body_entered(body):
+	SoundManager.play_sound_3d("res://assets/sounds/sfx/player/footstep"+str(GameManager.rng.randi_range(1,3))+".mp3",-3,1,.2,3,get_parent().global_position)

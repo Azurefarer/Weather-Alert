@@ -252,6 +252,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_na5vo")
 shape = SubResource("ConcavePolygonShape3D_gumjj")
 
 [node name="Circle_007" parent="Scalar/Ship" index="11"]
+transform = Transform3D(1, -2.47383e-10, 0, -2.13913e-09, 1, -7.45058e-09, -2.32831e-10, 0, 1, 0, 0, 0)
 surface_material_override/0 = SubResource("StandardMaterial3D_na5vo")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Scalar/Ship/Circle_007" index="0"]
@@ -266,6 +267,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_vsol8")
 [node name="StaticBody3D" type="StaticBody3D" parent="Scalar/Ship/Sphere_003" index="0"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Scalar/Ship/Sphere_003/StaticBody3D"]
+transform = Transform3D(1, -2.32831e-10, 0, -3.0559e-10, 1, 7.45058e-09, 0, 7.45058e-09, 1, 0, 0, 0)
 shape = SubResource("ConcavePolygonShape3D_s5h6x")
 
 [node name="Cube_001" parent="Scalar/Ship" index="13"]
@@ -278,6 +280,28 @@ surface_material_override/0 = SubResource("StandardMaterial3D_gidoa")
 
 [node name="Cube_003" parent="Scalar/Ship" index="15"]
 surface_material_override/0 = SubResource("StandardMaterial3D_vj4ws")
+
+[node name="CSGTorus3D" type="CSGTorus3D" parent="Scalar/Ship"]
+transform = Transform3D(4, 1.06607e-07, 9.31323e-09, -1.65193e-07, 2.71, -2.98023e-08, -1.02445e-08, -2.98023e-08, 4, 0.000297155, 3.40851, 0.000704005)
+use_collision = true
+inner_radius = 0.193
+outer_radius = 0.27
+sides = 16
+material = SubResource("StandardMaterial3D_na5vo")
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="Scalar/Ship"]
+transform = Transform3D(1.14, 7.59933e-09, 8.53383e-19, -8.66324e-09, 1, 0, -2.5269e-18, -1.68445e-26, 0.385, 1.017, 2.897, 0.151)
+material_override = SubResource("StandardMaterial3D_na5vo")
+use_collision = true
+radius = 0.055
+height = 0.71
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="Scalar/Ship"]
+transform = Transform3D(1.14, 9.06584e-09, 0, -1.33441e-08, 1, -5.58794e-09, -4.65661e-10, 0, 0.385, 1.017, 2.897, -0.154271)
+material_override = SubResource("StandardMaterial3D_na5vo")
+use_collision = true
+radius = 0.055
+height = 0.71
 
 [node name="Players" type="Node3D" parent="Scalar"]
 transform = Transform3D(0.05, 0, 0, 0, 0.05, 0, 0, 0, 0.05, 0.120167, 1.06797, -0.0511905)
