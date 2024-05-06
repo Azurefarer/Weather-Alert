@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://6aokocl2b5ii"
-path.s3tc="res://.godot/imported/Can of Tomatoes_soup can label1.png-48ae147869d51c9c93d79e6a50d3adca.s3tc.ctex"
+path.s3tc="res://.godot/imported/Can of Tomatoes_soup can label1.png-91e08453bc718716fab5c8440fcbe8a9.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -12,8 +12,8 @@ generator_parameters={}
 
 [deps]
 
-source_file="res://assets/ans/Can of Tomatoes_soup can label1.png"
-dest_files=["res://.godot/imported/Can of Tomatoes_soup can label1.png-48ae147869d51c9c93d79e6a50d3adca.s3tc.ctex"]
+source_file="res://assets/cans/Can of Tomatoes_soup can label1.png"
+dest_files=["res://.godot/imported/Can of Tomatoes_soup can label1.png-91e08453bc718716fab5c8440fcbe8a9.s3tc.ctex"]
 
 [params]
 

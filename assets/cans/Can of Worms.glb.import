@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://djg5vgfwit2kk"
-path="res://.godot/imported/Can of Candy.glb-b6f62e97198bf1f46d3d3948fc40efe1.scn"
+uid="uid://cr5ea21cm60fc"
+path="res://.godot/imported/Can of Worms.glb-66c64691e40ccab4e9dda052d30105a5.scn"
 
 [deps]
 
-source_file="res://assets/ans/Can of Candy.glb"
-dest_files=["res://.godot/imported/Can of Candy.glb-b6f62e97198bf1f46d3d3948fc40efe1.scn"]
+source_file="res://assets/cans/Can of Worms.glb"
+dest_files=["res://.godot/imported/Can of Worms.glb-66c64691e40ccab4e9dda052d30105a5.scn"]
 
 [params]
 

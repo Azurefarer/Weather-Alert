@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cghtk4vb4q6yg"
-path.s3tc="res://.godot/imported/Can of Worms_nutrition label.png-812e00594bcfd04067f9ac4923ec3cc5.s3tc.ctex"
+uid="uid://ckpm6rpxt4lm4"
+path.s3tc="res://.godot/imported/Can of Worms_can o worms can.png-fee7a63b849fb50fd733cb1a9f24a873.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -12,8 +12,8 @@ generator_parameters={}
 
 [deps]
 
-source_file="res://assets/ans/Can of Worms_nutrition label.png"
-dest_files=["res://.godot/imported/Can of Worms_nutrition label.png-812e00594bcfd04067f9ac4923ec3cc5.s3tc.ctex"]
+source_file="res://assets/cans/Can of Worms_can o worms can.png"
+dest_files=["res://.godot/imported/Can of Worms_can o worms can.png-fee7a63b849fb50fd733cb1a9f24a873.s3tc.ctex"]
 
 [params]
 

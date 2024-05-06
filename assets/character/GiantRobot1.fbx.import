@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://n2nl24mm6ijc"
-path="res://.godot/imported/GiantRobot1.fbx-fa2c02e2da9be1ea539271df9239cd73.scn"
+path="res://.godot/imported/GiantRobot1.fbx-0d761bbb441f7866465248518699e7af.scn"
 
 [deps]
 
-source_file="res://assets/haracter/GiantRobot1.fbx"
-dest_files=["res://.godot/imported/GiantRobot1.fbx-fa2c02e2da9be1ea539271df9239cd73.scn"]
+source_file="res://assets/character/GiantRobot1.fbx"
+dest_files=["res://.godot/imported/GiantRobot1.fbx-0d761bbb441f7866465248518699e7af.scn"]
 
 [params]
 
