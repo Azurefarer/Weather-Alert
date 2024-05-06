@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://bf8j0sq712xg5"
-path="res://.godot/imported/Can of Tomatoes.glb-8b99e15679c3c526ace03add104393d9.scn"
+path="res://.godot/imported/Can of Tomatoes.glb-c6d398056088e4e4d853f365bfdac7c5.scn"
 
 [deps]
 
-source_file="res://assets/Cans/Can of Tomatoes.glb"
-dest_files=["res://.godot/imported/Can of Tomatoes.glb-8b99e15679c3c526ace03add104393d9.scn"]
+source_file="res://assets/ans/Can of Tomatoes.glb"
+dest_files=["res://.godot/imported/Can of Tomatoes.glb-c6d398056088e4e4d853f365bfdac7c5.scn"]
 
 [params]
 

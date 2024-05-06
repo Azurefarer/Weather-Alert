@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b53n2lsejr5kd"
-path.s3tc="res://.godot/imported/Can of Candy_canned dandy label.png-e25c96fb8bf61c835bd36e9012dd363e.s3tc.ctex"
+uid="uid://cghtk4vb4q6yg"
+path.s3tc="res://.godot/imported/Can of Worms_nutrition label.png-812e00594bcfd04067f9ac4923ec3cc5.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -12,8 +12,8 @@ generator_parameters={}
 
 [deps]
 
-source_file="res://assets/Cans/Can of Candy_canned dandy label.png"
-dest_files=["res://.godot/imported/Can of Candy_canned dandy label.png-e25c96fb8bf61c835bd36e9012dd363e.s3tc.ctex"]
+source_file="res://assets/ans/Can of Worms_nutrition label.png"
+dest_files=["res://.godot/imported/Can of Worms_nutrition label.png-812e00594bcfd04067f9ac4923ec3cc5.s3tc.ctex"]
 
 [params]
 

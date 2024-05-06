@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://ckpm6rpxt4lm4"
-path.s3tc="res://.godot/imported/Can of Worms_can o worms can.png-7acbf18ab4ddc3ff10b2fdeb266c40e4.s3tc.ctex"
+path.s3tc="res://.godot/imported/Can of Worms_can o worms can.png-66630ca5445d10e178a18c0f647bc2ec.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -12,8 +12,8 @@ generator_parameters={}
 
 [deps]
 
-source_file="res://assets/Cans/Can of Worms_can o worms can.png"
-dest_files=["res://.godot/imported/Can of Worms_can o worms can.png-7acbf18ab4ddc3ff10b2fdeb266c40e4.s3tc.ctex"]
+source_file="res://assets/ans/Can of Worms_can o worms can.png"
+dest_files=["res://.godot/imported/Can of Worms_can o worms can.png-66630ca5445d10e178a18c0f647bc2ec.s3tc.ctex"]
 
 [params]
 

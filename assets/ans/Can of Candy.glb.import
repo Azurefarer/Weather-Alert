@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://djg5vgfwit2kk"
-path="res://.godot/imported/Can of Candy.glb-0a4cf337ca66663aa9301a4ce1c7a101.scn"
+path="res://.godot/imported/Can of Candy.glb-b6f62e97198bf1f46d3d3948fc40efe1.scn"
 
 [deps]
 
-source_file="res://assets/Cans/Can of Candy.glb"
-dest_files=["res://.godot/imported/Can of Candy.glb-0a4cf337ca66663aa9301a4ce1c7a101.scn"]
+source_file="res://assets/ans/Can of Candy.glb"
+dest_files=["res://.godot/imported/Can of Candy.glb-b6f62e97198bf1f46d3d3948fc40efe1.scn"]
 
 [params]
 

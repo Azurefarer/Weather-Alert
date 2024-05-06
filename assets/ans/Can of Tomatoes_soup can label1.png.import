@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cghtk4vb4q6yg"
-path.s3tc="res://.godot/imported/Can of Worms_nutrition label.png-eda2403948f8fcd89a363327f81d4c6f.s3tc.ctex"
+uid="uid://6aokocl2b5ii"
+path.s3tc="res://.godot/imported/Can of Tomatoes_soup can label1.png-48ae147869d51c9c93d79e6a50d3adca.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -12,8 +12,8 @@ generator_parameters={}
 
 [deps]
 
-source_file="res://assets/Cans/Can of Worms_nutrition label.png"
-dest_files=["res://.godot/imported/Can of Worms_nutrition label.png-eda2403948f8fcd89a363327f81d4c6f.s3tc.ctex"]
+source_file="res://assets/ans/Can of Tomatoes_soup can label1.png"
+dest_files=["res://.godot/imported/Can of Tomatoes_soup can label1.png-48ae147869d51c9c93d79e6a50d3adca.s3tc.ctex"]
 
 [params]
 

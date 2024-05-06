@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/player_stats.gd" id="2_f1lw6"]
 [ext_resource type="Script" path="res://scripts/player_character.gd" id="2_perqm"]
-[ext_resource type="PackedScene" uid="uid://df5eqk66osdpv" path="res://assets/Character/PlayerCharacter.fbx" id="2_uvm7g"]
+[ext_resource type="PackedScene" uid="uid://df5eqk66osdpv" path="res://assets/haracter/PlayerCharacter.fbx" id="2_uvm7g"]
 [ext_resource type="PackedScene" uid="uid://840q35guyxgq" path="res://assets/Prefabs/character_ik_targets.tscn" id="3_flq8k"]
 [ext_resource type="Script" path="res://Scripts/ragdoll.gd" id="4_f0yae"]
 
