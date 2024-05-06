@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://cde0raxjgmone"
-path="res://.godot/imported/grass_mesh1.glb-cf551514c335309d6e66add0517e6fdb.scn"
+uid="uid://cbrtdha06ehqo"
+path="res://.godot/imported/Ship.glb-187b8d0bba0073594dae577de51f4ae5.scn"
 
 [deps]
 
-source_file="res://assets/Props/grass_mesh1.glb"
-dest_files=["res://.godot/imported/grass_mesh1.glb-cf551514c335309d6e66add0517e6fdb.scn"]
+source_file="res://assets/rops/Ship.glb"
+dest_files=["res://.godot/imported/Ship.glb-187b8d0bba0073594dae577de51f4ae5.scn"]
 
 [params]
 

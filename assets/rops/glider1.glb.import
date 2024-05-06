@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://d21njgdpry27f"
-path="res://.godot/imported/glider1.glb-237017b99c8336f7ef8af3e660562ef3.scn"
+path="res://.godot/imported/glider1.glb-f0cbae1b163d6a60fa1deaac63da872c.scn"
 
 [deps]
 
-source_file="res://assets/Props/glider1.glb"
-dest_files=["res://.godot/imported/glider1.glb-237017b99c8336f7ef8af3e660562ef3.scn"]
+source_file="res://assets/rops/glider1.glb"
+dest_files=["res://.godot/imported/glider1.glb-f0cbae1b163d6a60fa1deaac63da872c.scn"]
 
 [params]
 

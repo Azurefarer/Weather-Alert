@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://cbrtdha06ehqo"
-path="res://.godot/imported/Ship.glb-3e1b7641fb4c184732993a06be237e82.scn"
+uid="uid://bpbp8ebh7dadr"
+path="res://.godot/imported/fireextinguisher.glb-3c372e61cc96045e06220b0e65c55e05.scn"
 
 [deps]
 
-source_file="res://assets/Props/Ship.glb"
-dest_files=["res://.godot/imported/Ship.glb-3e1b7641fb4c184732993a06be237e82.scn"]
+source_file="res://assets/rops/fireextinguisher.glb"
+dest_files=["res://.godot/imported/fireextinguisher.glb-3c372e61cc96045e06220b0e65c55e05.scn"]
 
 [params]
 

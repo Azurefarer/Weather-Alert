@@ -1,8 +1,8 @@
 [gd_scene load_steps=14 format=3 uid="uid://ei5ein17lo4y"]
 
-[ext_resource type="ArrayMesh" uid="uid://dhb76kvw32gdu" path="res://assets/Props/fireextinguisher.obj" id="1_dqxe3"]
+[ext_resource type="ArrayMesh" uid="uid://dhb76kvw32gdu" path="res://assets/rops/fireextinguisher.obj" id="1_dqxe3"]
 [ext_resource type="Script" path="res://scripts/item.gd" id="1_gakqg"]
-[ext_resource type="Texture2D" uid="uid://d1rcw7ym5rhcj" path="res://assets/Props/fireextinguisher_Fire_Extinguisher_Label.png" id="2_duqsh"]
+[ext_resource type="Texture2D" uid="uid://d1rcw7ym5rhcj" path="res://assets/rops/fireextinguisher_Fire_Extinguisher_Label.png" id="2_duqsh"]
 
 
 

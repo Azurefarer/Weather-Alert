@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://jtd2lscy4u17"
-path="res://.godot/imported/umbrella.glb-8497b933123c199adaa89d86e4a82aa1.scn"
+uid="uid://cde0raxjgmone"
+path="res://.godot/imported/grass_mesh1.glb-a944c1a6ebdf63c7a0df5d8fa8e9a678.scn"
 
 [deps]
 
-source_file="res://assets/Props/Umbrella/umbrella.glb"
-dest_files=["res://.godot/imported/umbrella.glb-8497b933123c199adaa89d86e4a82aa1.scn"]
+source_file="res://assets/rops/grass_mesh1.glb"
+dest_files=["res://.godot/imported/grass_mesh1.glb-a944c1a6ebdf63c7a0df5d8fa8e9a678.scn"]
 
 [params]
 
