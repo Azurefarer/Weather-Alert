@@ -29,7 +29,7 @@ func _ready():
 	add_player(1)#host
 	
 func add_player(id: int):
-	var player =preload("res://Assets/Prefabs/player_character.tscn").instantiate()
+	var player =preload("res://Assets_/Prefabs/player_character.tscn").instantiate()
 	player.name = str(id)
 	print ("Spawned client player "+player.name)
 	#player.stats.ign = GameManager.activePlayerName

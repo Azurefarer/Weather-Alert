@@ -54,8 +54,8 @@ func _on_debug_pressed():
 		return
 	GameManager.gameMode = "debug"
 	await GameManager.buttonFeedback(GameManager.active_button)
-	change_level(preload("res://Assets/Scenes/Test.tscn"))
-	var player = preload("res://Assets/Prefabs/player_character.tscn").instantiate()
+	change_level(preload("res://Assets_/Scenes/Test.tscn"))
+	var player = preload("res://Assets_/Prefabs/player_character.tscn").instantiate()
 	print ("Spawned client player "+player.name)
 	player.name = "1"
 	#player.global_position = Vector3(0,600,0)
@@ -77,8 +77,8 @@ func change_level(scene :PackedScene):
 		#c.queue_free()
 	hide_UI()
 	level.add_child(scene.instantiate())
-	GameManager.level.add_child(preload("res://Assets/Scenes/World.tscn").instantiate())
-	level.add_child(preload("res://Assets/Prefabs/time_and_weather.tscn").instantiate())
+	GameManager.level.add_child(preload("res://Assets_/Scenes/World.tscn").instantiate())
+	level.add_child(preload("res://Assets_/Prefabs/time_and_weather.tscn").instantiate())
 
 
 func _on_start_pressed():
@@ -86,7 +86,7 @@ func _on_start_pressed():
 		return
 	GameManager.gameMode = "game"
 	await GameManager.buttonFeedback(GameManager.active_button)
-	change_level.call_deferred(preload("res://Assets/Prefabs/Ship.tscn"))
+	change_level.call_deferred(preload("res://Assets_/Prefabs/Ship.tscn"))
 
 func _on_host_pressed():
 	if multiplayer.multiplayer_peer == peer or GameManager.gameMode != "menu":
@@ -95,7 +95,7 @@ func _on_host_pressed():
 	await GameManager.buttonFeedback(GameManager.active_button)
 	peer.create_server(9999)
 	multiplayer.multiplayer_peer = peer
-	change_level.call_deferred(preload("res://Assets/Prefabs/Ship.tscn"))
+	change_level.call_deferred(preload("res://Assets_/Prefabs/Ship.tscn"))
 
 func _on_join_pressed():
 	joinField.visible  = !joinField.visible
