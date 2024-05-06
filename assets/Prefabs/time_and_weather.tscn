@@ -1,10 +1,9 @@
 [gd_scene load_steps=11 format=3 uid="uid://bvg87topw1dbf"]
 
-[ext_resource type="Script" path="res://Scripts/time_and_weather_.gd" id="1_2u5ir"]
+[ext_resource type="Script" path="res://cripts/time_and_weather_.gd" id="1_2u5ir"]
 [ext_resource type="FontFile" uid="uid://bsegnh8v4qc3c" path="res://assets/Fonts/GmarketSansTTFBold.ttf" id="2_hnkd1"]
 [ext_resource type="Texture2D" uid="uid://bkclt7ey5akgu" path="res://assets/EtcImages/Clouds_PNG_Clipart-870.png" id="3_e2dc0"]
-[ext_resource type="Script" path="res://Scripts/Rotate.gd" id="4_kmdi6"]
-
+[ext_resource type="Script" path="res://cripts/Rotate.gd" id="4_kmdi6"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_yavjt"]
 properties/0/path = NodePath(".:world_temperature")

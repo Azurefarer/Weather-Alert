@@ -1,6 +1,6 @@
 [gd_scene load_steps=30 format=3 uid="uid://c6kpm6gi7t2ro"]
 
-[ext_resource type="Script" path="res://Scripts/ship.gd" id="1_ual5m"]
+[ext_resource type="Script" path="res://cripts/ship.gd" id="1_ual5m"]
 [ext_resource type="PackedScene" uid="uid://cbrtdha06ehqo" path="res://assets/Props/Ship.glb" id="2_dydfy"]
 
 
