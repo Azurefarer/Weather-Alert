@@ -1,0 +1,237 @@
+[gd_scene load_steps=11 format=3 uid="uid://d4dwfc0a6ki16"]
+
+[ext_resource type="Script" path="res://Scripts/NPC.gd" id="1_h6spf"]
+[ext_resource type="PackedScene" uid="uid://21fmdpahl8k" path="res://Assets/Character/PoliceModel1.glb" id="2_lp8ug"]
+[ext_resource type="Script" path="res://Scripts/stats.gd" id="3_g68lo"]
+[ext_resource type="Script" path="res://Scripts/Behavior.gd" id="4_uoxt7"]
+
+[sub_resource type="Gradient" id="Gradient_cglgu"]
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 0.219608)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_r3qxc"]
+gradient = SubResource("Gradient_cglgu")
+fill_from = Vector2(1, 0)
+fill_to = Vector2(1, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yupeg"]
+transparency = 1
+cull_mode = 2
+albedo_color = Color(1, 1, 0, 1)
+albedo_texture = SubResource("GradientTexture2D_r3qxc")
+emission_enabled = true
+emission = Color(1, 1, 0, 1)
+distance_fade_min_distance = 39.55
+distance_fade_max_distance = 54.15
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7wtao"]
+transparency = 1
+cull_mode = 1
+albedo_color = Color(1, 1, 1, 0)
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_l34rj"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:rotation")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath("RootScene/RootNode:rotation")
+properties/2/spawn = true
+properties/2/replication_mode = 1
+properties/3/path = NodePath(".:jumpIndex")
+properties/3/spawn = true
+properties/3/replication_mode = 1
+properties/4/path = NodePath(".:velocityExport")
+properties/4/spawn = true
+properties/4/replication_mode = 1
+properties/5/path = NodePath("RootScene/RootNode/root/Skeleton3D/CharacterIKTargets/Hand_IK_Target_r:position")
+properties/5/spawn = true
+properties/5/replication_mode = 1
+properties/6/path = NodePath("RootScene/RootNode/root/Skeleton3D/CharacterIKTargets/Hand_IK_Target_l:position")
+properties/6/spawn = true
+properties/6/replication_mode = 1
+properties/7/path = NodePath("RootScene/RootNode/root/Skeleton3D/CharacterIKTargets/Hand_IK_Target_r:rotation")
+properties/7/spawn = true
+properties/7/replication_mode = 1
+properties/8/path = NodePath("RootScene/RootNode/root/Skeleton3D/CharacterIKTargets/Hand_IK_Target_l:rotation")
+properties/8/spawn = true
+properties/8/replication_mode = 1
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_rous1"]
+height = 3.52352
+radius = 0.796301
+
+[node name="PoliceMech1" type="CharacterBody3D" node_paths=PackedStringArray("ceilCheckRay")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+collision_layer = 512
+wall_min_slide_angle = 1.22173
+floor_max_angle = 1.22173
+floor_snap_length = 1.0
+script = ExtResource("1_h6spf")
+ceilCheckRay = NodePath("CeilCheck")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+
+[node name="PoliceModel1" parent="." instance=ExtResource("2_lp8ug")]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+
+[node name="Skeleton3D" parent="PoliceModel1/Armature" index="0"]
+bones/0/rotation = Quaternion(-0.00215042, -3.25118e-17, -3.25118e-17, 0.999998)
+bones/1/rotation = Quaternion(-0.260463, 2.27104e-17, 9.82022e-17, 0.965484)
+bones/2/rotation = Quaternion(-0.260463, 2.27104e-17, 9.82022e-17, 0.965484)
+bones/3/rotation = Quaternion(0.5, -0.5, -0.5, -0.5)
+bones/4/rotation = Quaternion(-0.70587, -5.9269e-09, -0.0418003, 0.707107)
+bones/5/rotation = Quaternion(-0.035934, 1.09895e-08, 0.606807, 0.794037)
+bones/6/rotation = Quaternion(-0.0223946, 9.18422e-09, 0.37817, 0.925465)
+bones/6/scale = Vector3(1, 1, 1)
+bones/7/rotation = Quaternion(0.534098, -0.465861, -0.503405, -0.494264)
+bones/8/rotation = Quaternion(0.534098, -0.465861, -0.503405, -0.494264)
+bones/9/rotation = Quaternion(0.534098, -0.465861, -0.503405, -0.494264)
+bones/10/rotation = Quaternion(-0.0529758, 1.6657e-08, 0.894587, -0.443743)
+bones/11/rotation = Quaternion(0.531026, 0.46897, -0.50051, 0.497563)
+bones/11/scale = Vector3(1, 0.999999, 1)
+bones/12/rotation = Quaternion(0.681532, -0.240432, -0.642367, -0.255091)
+bones/12/scale = Vector3(1, 1, 1)
+bones/13/rotation = Quaternion(0.351191, 0.633417, -0.61373, -0.314297)
+bones/13/scale = Vector3(3.14028, 6.48804, 3.14028)
+bones/14/rotation = Quaternion(0.5, 0.5, 0.5, -0.5)
+bones/15/rotation = Quaternion(-0.70587, 5.9292e-09, 0.0418003, 0.707107)
+bones/16/rotation = Quaternion(-0.035934, -1.12956e-08, -0.606807, 0.794037)
+bones/17/rotation = Quaternion(-0.0223946, -8.60884e-09, -0.37817, 0.925465)
+bones/17/scale = Vector3(1, 1, 1)
+bones/18/rotation = Quaternion(0.534098, 0.465861, 0.503405, -0.494264)
+bones/19/rotation = Quaternion(0.0529847, 5.47873e-08, 0.894739, 0.443435)
+bones/19/scale = Vector3(1, 1, 1)
+bones/20/rotation = Quaternion(0.530855, -0.469142, 0.500349, 0.497745)
+bones/21/rotation = Quaternion(0.681532, 0.240432, 0.642367, -0.255091)
+bones/21/scale = Vector3(1, 1, 1)
+bones/22/rotation = Quaternion(0.633417, 0.351191, 0.314297, 0.61373)
+bones/22/scale = Vector3(3.14028, 6.48804, 3.14028)
+
+[node name="Cube_001" parent="PoliceModel1/Armature/Skeleton3D" index="0"]
+transform = Transform3D(1, -1.0538e-16, -3.77922e-17, 1.12501e-16, 0.807579, 0.625547, -3.06095e-17, -0.47459, 1.06445, -0.82898, 13.4109, 1.67258)
+
+[node name="Cube_008" parent="PoliceModel1/Armature/Skeleton3D" index="1"]
+transform = Transform3D(1, -1.0538e-16, -3.77922e-17, 1.12501e-16, 0.807579, 0.625547, -3.06095e-17, -0.47459, 1.06445, -0.82898, 13.4109, 1.67258)
+
+[node name="Cube_005" parent="PoliceModel1/Armature/Skeleton3D" index="2"]
+transform = Transform3D(1, -2.01166e-07, 1.07801e-06, -1.93715e-07, 0.862147, 0.506659, -9.62988e-07, -0.506659, 0.862147, -4.76837e-07, -15.4364, 17.0899)
+
+[node name="Cube_007" parent="PoliceModel1/Armature/Skeleton3D" index="3"]
+transform = Transform3D(1, 1.30385e-07, 9.05711e-08, -5.96046e-08, 0.862147, 0.506658, 3.35276e-08, -0.506657, 0.862147, -4.76837e-07, -15.4364, 17.0899)
+
+[node name="Cylinder_005" parent="PoliceModel1/Armature/Skeleton3D" index="4"]
+transform = Transform3D(1, -2.49594e-07, -8.56817e-08, 3.09199e-07, 0.862148, 0.506657, -3.35276e-08, -0.506657, 0.862147, 0, 13.372, 0.129214)
+
+[node name="Cylinder_004" parent="PoliceModel1/Armature/Skeleton3D" index="5"]
+transform = Transform3D(-1.73599e-06, 6.48804, -2.02656e-06, -2.70738, -7.45058e-08, 1.59105, 1.59105, 5.30481e-06, 2.70738, 0.107282, -0.014584, -0.0128816)
+
+[node name="Cube_004" parent="PoliceModel1/Armature/Skeleton3D" index="6"]
+transform = Transform3D(1, 2.08616e-07, -1.08127e-06, 1.86265e-07, 0.862147, 0.506659, 9.66713e-07, -0.506659, 0.862147, -4.76837e-07, -15.4364, 17.0899)
+
+[node name="Cube_006" parent="PoliceModel1/Armature/Skeleton3D" index="7"]
+transform = Transform3D(1, -5.96046e-07, -3.16417e-07, 5.81145e-07, 0.862147, 0.506658, -2.6077e-08, -0.506658, 0.862147, -4.76837e-07, -15.4364, 17.0899)
+
+[node name="Cylinder_003" parent="PoliceModel1/Armature/Skeleton3D" index="8"]
+transform = Transform3D(1, 2.6077e-07, 8.56817e-08, -3.1665e-07, 0.862148, 0.506657, 3.72529e-08, -0.506657, 0.862147, 0, 13.372, 0.129215)
+
+[node name="Cylinder_002" parent="PoliceModel1/Armature/Skeleton3D" index="9"]
+transform = Transform3D(1.69873e-06, 6.48804, 2.02656e-06, -2.70738, 8.71718e-07, 1.59105, 1.59105, -5.66244e-06, 2.70738, 0.107278, -0.014584, -0.0128816)
+
+[node name="BoneAttachment3D" type="BoneAttachment3D" parent="PoliceModel1/Armature/Skeleton3D" index="10"]
+transform = Transform3D(1, 6.51633e-17, -6.48837e-17, -6.48837e-17, 0.999991, 0.00430083, 6.51633e-17, -0.00430083, 0.999991, -5.29396e-23, 7.15256e-07, 9.53674e-07)
+bone_name = "Bone"
+bone_idx = 0
+
+[node name="SpotLight3D" type="SpotLight3D" parent="PoliceModel1/Armature/Skeleton3D/BoneAttachment3D"]
+transform = Transform3D(5, -3.70269e-07, -2.04801e-07, -3.70269e-07, -2.65735, -4.23538, 2.04801e-07, 4.23538, -2.65735, 1.05879e-22, 0.556275, -2.37915)
+light_color = Color(1, 0.839216, 0.584314, 1)
+light_energy = 3.104
+light_indirect_energy = 0.814
+light_volumetric_fog_energy = 2000.0
+light_size = 1.0
+light_specular = 16.0
+distance_fade_begin = 0.0
+distance_fade_length = 2082.71
+spot_range = 149.12
+spot_attenuation = 0.00571909
+spot_angle = 7.70066
+spot_angle_attenuation = 0.0149012
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="PoliceModel1/Armature/Skeleton3D/BoneAttachment3D"]
+transform = Transform3D(0.675, -4.09601e-08, 7.40538e-08, -4.99863e-08, -0.847077, 0.531471, 2.76481e-08, -0.531471, -0.847077, -3.08654e-15, 117.109, 70.0433)
+visible = false
+radius = 69.7646
+height = 292.169
+cone = true
+material = SubResource("StandardMaterial3D_yupeg")
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="PoliceModel1/Armature/Skeleton3D/BoneAttachment3D/CSGCylinder3D"]
+transform = Transform3D(1, 2.99767e-29, -5.04871e-29, 1.57772e-30, 1, 0, -1.26218e-29, 0, 1, -6.05845e-28, -149.753, 3.8147e-06)
+operation = 2
+radius = 104.234
+height = 16.135
+material = SubResource("StandardMaterial3D_7wtao")
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="PoliceModel1/Armature/Skeleton3D/BoneAttachment3D/CSGCylinder3D"]
+transform = Transform3D(1, 4.57539e-29, -7.57306e-29, 1.26218e-29, 1, 0, -1.89327e-29, 0, 1, 0, 158.359, 1.90735e-05)
+operation = 2
+radius = 104.234
+height = 68.7118
+material = SubResource("StandardMaterial3D_7wtao")
+
+[node name="Stats" type="Node" parent="."]
+script = ExtResource("3_g68lo")
+
+[node name="UpdateTimer" type="Timer" parent="Stats"]
+autostart = true
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_l34rj")
+
+[node name="RotateCheck" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+target_position = Vector3(0, -15, 0)
+debug_shape_custom_color = Color(1, 0, 0, 1)
+
+[node name="CeilCheck" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.667867, 0)
+target_position = Vector3(0, 9, 0)
+hit_from_inside = true
+debug_shape_custom_color = Color(1, 0, 0, 1)
+
+[node name="FloorCheck" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.900405, 0)
+target_position = Vector3(0, -1.02, 0)
+debug_shape_custom_color = Color(0.305882, 0, 0.909804, 1)
+debug_shape_thickness = 5
+
+[node name="NavigationPointCheck" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 300, 0)
+target_position = Vector3(0, -600, 0)
+debug_shape_custom_color = Color(0.305882, 0, 0.909804, 1)
+debug_shape_thickness = 5
+
+[node name="SnapCheck" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.900405, 0)
+target_position = Vector3(0, -2, 0)
+debug_shape_custom_color = Color(0.305882, 0, 0.909804, 1)
+debug_shape_thickness = 5
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.76892, 0)
+shape = SubResource("CylinderShape3D_rous1")
+
+[node name="Behavior" type="Node" parent="." node_paths=PackedStringArray("nav", "navCheckRay")]
+script = ExtResource("4_uoxt7")
+nav = NodePath("../NavigationAgent3D")
+navCheckRay = NodePath("../NavigationPointCheck")
+
+[node name="Timer" type="Timer" parent="Behavior"]
+wait_time = 5.0
+autostart = true
+
+[connection signal="timeout" from="Stats/UpdateTimer" to="Stats" method="_on_update_timer_timeout"]
+[connection signal="timeout" from="Behavior/Timer" to="Behavior" method="_on_timer_timeout"]
+
+[editable path="PoliceModel1"]

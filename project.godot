@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Weather Alert"
-run/main_scene="res://assets_/Scenes/Main.tscn"
+run/main_scene="res://assets/Scenes/Main.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 
 [autoload]
@@ -30,7 +30,7 @@ enabled=PackedStringArray("res://addons/proton_scatter/plugin.cfg", "res://addon
 
 [gui]
 
-theme/custom_font="res://assets_/Fonts/GmarketSansTTFMedium.ttf"
+theme/custom_font="res://assets/Fonts/GmarketSansTTFMedium.ttf"
 
 [input]
 
