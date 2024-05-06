@@ -16,14 +16,16 @@ var external_ip
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	$BlackOverlay.self_modulate.a = 0
+	$BlackOverlay.self_modulate.a = 1
 	port_map()
 	GameManager.main = self
 	GameManager.level = $Level
 	GameManager.game_screen = -1
 	multiplayer.connected_to_server.connect(_on_connected_ok)
 	$Main_UI/BG.material.set("shader_parameter/wave_time", RippleManager.ripple_time)
-
+	await get_tree().create_timer(.5).timeout
+	await get_tree().physics_frame
+	clear_black(3)
 	
 func port_map():
 	var upnp = UPNP.new()
@@ -127,8 +129,8 @@ func blackout():
 		$BlackOverlay.self_modulate.a+=GameManager.global_delta*3 
 		await get_tree().physics_frame
 
-func clear_black():
+func clear_black(speed):
 	while $BlackOverlay.self_modulate.a>0:
-		$BlackOverlay.self_modulate.a-=GameManager.global_delta*3
+		$BlackOverlay.self_modulate.a-=GameManager.global_delta*speed
 		await get_tree().physics_frame
 
