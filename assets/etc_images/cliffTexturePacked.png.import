@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://chw5s0g575888"
-path.s3tc="res://.godot/imported/images.jpg-f6805b482d0997c49f809a6d23f35bf8.s3tc.ctex"
+uid="uid://c0d1shqwn6x76"
+path.s3tc="res://.godot/imported/cliffTexturePacked.png-0919e0ece2fecb410626520bb8ba9f40.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://assets/EtcImages/images.jpg"
-dest_files=["res://.godot/imported/images.jpg-f6805b482d0997c49f809a6d23f35bf8.s3tc.ctex"]
+source_file="res://assets/etc_images/cliffTexturePacked.png"
+dest_files=["res://.godot/imported/cliffTexturePacked.png-0919e0ece2fecb410626520bb8ba9f40.s3tc.ctex"]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
-compress/normal_map=0
+compress/normal_map=2
 compress/channel_pack=0
 mipmaps/generate=true
 mipmaps/limit=-1

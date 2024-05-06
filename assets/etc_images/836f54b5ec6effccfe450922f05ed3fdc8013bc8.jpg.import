@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cy4kybitqrbjh"
-path.s3tc="res://.godot/imported/DeebugTexture.png-359537a9a6d555691323f65ad5b4e298.s3tc.ctex"
+uid="uid://flacwp83j7mr"
+path.s3tc="res://.godot/imported/836f54b5ec6effccfe450922f05ed3fdc8013bc8.jpg-d6f7239c8ec1c547b1eee9b10e6fd3b8.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://assets/EtcImages/DeebugTexture.png"
-dest_files=["res://.godot/imported/DeebugTexture.png-359537a9a6d555691323f65ad5b4e298.s3tc.ctex"]
+source_file="res://assets/etc_images/836f54b5ec6effccfe450922f05ed3fdc8013bc8.jpg"
+dest_files=["res://.godot/imported/836f54b5ec6effccfe450922f05ed3fdc8013bc8.jpg-d6f7239c8ec1c547b1eee9b10e6fd3b8.s3tc.ctex"]
 
 [params]
 
@@ -20,12 +20,12 @@ compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
-compress/normal_map=0
+compress/normal_map=1
 compress/channel_pack=0
 mipmaps/generate=true
 mipmaps/limit=-1
-roughness/mode=0
-roughness/src_normal=""
+roughness/mode=1
+roughness/src_normal="res://Assets/EtcImages/836f54b5ec6effccfe450922f05ed3fdc8013bc8.jpg"
 process/fix_alpha_border=true
 process/premult_alpha=false
 process/normal_map_invert_y=false

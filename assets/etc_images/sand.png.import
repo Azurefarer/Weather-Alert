@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://hwtxlfqriex6"
-path="res://.godot/imported/sand_displacement.png-13056168343c0615c2212e981bbff50d.ctex"
+uid="uid://bu803or41b3ve"
+path="res://.godot/imported/sand.png-1da6aeb077dd3719b38d23ccf1d2d78e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/EtcImages/sand_displacement.png"
-dest_files=["res://.godot/imported/sand_displacement.png-13056168343c0615c2212e981bbff50d.ctex"]
+source_file="res://assets/etc_images/sand.png"
+dest_files=["res://.godot/imported/sand.png-1da6aeb077dd3719b38d23ccf1d2d78e.ctex"]
 
 [params]
 
