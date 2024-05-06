@@ -1,8 +1,8 @@
 [gd_scene load_steps=34 format=3 uid="uid://d4dwfc0a6ki16"]
 
-[ext_resource type="Script" path="res://cripts/police_robot.gd" id="1_8stj0"]
+[ext_resource type="Script" path="res://scripts/police_robot.gd" id="1_8stj0"]
 [ext_resource type="PackedScene" uid="uid://21fmdpahl8k" path="res://assets/Character/PoliceModel1.glb" id="2_lp8ug"]
-[ext_resource type="Script" path="res://cripts/stats.gd" id="3_g68lo"]
+[ext_resource type="Script" path="res://scripts/stats.gd" id="3_g68lo"]
 [ext_resource type="Script" path="res://Scripts/behavior.gd" id="4_fetkr"]
 
 

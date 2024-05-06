@@ -1,6 +1,6 @@
 [gd_scene load_steps=13 format=3 uid="uid://cr3o673h8ofgo"]
 
-[ext_resource type="Script" path="res://cripts/console.gd" id="1_snvo6"]
+[ext_resource type="Script" path="res://scripts/console.gd" id="1_snvo6"]
 
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_hdw1r"]
