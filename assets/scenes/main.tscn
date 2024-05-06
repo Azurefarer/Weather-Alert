@@ -1,11 +1,11 @@
 [gd_scene load_steps=44 format=3 uid="uid://c2ei7wexs7rb7"]
 
-[ext_resource type="Script" path="res://scripts/main.gd" id="1_36uvr"]
-[ext_resource type="FontFile" uid="uid://diyl4h4a00hli" path="res://assets/fonts/GmarketSansTTFLight.ttf" id="1_oieq6"]
-[ext_resource type="PackedScene" uid="uid://n2nl24mm6ijc" path="res://assets/entity_models/mechs/giant_robot_1.fbx" id="2_3foj5"]
-[ext_resource type="Texture2D" uid="uid://htvxvd3tlalj" path="res://assets/etc_images/weather_alert_icon_big.png" id="2_6wsx3"]
-[ext_resource type="Material" uid="uid://upnpj06x081t" path="res://shaders/materials/ripple_ring.tres" id="3_r12pu"]
-[ext_resource type="Script" path="res://scripts/button_properties.gd" id="3_ugwyl"]
+[ext_resource type="Script" path="res://scripts/main.gd" id="1_4x7e1"]
+[ext_resource type="PackedScene" uid="uid://n2nl24mm6ijc" path="res://assets/entity_models/mechs/giant_robot_1.fbx" id="2_kvl24"]
+[ext_resource type="Texture2D" uid="uid://htvxvd3tlalj" path="res://assets/etc_images/weather_alert_icon_big.png" id="3_3l6rs"]
+[ext_resource type="Material" uid="uid://upnpj06x081t" path="res://shaders/materials/ripple_ring.tres" id="4_tpb4u"]
+[ext_resource type="FontFile" uid="uid://diyl4h4a00hli" path="res://assets/fonts/GmarketSansTTFLight.ttf" id="5_mkodc"]
+[ext_resource type="Script" path="res://scripts/button_properties.gd" id="6_n2kqa"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_wmad1"]
 height = 3864.89
@@ -667,7 +667,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_36uvr")
+script = ExtResource("1_4x7e1")
 level = null
 players = null
 
@@ -725,48 +725,48 @@ replication_config = SubResource("SceneReplicationConfig_ailfq")
 wait_time = 120.0
 autostart = true
 
-[node name="Root Scene" parent="Stuff" instance=ExtResource("2_3foj5")]
+[node name="Root Scene" parent="Stuff" instance=ExtResource("2_kvl24")]
 
 [node name="Skeleton3D" parent="Stuff/Root Scene/RootNode/root" index="0"]
-bones/0/position = Vector3(1.05072e-06, -0.0549172, -3.00308)
-bones/0/rotation = Quaternion(0.719285, -2.35428e-06, -2.4454e-06, 0.694715)
+bones/0/position = Vector3(1.09931e-06, -0.14478, -3.67705)
+bones/0/rotation = Quaternion(0.749432, -3.70616e-06, -1.1038e-06, 0.662081)
 bones/0/scale = Vector3(1, 1, 1)
 bones/2/rotation = Quaternion(-0.01702, 0.00344735, 0.0133315, 0.99976)
 bones/4/rotation = Quaternion(-0.0829239, -0.00766268, 0.00706174, 0.996501)
 bones/4/scale = Vector3(1, 1, 1)
 bones/5/rotation = Quaternion(0.498926, 0.482833, 0.526308, -0.490862)
-bones/6/rotation = Quaternion(-0.585401, 0.433907, -0.0699648, 0.681275)
+bones/6/rotation = Quaternion(-0.5838, 0.426135, -0.0753785, 0.686953)
 bones/6/scale = Vector3(1, 1, 1)
-bones/7/rotation = Quaternion(-5.15908e-08, -0.508903, -9.35895e-09, 0.860824)
-bones/8/rotation = Quaternion(-1.33121e-08, -9.13612e-08, -0.183809, 0.982962)
+bones/7/rotation = Quaternion(-4.05732e-09, -0.502656, 1.70109e-08, 0.864487)
+bones/8/rotation = Quaternion(7.14605e-08, 2.16094e-08, -0.103537, 0.994626)
 bones/8/scale = Vector3(1, 0.999999, 1)
-bones/9/rotation = Quaternion(5.8029e-09, -0.354981, -6.39652e-09, 0.934873)
-bones/10/rotation = Quaternion(0.713924, -0.317757, 0.222618, 0.58291)
+bones/9/rotation = Quaternion(-2.23094e-08, -0.372538, -1.96979e-08, 0.928017)
+bones/10/rotation = Quaternion(0.626151, -0.41222, 0.112475, 0.652196)
 bones/10/scale = Vector3(1, 1, 1)
 bones/11/rotation = Quaternion(-0.485848, 0.495986, 0.513171, 0.504584)
-bones/12/rotation = Quaternion(-0.506936, -0.347799, 0.104337, 0.781771)
-bones/13/rotation = Quaternion(4.43239e-08, 0.414366, -1.56096e-08, 0.910111)
-bones/14/rotation = Quaternion(5.33809e-08, 5.77133e-08, 0.416291, 0.909232)
-bones/15/rotation = Quaternion(-3.97534e-09, 0.372098, -6.5496e-09, 0.928194)
-bones/16/rotation = Quaternion(0.707855, 0.107695, -0.401684, 0.570958)
-bones/17/rotation = Quaternion(0.811318, 0.202946, 0.501946, 0.220512)
+bones/12/rotation = Quaternion(-0.476482, -0.251381, 0.203181, 0.817612)
+bones/13/rotation = Quaternion(1.13694e-08, 0.348048, -2.18603e-08, 0.937477)
+bones/14/rotation = Quaternion(1.03792e-07, 7.27092e-08, 0.429405, 0.903112)
+bones/15/rotation = Quaternion(-1.34596e-08, 0.419584, -4.93542e-09, 0.907717)
+bones/16/rotation = Quaternion(0.710439, 0.025603, -0.477767, 0.516101)
+bones/17/rotation = Quaternion(0.879774, 0.104084, 0.461887, 0.0427151)
 bones/17/scale = Vector3(1, 1, 1)
-bones/18/rotation = Quaternion(3.54744e-08, -6.05e-09, 0.220395, 0.975411)
-bones/19/rotation = Quaternion(0.375317, 0.678731, -0.461089, 0.431113)
+bones/18/rotation = Quaternion(-3.15291e-09, -5.5516e-08, 0.224672, 0.974435)
+bones/19/rotation = Quaternion(0.390527, 0.635356, -0.583096, 0.322197)
 bones/19/scale = Vector3(1, 1, 1)
 bones/20/rotation = Quaternion(0.0405687, 0.982636, 0.180724, 0.010893)
 bones/20/scale = Vector3(1, 1, 1)
-bones/21/rotation = Quaternion(-9.21057e-09, -0.0391872, -5.96035e-09, 0.999232)
-bones/22/rotation = Quaternion(4.56477e-08, -0.0210586, 1.60027e-07, 0.999778)
-bones/23/rotation = Quaternion(0.821567, 0.0180075, -0.558775, -0.111689)
+bones/21/rotation = Quaternion(-3.1209e-08, 0.0505081, -1.09494e-07, 0.998724)
+bones/22/rotation = Quaternion(-2.5559e-08, 0.0464863, 3.31516e-07, 0.998919)
+bones/23/rotation = Quaternion(0.76778, -0.281345, -0.545783, 0.182974)
 bones/23/scale = Vector3(1, 1, 1)
-bones/24/rotation = Quaternion(-1.67664e-07, 3.5935e-09, -0.213431, 0.976958)
-bones/25/rotation = Quaternion(-0.350327, 0.702091, -0.403313, -0.470828)
+bones/24/rotation = Quaternion(-2.49416e-08, 3.22269e-08, -0.624806, 0.78078)
+bones/25/rotation = Quaternion(-0.433105, 0.670592, -0.390624, -0.45841)
 bones/25/scale = Vector3(1, 1, 1)
 bones/26/rotation = Quaternion(-0.0405764, 0.982641, 0.1807, -0.0108955)
 bones/26/scale = Vector3(1, 1, 1)
-bones/27/rotation = Quaternion(2.74399e-07, 0.0635314, -2.16827e-07, 0.99798)
-bones/28/rotation = Quaternion(-2.51394e-07, 0.0691745, 2.16539e-07, 0.997605)
+bones/27/rotation = Quaternion(2.96916e-08, 0.113226, 4.99711e-08, 0.993569)
+bones/28/rotation = Quaternion(6.84046e-09, 0.0853744, -5.851e-08, 0.996349)
 
 [node name="Cylinder_003" parent="Stuff/Root Scene/RootNode/root/Skeleton3D" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_ds3q8")
@@ -802,11 +802,11 @@ z_index = 100
 material = SubResource("CanvasItemMaterial_dktlg")
 position = Vector2(822, 349)
 scale = Vector2(0.269441, 0.269441)
-texture = ExtResource("2_6wsx3")
+texture = ExtResource("3_3l6rs")
 
 [node name="BG" type="TextureRect" parent="Main_UI"]
 visible = false
-material = ExtResource("3_r12pu")
+material = ExtResource("4_tpb4u")
 layout_mode = 0
 offset_left = -747.0
 offset_top = -359.0
@@ -821,7 +821,7 @@ offset_top = 16.0
 offset_right = 980.0
 offset_bottom = 230.0
 theme_override_constants/outline_size = 0
-theme_override_fonts/normal_font = ExtResource("1_oieq6")
+theme_override_fonts/normal_font = ExtResource("5_mkodc")
 theme_override_font_sizes/normal_font_size = 41
 text = "W E A T H E R   A L E R T "
 
@@ -833,7 +833,7 @@ offset_left = 20.0
 offset_top = 107.0
 offset_right = 94.0
 offset_bottom = 129.0
-script = ExtResource("3_ugwyl")
+script = ExtResource("6_n2kqa")
 
 [node name="Text" type="RichTextLabel" parent="Main_UI/Start"]
 layout_mode = 0
@@ -843,7 +843,7 @@ offset_right = 81.0
 offset_bottom = 27.0
 mouse_filter = 2
 theme_override_constants/outline_size = 2
-theme_override_fonts/normal_font = ExtResource("1_oieq6")
+theme_override_fonts/normal_font = ExtResource("5_mkodc")
 theme_override_font_sizes/normal_font_size = 20
 text = "START"
 
@@ -856,7 +856,7 @@ offset_left = 20.0
 offset_top = 226.0
 offset_right = 94.0
 offset_bottom = 248.0
-script = ExtResource("3_ugwyl")
+script = ExtResource("6_n2kqa")
 
 [node name="Text" type="RichTextLabel" parent="Main_UI/Debug"]
 layout_mode = 0
@@ -866,7 +866,7 @@ offset_right = 95.0
 offset_bottom = 27.0
 mouse_filter = 2
 theme_override_constants/outline_size = 2
-theme_override_fonts/normal_font = ExtResource("1_oieq6")
+theme_override_fonts/normal_font = ExtResource("5_mkodc")
 theme_override_font_sizes/normal_font_size = 20
 text = "DEBUG"
 
@@ -878,7 +878,7 @@ offset_left = 20.0
 offset_top = 136.0
 offset_right = 251.0
 offset_bottom = 158.0
-script = ExtResource("3_ugwyl")
+script = ExtResource("6_n2kqa")
 
 [node name="Text" type="RichTextLabel" parent="Main_UI/Host"]
 layout_mode = 0
@@ -888,7 +888,7 @@ offset_right = 360.0
 offset_bottom = 27.0
 mouse_filter = 2
 theme_override_constants/outline_size = 2
-theme_override_fonts/normal_font = ExtResource("1_oieq6")
+theme_override_fonts/normal_font = ExtResource("5_mkodc")
 theme_override_font_sizes/normal_font_size = 20
 text = "HOST ONLINE GAME"
 
@@ -900,7 +900,7 @@ offset_left = 20.0
 offset_top = 167.0
 offset_right = 238.0
 offset_bottom = 189.0
-script = ExtResource("3_ugwyl")
+script = ExtResource("6_n2kqa")
 
 [node name="Text" type="RichTextLabel" parent="Main_UI/Join"]
 layout_mode = 0
@@ -910,7 +910,7 @@ offset_right = 360.0
 offset_bottom = 27.0
 mouse_filter = 2
 theme_override_constants/outline_size = 2
-theme_override_fonts/normal_font = ExtResource("1_oieq6")
+theme_override_fonts/normal_font = ExtResource("5_mkodc")
 theme_override_font_sizes/normal_font_size = 20
 text = "JOIN ONLINE GAME"
 
@@ -922,7 +922,7 @@ offset_left = 20.0
 offset_top = 198.0
 offset_right = 125.0
 offset_bottom = 220.0
-script = ExtResource("3_ugwyl")
+script = ExtResource("6_n2kqa")
 
 [node name="Text" type="RichTextLabel" parent="Main_UI/Options"]
 layout_mode = 0
@@ -932,7 +932,7 @@ offset_right = 360.0
 offset_bottom = 27.0
 mouse_filter = 2
 theme_override_constants/outline_size = 2
-theme_override_fonts/normal_font = ExtResource("1_oieq6")
+theme_override_fonts/normal_font = ExtResource("5_mkodc")
 theme_override_font_sizes/normal_font_size = 20
 text = "OPTIONS"
 
@@ -950,7 +950,7 @@ offset_top = 43.0
 offset_right = 282.0
 offset_bottom = 65.0
 scale = Vector2(0.17, 1)
-script = ExtResource("3_ugwyl")
+script = ExtResource("6_n2kqa")
 
 [node name="Text" type="RichTextLabel" parent="Main_UI/Sprite2D/Start2"]
 layout_mode = 0
@@ -960,7 +960,7 @@ offset_right = 359.966
 offset_bottom = 27.0
 mouse_filter = 2
 theme_override_constants/outline_size = 2
-theme_override_fonts/normal_font = ExtResource("1_oieq6")
+theme_override_fonts/normal_font = ExtResource("5_mkodc")
 theme_override_font_sizes/normal_font_size = 20
 text = "JOIN PARTY"
 
@@ -972,7 +972,7 @@ offset_bottom = -23.0
 scale = Vector2(0.26, 1)
 mouse_filter = 2
 theme_override_constants/outline_size = 2
-theme_override_fonts/normal_font = ExtResource("1_oieq6")
+theme_override_fonts/normal_font = ExtResource("5_mkodc")
 theme_override_font_sizes/normal_font_size = 20
 text = "IP ADDRESS"
 

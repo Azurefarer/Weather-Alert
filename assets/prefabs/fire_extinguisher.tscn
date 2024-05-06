@@ -2,10 +2,7 @@
 
 [ext_resource type="ArrayMesh" uid="uid://dhb76kvw32gdu" path="res://assets/prop_models/fireextinguisher.obj" id="1_dqxe3"]
 [ext_resource type="Script" path="res://scripts/item.gd" id="1_gakqg"]
-[ext_resource type="Texture2D" uid="uid://d1rcw7ym5rhcj" path="res://assets/prop_models/fireextinguisher_Fire_Extinguisher_Label.png" id="2_duqsh"]
-
-
-
+[ext_resource type="Texture2D" uid="uid://gcv3oe51v6k5" path="res://assets/prop_models/fire_extinguisher_label.png" id="2_duqsh"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_tmec8"]
 friction = 0.3

@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d1rcw7ym5rhcj"
-path.s3tc="res://.godot/imported/fireextinguisher_Fire_Extinguisher_Label.png-3e9f4d6a70be6685d70728f486d58057.s3tc.ctex"
+uid="uid://gcv3oe51v6k5"
+path.s3tc="res://.godot/imported/fire_extinguisher_label.png-c9b10c1471ed5f22cfa56c71f7dfe99f.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -12,8 +12,8 @@ generator_parameters={}
 
 [deps]
 
-source_file="res://assets/prop_models/fireextinguisher_Fire_Extinguisher_Label.png"
-dest_files=["res://.godot/imported/fireextinguisher_Fire_Extinguisher_Label.png-3e9f4d6a70be6685d70728f486d58057.s3tc.ctex"]
+source_file="res://assets/prop_models/fire_extinguisher_label.png"
+dest_files=["res://.godot/imported/fire_extinguisher_label.png-c9b10c1471ed5f22cfa56c71f7dfe99f.s3tc.ctex"]
 
 [params]
 

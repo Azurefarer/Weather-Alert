@@ -1,6 +1,6 @@
 [gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://upnpj06x081t"]
 
-[ext_resource type="Shader" path="res://shaders/Main_BG_.gdshader" id="1_a6v2i"]
+[ext_resource type="Shader" path="res://shaders/main_bg.gdshader" id="1_a6v2i"]
 
 
 [resource]
