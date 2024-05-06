@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://ccgev7vpdbxm6"]
 
-[ext_resource type="ArrayMesh" uid="uid://cjhvodkgynu1t" path="res://assets/rops/flower1.obj" id="1_uoic6"]
+[ext_resource type="ArrayMesh" uid="uid://cjhvodkgynu1t" path="res://assets/props/flower1.obj" id="1_uoic6"]
 
 
 

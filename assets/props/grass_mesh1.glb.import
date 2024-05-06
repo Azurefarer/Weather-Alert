@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://bpbp8ebh7dadr"
-path="res://.godot/imported/fireextinguisher.glb-3c372e61cc96045e06220b0e65c55e05.scn"
+uid="uid://cde0raxjgmone"
+path="res://.godot/imported/grass_mesh1.glb-645f0763794191e9af19a03517f4eabf.scn"
 
 [deps]
 
-source_file="res://assets/rops/fireextinguisher.glb"
-dest_files=["res://.godot/imported/fireextinguisher.glb-3c372e61cc96045e06220b0e65c55e05.scn"]
+source_file="res://assets/props/grass_mesh1.glb"
+dest_files=["res://.godot/imported/grass_mesh1.glb-645f0763794191e9af19a03517f4eabf.scn"]
 
 [params]
 
