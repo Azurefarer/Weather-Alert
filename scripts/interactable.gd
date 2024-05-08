@@ -1,6 +1,5 @@
 #Interactable
-extends Node3D
-class_name Interactable
+class_name Interactable extends Node3D
 
 @export var occupied: bool
 @export var stand_offset: Vector3
@@ -41,8 +40,8 @@ func use(user):
 		user.camera.current = true
 	user.interacting = null
 	rpc("update_occupied",false)
-	
-#fill out in children classes	
+
+#fill out in children classes
 func item_interact():
 	while true:
 		if Input.is_action_just_pressed("backout"):

@@ -1,5 +1,4 @@
-class_name Stats
-extends Node
+class_name Stats extends Node
 
 var weather_modifiers: Array
 var experienced_temperature: float

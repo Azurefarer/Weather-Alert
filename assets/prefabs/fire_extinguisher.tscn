@@ -1,7 +1,7 @@
 [gd_scene load_steps=14 format=3 uid="uid://ei5ein17lo4y"]
 
 [ext_resource type="ArrayMesh" uid="uid://dhb76kvw32gdu" path="res://assets/prop_models/fireextinguisher.obj" id="1_dqxe3"]
-[ext_resource type="Script" path="res://scripts/item.gd" id="1_gakqg"]
+[ext_resource type="Script" path="res://scripts/fire_extinguisher.gd" id="1_ny4np"]
 [ext_resource type="Texture2D" uid="uid://gcv3oe51v6k5" path="res://assets/prop_models/fire_extinguisher_label.png" id="2_duqsh"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_tmec8"]
@@ -53,8 +53,8 @@ collision_layer = 17
 mass = 0.1
 physics_material_override = SubResource("PhysicsMaterial_tmec8")
 continuous_cd = true
-script = ExtResource("1_gakqg")
-name_ = "FireExtinguisher"
+script = ExtResource("1_ny4np")
+name_ = "Fire_Extinguisher"
 
 [node name="Fireextinguisher" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, -0.541254, 0)

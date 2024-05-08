@@ -15,7 +15,7 @@ func _ready():
 func _process(delta):
 	velocity= velocity.lerp(wind_vector,delta/5)
 	#print("velocity:"+str(velocity))
-	get_parent().global_position += velocity*delta/30		
+	get_parent().global_position += velocity*delta/30
 
 func _on_update_timer_timeout():
 	update()

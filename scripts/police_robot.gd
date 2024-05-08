@@ -18,7 +18,7 @@ func _ready():
 	if !is_multiplayer_authority():
 		return
 	power_on_time = GameManager.rng.randi_range(0,60)
-	
+
 func _physics_process(delta):
 	animate()
 	if !is_multiplayer_authority():
@@ -43,7 +43,7 @@ func _physics_process(delta):
 			#print(velocity)
 	elif GameManager.weather_manager.time_of_day>power_on_time:
 		powered_on = true
-		
+
 	# Add the gravity.
 	if not is_on_floor():
 		velocity.y -= gravity * delta * 4

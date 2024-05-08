@@ -33,7 +33,7 @@ func get_vector_from_pressure_difference(area,experienced_pressure,current_pos):
 func _process(delta):
 	global_delta = delta
 	toggle_fullscreen()
-		
+
 func toggle_fullscreen():
 	if Input.is_action_just_pressed("fullscreen"):
 		if DisplayServer.window_get_mode(0) == DisplayServer.WINDOW_MODE_FULLSCREEN:
@@ -50,13 +50,13 @@ func button_feedback(button):
 	await get_tree().create_timer(.02).timeout
 	button.modulate = Color(1,1,1,1)
 	await get_tree().create_timer(.02).timeout
-	button.modulate = Color(1,1,1,0)  
+	button.modulate = Color(1,1,1,0)
 	await get_tree().create_timer(.02).timeout
 	button.modulate = Color(1,1,1,1)
 	await get_tree().create_timer(.02).timeout
-	button.modulate = Color(1,1,1,0)  
+	button.modulate = Color(1,1,1,0)
 	await get_tree().create_timer(.02).timeout
-	button.modulate = Color(1,1,1,1)  
+	button.modulate = Color(1,1,1,1)
 
 func transition_camera(camera1,camera2):
 	var origin_fov = camera1.fov
@@ -67,7 +67,7 @@ func transition_camera(camera1,camera2):
 	while(true):
 		await get_tree().physics_frame
 		camera1.global_position = lerp(camera1.global_position,origin_pos,GameManager.global_delta*10)
-		camera1.global_basis.y = lerp(camera1.global_basis.y,origin_basis.y,GameManager.global_delta*10) 
+		camera1.global_basis.y = lerp(camera1.global_basis.y,origin_basis.y,GameManager.global_delta*10)
 		camera1.global_basis.x = lerp(camera1.global_basis.x,-origin_basis.z.cross(Vector3(0,1,0)),GameManager.global_delta*10)
 		camera1.fov = lerp(camera1.fov,origin_fov,GameManager.global_delta*10)
 		#camera1.global_basis.x = lerp(camera1.global_basis.x,origin_basis.x.cross(Vector3(0,1,0)),GameManager.global_delta*4)
@@ -78,7 +78,7 @@ func transition_camera(camera1,camera2):
 	camera1.global_position = origin_pos
 	camera1.global_basis = origin_basis
 	camera1.fov = origin_fov
-		
+
 @rpc("any_peer","call_local","reliable")
 func shoot(path,pos,velocity):
 	var instance = load(path).instantiate()
@@ -86,4 +86,4 @@ func shoot(path,pos,velocity):
 	instance.global_position = pos
 	instance.global_basis.y = velocity
 	instance.linear_velocity = velocity
-	
+

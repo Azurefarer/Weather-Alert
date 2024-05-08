@@ -16,17 +16,17 @@ func item_interact():
 		await get_tree().physics_frame
 	$Monitor/TextEdit.release_focus()
 	GameManager.weather_manager.get_node("UI").visible = true
-	
+
 func type():
 	if Input.is_action_just_pressed("return") and $Monitor/TextEdit.text.replace("\n","")!="":
 		analyze($Monitor/TextEdit.text.replace("\n",""))
 		$Monitor/TextEdit.text = ""
 
 func analyze(text):
-	if "help" in text.to_lower():	
+	if "help" in text.to_lower():
 #		console_output = "This operating system is currently under construction.\nThere are no available commands.\nGoodbye.\n--\n>"
 		rpc("update_output","NAVIGATE - Route the ship to a new location.\nWEATHER - Analyze atmospheric properties.\n--\n>")
-	elif "weather" in text.to_lower():	
+	elif "weather" in text.to_lower():
 		computing = true
 		rpc("update_output","SCANNING SURROUNDINGS")
 		await get_tree().create_timer(.5).timeout

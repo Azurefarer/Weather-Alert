@@ -1,5 +1,4 @@
-class_name PlayerCharacter
-extends CharacterBody3D
+class_name PlayerCharacter extends CharacterBody3D
 
 const MOVE_SPEED = 10
 const MAX_SPEED = 200
@@ -26,7 +25,7 @@ var jumping = false
 var flight_angle: float
 var flight_speed: float
 var landing = false
-var holding_item = null
+var holding_item : Item = null
 var interacting = null
 @export var land_power = 0
 @export var rotate_check_ray: RayCast3D
@@ -89,7 +88,7 @@ func _process(delta):
 	#print (global_position)
 	pass
 
-func toggle_held_item(holding):
+func toggle_held_item(holding : Item):
 	if holding.holder_id != -1:
 		return
 	if holding == holding_item:
@@ -128,7 +127,7 @@ func drop_item():
 	targeted_item = holding_item
 	holding_item.rpc("update_holder_id",-1)
 	holding_item = null
-	
+
 func _physics_process(delta):
 	animate(delta)
 	if !is_multiplayer_authority():
@@ -152,9 +151,9 @@ func _physics_process(delta):
 	velocity_export = velocity
 	if snap_check_ray.is_colliding() and can_snap:
 		apply_floor_snap()
-	
+
 	camera.fov = clamp(camera.fov,10,70)
-	
+
 	# Merge into other identical check Maybe
 	if fully_actionable() and player_focus():
 		tilt -= mouse_delta.y * TURN_SPEED * delta
@@ -179,7 +178,7 @@ func _physics_process(delta):
 		camera.global_position.y = lerp(camera.global_position.y,camera_track2.get_collision_point().y+camera_track2.global_basis.y.y*3,delta*2)
 		if tilt <0:
 			camera.global_position.y = lerp(camera.global_position.y,camera_track.global_position.y,delta*2)
-		
+
 	else:
 		obstruction_zoom-=delta/4
 		camera.global_position = lerp(camera.global_position,camera_track.global_position,delta*7)
@@ -193,16 +192,16 @@ func _physics_process(delta):
 			if targeted_item is Item:
 				toggle_held_item(targeted_item)
 	if Input.is_action_just_pressed("interact"):
-		if targeted_item !=null:	
+		if targeted_item !=null:
 			if targeted_item is Interactable:
 				targeted_item.use(self)
 	if Input.is_action_just_pressed("drop"):
 		drop_item()
 		left_hand_ik.stop()
 		right_hand_ik.stop()
-		
+
 	mouse_delta = Vector2.ZERO
-	
+
 func _input(event: InputEvent) -> void:
 	if !is_multiplayer_authority():
 		return
@@ -212,7 +211,7 @@ func _input(event: InputEvent) -> void:
 
 func is_gliding():
 	gliding = false
-	if holding_item != null: 
+	if holding_item != null:
 			if holding_item.name_=="Glider" and !is_on_floor() and begun_falling > .15:
 				gliding = true
 				return true
@@ -222,7 +221,7 @@ func check_run():
 		player_move_force = run_force
 	else:
 		player_move_force = walk_force
-		
+
 func check_jump():
 	if Input.is_action_pressed("jump") and !jumping:
 		if !is_on_floor():
@@ -233,7 +232,7 @@ func check_jump():
 			2:
 				jump_index = 1
 		jump()
-		
+
 func jump():
 	jumping = true
 	await get_tree().create_timer(.1).timeout
@@ -243,13 +242,13 @@ func jump():
 	jumping = false
 
 func land():
-	print("land start "+str(land_power))	
+	print("land start "+str(land_power))
 	dive_bomb_momentum = 0
 	landing = true
 	await get_tree().create_timer(.005*land_power).timeout
 	land_power = 0
 	print("land end "+str(land_power))
-		
+
 func gravity(delta):
 	if !is_on_floor():
 		begun_falling+=delta
@@ -281,24 +280,24 @@ func rotate_to_normal():
 		var rotation_speed = 0
 		rotation_speed = (8-clamp(length,0,8))
 		#print(rotation_speed)
-		basis.y = lerp(basis.y,normal,GameManager.global_delta*rotation_speed*3) 
+		basis.y = lerp(basis.y,normal,GameManager.global_delta*rotation_speed*3)
 		basis.x = lerp(basis.x,-basis.z.cross(normal),GameManager.global_delta)
 		basis = basis.orthonormalized()
 		up_direction = normal
 		#apply_floor_snap()
 	else:
 		#print("not colliding")
-		flattening = true		
+		flattening = true
 		rotate_flatten()
 
 func rotate_flatten():
-		basis.y = lerp(basis.y,Vector3(0,1,0),GameManager.global_delta*30) 
+		basis.y = lerp(basis.y,Vector3(0,1,0),GameManager.global_delta*30)
 		basis.x = lerp(basis.x,-basis.z.cross(Vector3(0,1,0)),GameManager.global_delta*30)
 		basis = basis.orthonormalized()
 		up_direction = Vector3(0,1,0)
 
 func rotate_flatten_root_node():
-		$RootScene/RootNode.basis.y = lerp($RootScene/RootNode.basis.y,Vector3(0,1,0),GameManager.global_delta*30) 
+		$RootScene/RootNode.basis.y = lerp($RootScene/RootNode.basis.y,Vector3(0,1,0),GameManager.global_delta*30)
 		$RootScene/RootNode.basis.x = lerp($RootScene/RootNode.basis.x,-$RootScene/RootNode.basis.z.cross(Vector3(0,1,0)),GameManager.global_delta*30)
 		$RootScene/RootNode.basis = $RootScene/RootNode.basis.orthonormalized()
 		#up_direction = Vector3(0,1,0)
@@ -313,7 +312,7 @@ func move_inputs(delta):
 	var normal = (rotate_check_ray.get_collision_normal()+Vector3.UP).normalized()
 	var rotation_speed = 10
 	#print(rotation_speed)
-	camera.global_transform.basis.y = lerp(camera.global_transform.basis.y,camera_track.global_transform.basis.y,GameManager.global_delta*rotation_speed*3) 
+	camera.global_transform.basis.y = lerp(camera.global_transform.basis.y,camera_track.global_transform.basis.y,GameManager.global_delta*rotation_speed*3)
 	camera.global_transform.basis.x = lerp(camera.global_transform.basis.x,-camera.global_transform.basis.z.cross(camera_track.global_transform.basis.y),GameManager.global_delta*rotation_speed*3)
 	camera.basis = camera.basis.orthonormalized()
 	if Input.is_action_pressed("forward"):
@@ -335,7 +334,7 @@ func move_inputs(delta):
 		look_direction += Vector3.UP*tilt*4
 		look_direction = look_direction.normalized()
 		move_direction = move_direction.normalized()
-			
+
 	## rotate toward direction #############################
 	#rotate_to_normal()
 	var initial_rotation = $RootScene/RootNode.rotation
@@ -375,7 +374,7 @@ func move_inputs(delta):
 			velocity+=Vector3(stats.wind_vector.x,stats.wind_vector.y/4,stats.wind_vector.z)/125*delta
 	velocity.x = clamp(velocity.x,-MAX_SPEED,MAX_SPEED)
 	velocity.z = clamp(velocity.z,-MAX_SPEED,MAX_SPEED)
-		
+
 func player_focus():
 	match Input.get_mouse_mode():
 			Input.MOUSE_MODE_CAPTURED:
@@ -384,11 +383,11 @@ func player_focus():
 				return true
 			Input.MOUSE_MODE_VISIBLE:
 				return false
-	
+
 func fully_actionable():
 	if interacting == null:
 		return true
-	return false 
+	return false
 
 func animate(delta):
 	if holding_item != null:
@@ -440,8 +439,8 @@ func animate(delta):
 			$RootScene/AnimationPlayer.play("root|Jump"+str(jump_index),.5)
 			$RootScene/AnimationPlayer.speed_scale = 1
 			$RootScene/AnimationPlayer.seek(.5)
-	
- 
+
+
 func _on_interact_area_body_entered(body):
 	#print(body.name)
 	if body == holding_item:

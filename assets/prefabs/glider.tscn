@@ -1,10 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://om2lr6ft6tf6"]
 
-[ext_resource type="Script" path="res://scripts/item.gd" id="1_e214t"]
+[ext_resource type="Script" path="res://scripts/glider.gd" id="1_pjlit"]
 [ext_resource type="PackedScene" uid="uid://d21njgdpry27f" path="res://assets/prop_models/glider1.glb" id="2_kh5bu"]
-
-
-
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_tmec8"]
 friction = 0.3
@@ -29,7 +26,7 @@ collision_layer = 16
 mass = 0.1
 physics_material_override = SubResource("PhysicsMaterial_tmec8")
 continuous_cd = true
-script = ExtResource("1_e214t")
+script = ExtResource("1_pjlit")
 name_ = "Glider"
 
 [node name="glider1" parent="." instance=ExtResource("2_kh5bu")]

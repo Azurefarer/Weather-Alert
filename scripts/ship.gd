@@ -25,9 +25,9 @@ func _ready():
 	multiplayer.peer_disconnected.connect(del_player)
 
 	for id in multiplayer.get_peers():
-		add_player(id)	
+		add_player(id)
 	add_player(1)#host
-	
+
 func add_player(id: int):
 	var player =preload("res://assets/prefabs/player_character.tscn").instantiate()
 	player.name = str(id)
@@ -36,7 +36,7 @@ func add_player(id: int):
 	#player.global_position = Vector3(0,600,0)
 	#player.global_position = $StartingPositions.get_child(RandomNumberGenerator.new().randi_range(0,1)).global_position
 	$Scalar/Players.add_child(player)
-	
+
 func _exit_tree():
 	if not multiplayer.is_server():
 		return
@@ -45,7 +45,7 @@ func _exit_tree():
 
 func del_player(id: int):
 	if not $Players.has_node(str(id)):
-		return 
+		return
 	print ("deleted client player "+str(id)+"|system: "+str(multiplayer.get_unique_id()))
 	$Players.get_node(str(id)).queue_free()
 

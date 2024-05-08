@@ -24,31 +24,31 @@ func _ready():
 	multiplayer.connected_to_server.connect(_on_connected_ok)
 	$Main_UI/BG.material.set("shader_parameter/wave_time", RippleManager.ripple_time)
 
-	
+
 func port_map():
 	var upnp = UPNP.new()
-	
+
 	upnp.delete_port_mapping(9999,"UDP")
 	upnp.delete_port_mapping(9999,"TCP")
-	
+
 	var discover_result = upnp.discover()
-	
+
 	if discover_result == UPNP.UPNP_RESULT_SUCCESS:
 		if upnp.get_gateway() and upnp.get_gateway().is_valid_gateway():
-			
+
 			var map_result_udp = upnp.add_port_mapping(9999,9999,"godot_udp", "UDP", 0)
 			var map_result_tcp = upnp.add_port_mapping(9999,9999,"godot_tcp", "TCP", 0)
-			
+
 			if not map_result_udp == UPNP.UPNP_RESULT_SUCCESS:
 				upnp.add_port_mapping(9999,9999,"","UDP")
 			if not map_result_tcp == UPNP.UPNP_RESULT_SUCCESS:
 				upnp.add_port_mapping(9999,9999,"","TCP")
-	
+
 	external_ip = upnp.query_external_address()
-	
+
 	#upnp.delete_port_mapping(9999,"UDP")
 	#upnp.delete_port_mapping(9999,"TCP")
-	
+
 	#$UI/PublicIP.text = str(external_ip)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -67,14 +67,14 @@ func _on_debug_pressed():
 	#player.global_position = Vector3(0,600,0)
 	#player.global_position = $StartingPositions.get_child(RandomNumberGenerator.new().randi_range(0,1)).global_position
 	$Level/Test/Players.add_child(player)
-	
+
 func hide_ui():
 	$Main_UI.visible = false
 	$Stuff.queue_free()
-	
+
 func show_ui():
 	$Main_UI.visible = true
-	
+
 func change_level(scene :PackedScene):
 	await blackout()
 	print("called change level")
@@ -117,14 +117,14 @@ func _on_start_2_pressed():
 		peer.create_client(host_ip.text,9999)
 	multiplayer.multiplayer_peer = peer
 	#change_level("res://Assets/Scenes/World.tscn")
-	
+
 func _on_connected_ok():
 	GameManager.game_mode = "game"
 	hide_ui()
-	
+
 func blackout():
 	while $BlackOverlay.self_modulate.a<1:
-		$BlackOverlay.self_modulate.a+=GameManager.global_delta*3 
+		$BlackOverlay.self_modulate.a+=GameManager.global_delta*3
 		await get_tree().physics_frame
 
 func clear_black():
