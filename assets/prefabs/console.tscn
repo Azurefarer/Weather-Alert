@@ -2,8 +2,6 @@
 
 [ext_resource type="Script" path="res://scripts/console.gd" id="1_snvo6"]
 
-
-
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_hdw1r"]
 noise_type = 5
 seed = 240
@@ -41,20 +39,20 @@ uv1_triplanar = true
 [sub_resource type="QuadMesh" id="QuadMesh_hwwfx"]
 size = Vector2(0.215, 0.115)
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_sg68h"]
-viewport_path = NodePath("Scalar/Console/Monitor/SubViewport")
+[sub_resource type="ViewportTexture" id="ViewportTexture_eq3tj"]
+viewport_path = NodePath("Monitor/SubViewport")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i21er"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jsvt0"]
 resource_local_to_scene = true
-cull_mode = 2
-albedo_texture = SubResource("ViewportTexture_sg68h")
+cull_mode = 1
+shading_mode = 2
+diffuse_mode = 3
+specular_mode = 1
+albedo_color = Color(0.623529, 0.478431, 0, 1)
+albedo_texture = SubResource("ViewportTexture_eq3tj")
 emission_enabled = true
-emission = Color(0.321569, 1, 0.231373, 1)
-emission_energy_multiplier = 2.59
-emission_operator = 1
-emission_texture = SubResource("ViewportTexture_sg68h")
-uv1_scale = Vector3(0.695, 0.392, 4.004)
-uv1_offset = Vector3(2.125, 0.535, 0)
+emission_energy_multiplier = 4.77
+emission_texture = SubResource("ViewportTexture_eq3tj")
 
 [sub_resource type="Gradient" id="Gradient_ixhi1"]
 colors = PackedColorArray(0.244776, 0.244776, 0.244776, 1, 1, 1, 1, 1)
@@ -72,7 +70,7 @@ properties/0/replication_mode = 1
 size = Vector3(0.17, 0.199531, 0.152383)
 
 [node name="Console" type="CSGBox3D"]
-transform = Transform3D(0.475, 0, 0, 0, 0.411362, 0.2375, 0, -0.2375, 0.411362, 0, -0.062891, 0.704127)
+transform = Transform3D(6, 0, 0, 0, 5.19615, 3, 0, -3, 5.19615, 0, -0.062891, 0.704127)
 material_override = SubResource("StandardMaterial3D_qehri")
 use_collision = true
 size = Vector3(0.37, 0.130633, 0.178)
@@ -96,9 +94,9 @@ operation = 2
 size = Vector3(0.192, 0.0537305, 0.108)
 
 [node name="Monitor3" type="MeshInstance3D" parent="Monitor"]
-transform = Transform3D(-0.784999, 6.86268e-08, 3.43122e-07, -3.43122e-07, -3.77435e-07, -0.785, 6.86267e-08, 0.785, -3.77435e-07, 0.0038481, 0.0220001, 0.00152969)
+transform = Transform3D(-0.784999, 6.8627e-08, 2.99978e-15, 0, 3.43135e-08, -0.785, 6.86269e-08, 0.785, 3.43135e-08, -0.001, 0.022, 0.002)
 mesh = SubResource("QuadMesh_hwwfx")
-surface_material_override/0 = SubResource("StandardMaterial3D_i21er")
+surface_material_override/0 = SubResource("StandardMaterial3D_jsvt0")
 
 [node name="TextEdit" type="TextEdit" parent="Monitor"]
 visibility_layer = 4
@@ -107,8 +105,11 @@ offset_top = -235.0
 offset_right = 900.0
 offset_bottom = -105.0
 
-[node name="ConsoleText" type="Label3D" parent="Monitor"]
-transform = Transform3D(-0.92, 1.38916e-07, 6.07222e-15, 0, -4.02145e-08, 0.92, 1.38916e-07, 0.92, 4.02145e-08, 2.029, -2.171, 4.974)
+[node name="SubViewport" type="SubViewport" parent="Monitor"]
+size = Vector2i(1920, 1080)
+
+[node name="ConsoleText" type="Label3D" parent="Monitor/SubViewport"]
+transform = Transform3D(-8.54148, 1.28973e-06, 5.63758e-14, 1.28973e-06, 8.54147, 3.44419e-06, 4.63682e-13, 3.44419e-06, -8.54147, 18.8377, 47.0907, 20.9628)
 layers = 4
 texture_filter = 1
 modulate = Color(0.352941, 0.94902, 1, 1)
@@ -122,22 +123,20 @@ line_spacing = 8.4
 autowrap_mode = 1
 width = 859.51
 
-[node name="SubViewport" type="SubViewport" parent="Monitor"]
-size = Vector2i(1920, 1080)
-
-[node name="Camera3D" type="Camera3D" parent="Monitor/SubViewport"]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 696.566, 0)
-cull_mask = 4
-v_offset = -20.72
-projection = 1
-fov = 48.0
-size = 49.395
-
-[node name="BackLight" type="Sprite3D" parent="Monitor"]
-transform = Transform3D(-7.245, 6.15308e-07, 2.48829e-15, 0, -1.78124e-07, 0.377, 1.09396e-06, 4.075, 1.64792e-08, 0, -2.19293, 3.70748)
+[node name="BackLight" type="Sprite3D" parent="Monitor/SubViewport"]
+transform = Transform3D(-86.6218, 7.35706e-06, 2.97199e-14, 1.30795e-05, 48.7235, 1.81569e-06, 4.70235e-12, 1.96469e-05, -4.50284, 6.23663e-08, 35.745, 21.1664)
 layers = 4
 modulate = Color(0, 0.188235, 0.0823529, 1)
 texture = SubResource("GradientTexture2D_2xxc6")
+
+[node name="Camera3D" type="Camera3D" parent="Monitor/SubViewport"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 45.5649, 0)
+cull_mask = 4
+h_offset = 0.56
+v_offset = -8.78
+projection = 1
+fov = 48.0
+size = 24.835
 
 [node name="CSGBox3D4" type="CSGBox3D" parent="."]
 transform = Transform3D(0.415, 0, 0, 0, 0.415, 5.36442e-07, 0, -5.36442e-07, 0.415, 0, 0.0857697, -0.0576143)

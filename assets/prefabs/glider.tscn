@@ -3,10 +3,6 @@
 [ext_resource type="Script" path="res://scripts/item.gd" id="1_e214t"]
 [ext_resource type="PackedScene" uid="uid://d21njgdpry27f" path="res://assets/prop_models/glider1.glb" id="2_kh5bu"]
 
-
-
-
-
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_tmec8"]
 friction = 0.3
 bounce = 0.06

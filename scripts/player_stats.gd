@@ -2,6 +2,9 @@
 extends Stats
 
 var flags := {}
+var wind_vector_mph : float
+@export var fast_wind_sfx : AudioStreamPlayer
+@export var breeze_sfx : AudioStreamPlayer
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -14,6 +17,8 @@ func _ready():
 	experienced_temperature = 50
 	experienced_pressure = 15
 	experienced_humidity = 50
+	fast_wind_sfx.play()
+	breeze_sfx.play()
 
 func initialize_flags():
 	flags["outside_check_morning"] = false
@@ -22,20 +27,28 @@ func initialize_flags():
 
 func outside_check():
 	if GameManager.weather_manager.time_of_day < 250 and flags["outside_check_morning"] == false:
-		SoundManager.play_sound("res://assets/sounds/melodies/day_break.mp3",-15,1,0,30)
+		SoundManager.play_sound("res://assets/sounds/melodies/day_break.mp3",-5,1,0,30)
 		flags["outside_check_morning"] = true
 	elif GameManager.weather_manager.time_of_day >= 250 and GameManager.weather_manager.time_of_day < 500 and flags["outside_check_afternoon"] == false:
-		SoundManager.play_sound("res://assets/sounds/melodies/mid_day.mp3",-15,1,0,30)
+		SoundManager.play_sound("res://assets/sounds/melodies/mid_day.mp3",-5,1,0,30)
 		flags["outside_check_afternoon"] = true
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	pass
-	#if !is_multiplayer_authority():
-	#	return
-	#print("looking")
+	environmental_sound_mixing(delta)
 
-
+func environmental_sound_mixing(delta):
+	if wind_vector_mph > 20:
+		fast_wind_sfx.volume_db = lerp(fast_wind_sfx.volume_db,-15+wind_vector_mph/2,delta)
+		fast_wind_sfx.pitch_scale = lerp(fast_wind_sfx.pitch_scale,.8+wind_vector_mph/70,delta)
+	else:
+		fast_wind_sfx.volume_db = lerp(fast_wind_sfx.volume_db,-80.0,delta/2)
+	if wind_vector_mph >5 and wind_vector_mph <=20:
+		breeze_sfx.volume_db = lerp(breeze_sfx.volume_db,-15+wind_vector_mph/2,delta)
+		breeze_sfx.pitch_scale = lerp(breeze_sfx.pitch_scale,.8+wind_vector_mph/70,delta)
+	else:
+		fast_wind_sfx.volume_db = lerp(fast_wind_sfx.volume_db,-80.0,delta/2)
+		
 func _on_update_timer_timeout():
 	update()
 
@@ -52,6 +65,7 @@ func update():
 				wind_vector+= GameManager.get_vector_from_pressure_difference(area,experienced_pressure,get_parent().global_position)
 			wind_vector = wind_vector/GameManager.weather_areas.size()*3
 			wind_vector.y = wind_vector.y/2
+			wind_vector_mph = wind_vector.length()/200
 			await get_tree().process_frame
 			#print("wind vector:"+str(wind_vector))
 	var world_temperature_offset = 0

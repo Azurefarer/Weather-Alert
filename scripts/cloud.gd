@@ -4,6 +4,7 @@ extends Stats
 var velocity: Vector3
 @export var drop_emitter: GPUParticles3D
 @export var cloud_emitter: GPUParticles3D
+@export var rain_sfx: AudioStreamPlayer3D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -23,7 +24,9 @@ func _on_update_timer_timeout():
 func update():
 	if experienced_humidity>=60:
 		drop_emitter.emitting = true
+		rain_sfx.volume_db = lerp(rain_sfx.volume_db,0.0,GameManager.global_delta)
 	else:
+		rain_sfx.volume_db = lerp(rain_sfx.volume_db,-80.0,GameManager.global_delta/2)
 		drop_emitter.emitting = false
 	if !is_multiplayer_authority():
 		return

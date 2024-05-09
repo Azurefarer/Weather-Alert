@@ -18,6 +18,8 @@ var rng = RandomNumberGenerator.new()
 @export var world_temperature: float
 @export var world_pressure: float
 @export var world_humidity: float
+@export var air_quality_index: float
+@export var water_quality_index: float
 @export var wind_arrow_camera: Camera3D
 @export var wind_arrow: Node3D
 
@@ -29,6 +31,8 @@ func _ready():
 		await get_tree().physics_frame
 	update()
 	if is_multiplayer_authority():
+		air_quality_index = 500
+		water_quality_index = 10
 		initialize_day()
 		igmPERrs = float(SIMULATED_DAY_LENGTH)/float(DAY_LENGTH)
 
