@@ -13,7 +13,6 @@ extends NPC
 @export var nav_check_ray: RayCast3D
 @export var head: BoneAttachment3D
 
-
 func _ready():
 	if !is_multiplayer_authority():
 		return

@@ -11,7 +11,6 @@ const DRAG = 10
 var run_force : float = 7000.0 # In newtons
 var walk_force : float = 3500.0 # In newtons
 var player_move_force : float
-
 var mouse_delta: Vector2
 var move_direction = Vector3.ZERO
 var flattening = false
