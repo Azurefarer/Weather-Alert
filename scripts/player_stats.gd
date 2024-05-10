@@ -2,11 +2,13 @@ extends Stats
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	mass = 70.0
 	if !is_multiplayer_authority():
 		return
 	GameManager.player_stats = self
 	while GameManager.weather_manager == null:
 		await get_tree().physics_frame
+	get_parent().mass = mass
 	experienced_temperature = 50
 	experienced_pressure = 15
 	experienced_humidity = 50

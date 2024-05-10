@@ -1,39 +1,60 @@
 class_name PlayerCharacter extends CharacterBody3D
 
+## Constants
 const MOVE_SPEED = 10
 const MAX_SPEED = 200
 const FALL_SPEED = 200
 const TURN_SPEED = 1
 const DRAG = 10
+
+## Stats
+@export var stats: Node
+
+## Jumping
 @export var jump_index = 1
-@export var gliding: bool
-@export var velocity_export: Vector3
+var jumping = false
+
+## Direction
+var mouse_delta: Vector2
+var move_direction = Vector3.ZERO
+
+## Ground
 var run_force : float = 7000.0 # In newtons
 var walk_force : float = 3500.0 # In newtons
 var player_move_force : float
-var mouse_delta: Vector2
-var move_direction = Vector3.ZERO
-var flattening = false
+
+## Air
+@export var gliding: bool
+var dive_bomb_momentum:= 0.0
+var flight_angle: float
+var flight_speed: float
 var begun_falling = 0.0
+
+## Collision
+@export var land_power = 0
+var flattening = false
+var can_snap = false
+var landing = false
+
+## Camera
 @export var camera: Camera3D
 @export var camera_track: RayCast3D
 @export var camera_track2: RayCast3D
-@export var stats: Node
-var can_snap = false
-var jumping = false
-var flight_angle: float
-var flight_speed: float
-var landing = false
+var tilt = -.6
+var obstruction_zoom: float
+
+## Items
 var holding_item : Item = null
 var interacting = null
-@export var land_power = 0
+var targeted_item: Node3D
+
+## RayCasts
 @export var rotate_check_ray: RayCast3D
 @export var ceil_check_ray: RayCast3D
 @export var floor_check_ray: RayCast3D
 @export var snap_check_ray: RayCast3D
-var tilt = -.6
-var obstruction_zoom: float
-var targeted_item: Node3D
+
+## Skeleton IK & bones
 @export var left_hand_ik: SkeletonIK3D
 @export var right_hand_ik: SkeletonIK3D
 @export var left_hand_ik_active_target: Node3D
@@ -50,7 +71,9 @@ var targeted_item: Node3D
 @export var right_hand_physics_bone: PhysicalBone3D
 @export var root_physics_bone: PhysicalBone3D
 @export var right_hand_bone_attach: BoneAttachment3D
-var dive_bomb_momentum:= 0.0
+
+## Multiplayer
+@export var velocity_export: Vector3
 
 func _enter_tree():
 	set_multiplayer_authority(name.to_int())
@@ -78,6 +101,7 @@ func _ready():
 	camera_track.global_position.y = 4+ global_position.y-tilt*5
 	camera.global_position = lerp(camera.global_position,camera_track.global_position,1)
 	GameManager.main.clear_black()
+	mass = stats.mass
 	#while GameManager.stage == null:
 	#	global_position = Vector3(280,115,-153)
 	#	await get_tree().physics_frame
@@ -372,7 +396,7 @@ func move_inputs(delta):
 	####################velocity movement determine####################################
 	if !is_gliding():
 		# normalized direction * F/m * dt (we handle drag in physics process)
-		velocity += move_direction*player_move_force/stats.mass*delta
+		velocity += move_direction*player_move_force/mass*delta
 	else:
 		velocity = velocity.lerp(move_direction.normalized()*delta*50 +Vector3(move_direction.normalized().x,move_direction.normalized().y/2,move_direction.normalized().z)*dive_bomb_momentum*delta*180,delta*5)
 		if flight_angle>0:
