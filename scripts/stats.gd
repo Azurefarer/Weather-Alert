@@ -1,11 +1,11 @@
 class_name Stats extends Node
 
-var weather_modifiers: Array
-var experienced_temperature: float
-var experienced_pressure: float
-var experienced_humidity: float
-var wind_vector: Vector3
-var mass:= 70
+var weather_modifiers : Array
+var experienced_temperature : float
+var experienced_pressure : float
+var experienced_humidity : float
+var wind_vector : Vector3
+var mass : float
 
 
 # Called when the node enters the scene tree for the first time.
