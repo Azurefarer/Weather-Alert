@@ -98,27 +98,39 @@ func toggle_held_item(holding : Item):
 	holding.rpc("update_holder_id",name.to_int())
 	match holding.name_:
 		"":
-			left_hand_ik.stop()
-			right_hand_ik.stop()
-			return
+			null_hold()
 		"Umbrella":
-			left_hand_ik_active_target.transform = umbrella_hang_ik_pos_left.transform
-			left_hand_ik.start()
-			right_hand_ik_active_target.transform = umbrella_hang_ik_pos_right.transform
-			right_hand_ik.start()
+			umbrella_hold()
 		"FireExtinguisher":
-			left_hand_ik_active_target.transform = fire_extinguisher_ik_pos_left.transform
-			left_hand_ik.start()
-			right_hand_ik_active_target.transform = fire_extinguisher_ik_pos_right.transform
-			right_hand_ik.start()
+			fire_extinguisher_hold()
 		"Glider":
-			left_hand_ik_active_target.transform = glider_ik_pos_left.transform
-			left_hand_ik.start()
-			right_hand_ik_active_target.transform = glider_ik_pos_right.transform
-			right_hand_ik.start()
+			glider_hold()
 	holding.global_position = right_hand_ik_active_target.global_position-$RootScene.basis.x*.25
 	#holding_item.reparent(right_hand_ik_active_target)
 	holding.global_rotation = $RootScene.global_rotation
+
+func null_hold():
+	left_hand_ik.stop()
+	right_hand_ik.stop()
+	return
+
+func umbrella_hold():
+	left_hand_ik_active_target.transform = umbrella_hang_ik_pos_left.transform
+	left_hand_ik.start()
+	right_hand_ik_active_target.transform = umbrella_hang_ik_pos_right.transform
+	right_hand_ik.start()
+
+func fire_extinguisher_hold():
+	left_hand_ik_active_target.transform = fire_extinguisher_ik_pos_left.transform
+	left_hand_ik.start()
+	right_hand_ik_active_target.transform = fire_extinguisher_ik_pos_right.transform
+	right_hand_ik.start()
+
+func glider_hold():
+	left_hand_ik_active_target.transform = glider_ik_pos_left.transform
+	left_hand_ik.start()
+	right_hand_ik_active_target.transform = glider_ik_pos_right.transform
+	right_hand_ik.start()
 
 func drop_item():
 	if holding_item == null:
