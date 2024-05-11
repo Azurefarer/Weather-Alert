@@ -13,7 +13,7 @@ func _ready():
 
 
 func _process(delta):
-	velocity= velocity.lerp(wind_vector,delta/5)
+	velocity = velocity.lerp(wind_vector,delta/5)
 	#print("velocity:"+str(velocity))
 	get_parent().global_position += velocity*delta/30
 
@@ -27,13 +27,13 @@ func update():
 		drop_emitter.emitting = false
 	if !is_multiplayer_authority():
 		return
-	if GameManager.weather_areas.size()>0:
+	if WeatherManager.weather_areas.size()>0:
 		wind_vector = Vector3.ZERO
 		if true:
-			for area in GameManager.weather_areas:
+			for area in WeatherManager.weather_areas:
 				#await get_tree().physics_frame
 				wind_vector+= GameManager.get_vector_from_pressure_difference(area,experienced_pressure,get_parent().global_position)
-			wind_vector = wind_vector/GameManager.weather_areas.size()*3
+			wind_vector = wind_vector/WeatherManager.weather_areas.size()*3
 			wind_vector.y = wind_vector.y/2
 			#print(wind_vector)
 			await get_tree().process_frame
@@ -55,11 +55,11 @@ func update():
 		await get_tree().process_frame
 		world_humidty_offset = world_humidty_offset/weather_modifiers.size()
 	await get_tree().process_frame
-	experienced_temperature = lerp(experienced_temperature,GameManager.weather_manager.world_temperature+world_temperature_offset,GameManager.global_delta*10)
+	experienced_temperature = lerp(experienced_temperature,WeatherManager.world_temperature+world_temperature_offset,GameManager.global_delta*10)
 	await get_tree().process_frame
-	experienced_pressure = lerp(experienced_pressure,GameManager.weather_manager.world_pressure+world_pressure_offset,GameManager.global_delta*3)
+	experienced_pressure = lerp(experienced_pressure,WeatherManager.world_pressure+world_pressure_offset,GameManager.global_delta*3)
 	await get_tree().process_frame
-	experienced_humidity = lerp(experienced_humidity,GameManager.weather_manager.world_humidity+world_humidty_offset,GameManager.global_delta*3)
+	experienced_humidity = lerp(experienced_humidity,WeatherManager.world_humidity+world_humidty_offset,GameManager.global_delta*3)
 
 
 func _on_reposition_timer_timeout():

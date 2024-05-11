@@ -59,7 +59,7 @@ func check_timer(timer : Timer) -> void:
 		wave_timer.pop_at(wave_timer.find(timer))
 		timer.free()
 		decrease_num_inst()
-		
+
 func update_time_elapsed(timer : Timer, index : int) -> void:
 	if BG != null:
 		var time_left : float = timer.get_wait_time() - timer.get_time_left()
@@ -67,7 +67,7 @@ func update_time_elapsed(timer : Timer, index : int) -> void:
 		time_elapsed[index] = time_left
 		# Send data to GPU
 		BG.material.set("shader_parameter/time_since_hover", time_elapsed)
-		
+
 func inst_ripple(pos : Vector2) -> void:
 	# Init timer OBJ
 	var timer = Timer.new()
@@ -79,7 +79,7 @@ func inst_ripple(pos : Vector2) -> void:
 	wave_timer.append(timer)
 	wave_position.append(pos)
 	increase_num_inst()
-	
+
 func inst_ripple_click(pos : Vector2) -> void:
 	# Init timer OBJ
 	var timer = Timer.new()
@@ -91,14 +91,14 @@ func inst_ripple_click(pos : Vector2) -> void:
 	wave_timer.append(timer)
 	wave_position.append(pos)
 	increase_num_inst()
-	
+
 # TODO: make it so that ripples dont clutter the screen so much.
 # Shorten time left on existing timers or speed up their countdown.
 
 func decrease_num_inst() -> void:
 	num_inst -= 1
 	BG.material.set("shader_parameter/num_inst", num_inst)
-	
+
 func increase_num_inst() -> void:
 	num_inst += 1
 	BG.material.set("shader_parameter/num_inst", num_inst)

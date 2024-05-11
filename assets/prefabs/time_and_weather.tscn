@@ -3,8 +3,7 @@
 [ext_resource type="Script" path="res://scripts/time_and_weather_.gd" id="1_2u5ir"]
 [ext_resource type="FontFile" uid="uid://bsegnh8v4qc3c" path="res://assets/fonts/GmarketSansTTFBold.ttf" id="2_hnkd1"]
 [ext_resource type="Texture2D" uid="uid://bkclt7ey5akgu" path="res://assets/etc_images/clouds_pnd_clipart-870.png" id="3_e2dc0"]
-[ext_resource type="Script" path="res://scripts/rotate.gd" id="4_kmdi6"]
-
+[ext_resource type="Script" path="res://scripts/orb_rotate.gd" id="4_8lg3t"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_yavjt"]
 properties/0/path = NodePath(".:world_temperature")
@@ -207,7 +206,7 @@ layers = 2
 material_override = SubResource("StandardMaterial3D_nrb20")
 radius = 0.191438
 radial_segments = 24
-script = ExtResource("4_kmdi6")
+script = ExtResource("4_8lg3t")
 
 [node name="SpotLight3D" type="SpotLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -0.761776, 0.647841, 0, -0.647841, -0.761776, 0, 1.1418, -2.91701)

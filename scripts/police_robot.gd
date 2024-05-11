@@ -40,7 +40,7 @@ func _physics_process(delta):
 			probe.rotate(probe.basis.x,2*PI)
 			velocity = velocity.lerp(Vector3(0,velocity.y,0),delta*15)
 			#print(velocity)
-	elif GameManager.weather_manager.time_of_day>power_on_time:
+	elif WeatherManager.time_of_day>power_on_time:
 		powered_on = true
 
 	# Add the gravity.

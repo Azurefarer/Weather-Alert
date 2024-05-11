@@ -20,14 +20,13 @@ var ship: Node3D
 func _ready():
 	pass # Replace with function body.
 
-
-func get_vector_from_pressure_difference(area,experienced_pressure,current_pos):
-	var total_pressure_in_area = area.pressure_psi+GameManager.weather_manager.world_pressure
-	var base_directional_vector = (area.get_child(0).global_position - current_pos).normalized()
-	var base_directional_length = (area.get_child(0).global_position - current_pos).length()
-	var accounted_directional_vector = base_directional_vector*(4000 -clamp(base_directional_length,0,4000))
-	var pressure_difference = total_pressure_in_area-experienced_pressure
-	return (accounted_directional_vector)*-pressure_difference
+#func get_vector_from_pressure_difference(area,experienced_pressure,current_pos):
+	#var total_pressure_in_area = area.pressure_psi+GameManager.weather_manager.world_pressure
+	#var base_directional_vector = (area.get_child(0).global_position - current_pos).normalized()
+	#var base_directional_length = (area.get_child(0).global_position - current_pos).length()
+	#var accounted_directional_vector = base_directional_vector*(4000 -clamp(base_directional_length,0,4000))
+	#var pressure_difference = total_pressure_in_area-experienced_pressure
+	#return (accounted_directional_vector)*-pressure_difference
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
