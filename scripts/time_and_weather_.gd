@@ -51,10 +51,10 @@ func _process(delta):
 		simulated_time_of_day+=delta*igmPERrs
 		if time_of_day>720:
 			initialize_day()
-	
+
 	if GameManager.player_stats == null:
 		return
-	
+
 func initialize_day():
 	current_day +=1
 	time_of_day = 0

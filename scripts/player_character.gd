@@ -395,7 +395,7 @@ func move_inputs(delta):
 	####################velocity movement determine####################################
 	if !is_gliding():
 		# normalized direction * F/m * dt (we handle drag in physics process)
-		velocity += move_direction*player_move_force/mass*delta
+		velocity += move_direction*player_move_force/stats.mass*delta
 	else:
 		velocity = velocity.lerp(move_direction.normalized()*delta*50 +Vector3(move_direction.normalized().x,move_direction.normalized().y/2,move_direction.normalized().z)*dive_bomb_momentum*delta*180,delta*5)
 		if flight_angle>0:
