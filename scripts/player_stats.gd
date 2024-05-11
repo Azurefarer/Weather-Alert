@@ -1,3 +1,5 @@
+## Interface for querying player stats
+
 extends Stats
 
 # Called when the node enters the scene tree for the first time.

@@ -101,7 +101,6 @@ func _ready():
 	camera_track.global_position.y = 4+ global_position.y-tilt*5
 	camera.global_position = lerp(camera.global_position,camera_track.global_position,1)
 	GameManager.main.clear_black()
-	mass = stats.mass
 	#while GameManager.stage == null:
 	#	global_position = Vector3(280,115,-153)
 	#	await get_tree().physics_frame
