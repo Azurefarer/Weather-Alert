@@ -8,6 +8,7 @@ var wind_vector_mph : float
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	current_hp = MAX_HP
 	if !is_multiplayer_authority():
 		return
 	initialize_flags()
@@ -39,12 +40,12 @@ func _process(delta):
 
 func environmental_sound_mixing(delta):
 	if wind_vector_mph > 20:
-		fast_wind_sfx.volume_db = lerp(fast_wind_sfx.volume_db,-15+wind_vector_mph/2,delta)
+		fast_wind_sfx.volume_db = lerp(fast_wind_sfx.volume_db,-25+wind_vector_mph/2,delta)
 		fast_wind_sfx.pitch_scale = lerp(fast_wind_sfx.pitch_scale,.8+wind_vector_mph/70,delta)
 	else:
 		fast_wind_sfx.volume_db = lerp(fast_wind_sfx.volume_db,-80.0,delta/2)
 	if wind_vector_mph >5 and wind_vector_mph <=20:
-		breeze_sfx.volume_db = lerp(breeze_sfx.volume_db,-15+wind_vector_mph/2,delta)
+		breeze_sfx.volume_db = lerp(breeze_sfx.volume_db,-25+wind_vector_mph/2,delta)
 		breeze_sfx.pitch_scale = lerp(breeze_sfx.pitch_scale,.8+wind_vector_mph/70,delta)
 	else:
 		fast_wind_sfx.volume_db = lerp(fast_wind_sfx.volume_db,-80.0,delta/2)
@@ -93,4 +94,4 @@ func update():
 
 
 func _on_area_3d_body_entered(body):
-	SoundManager.play_sound_3d("res://assets/sounds/sfx/player/footstep"+str(GameManager.rng.randi_range(1,3))+".mp3",-3,1,.2,3,get_parent().global_position)
+	SoundManager.play_sound_3d("res://assets/sounds/sfx/player/footstep"+str(GameManager.rng.randi_range(1,3))+".mp3",-12,1,.2,3,20,get_parent().global_position)

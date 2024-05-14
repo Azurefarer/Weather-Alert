@@ -19,7 +19,8 @@ func play_sound(path, volume, pitch, pitch_range, duration):
 	get_node("/root").remove_child(this_sound)
 	this_sound.queue_free()
 	
-func play_sound_3d(path, volume, pitch, pitch_range, duration, pos):
+@rpc("any_peer","call_local","reliable")
+func play_sound_3d(path, volume, pitch, pitch_range, duration, audible_distance, pos):
 	var this_sound = load(audio_stream_3d_path).instantiate()
 	get_node("/root").add_child(this_sound)
 	this_sound.volume_db = float(volume)
@@ -28,6 +29,8 @@ func play_sound_3d(path, volume, pitch, pitch_range, duration, pos):
 	this_sound.pitch_scale = final_pitch
 	this_sound.stream = load(path)
 	this_sound.global_position = pos
+	this_sound.unit_size = 3.0
+	this_sound.max_distance = audible_distance
 	this_sound.play()
 	var t = 0
 	while(t<duration):

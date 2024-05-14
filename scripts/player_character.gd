@@ -176,7 +176,7 @@ func _physics_process(delta):
 		obstruction_zoom-=delta/4
 		camera.global_position.x = lerp(camera.global_position.x,camera_track.global_position.x,delta*4)
 		camera.global_position.z = lerp(camera.global_position.z,camera_track.global_position.z,delta*4)
-		camera.global_position.y = lerp(camera.global_position.y,camera_track2.get_collision_point().y+camera_track2.global_basis.y.y*3,delta*2)
+		camera.global_position.y = lerp(camera.global_position.y,camera_track2.get_collision_point().y+3,delta*2)
 		if tilt <0:
 			camera.global_position.y = lerp(camera.global_position.y,camera_track.global_position.y,delta*2)
 		
@@ -251,7 +251,7 @@ func land():
 	print("land end "+str(land_power))
 		
 func gravity(delta):
-	if !is_on_floor():
+	if !is_on_floor() and !floor_check_ray.is_colliding():
 		begun_falling+=delta
 		land_power = abs(velocity.y)
 		landing = false
@@ -370,7 +370,8 @@ func move_inputs(delta):
 		velocity+=stats.wind_vector/110*delta
 		velocity.y+=stats.wind_vector.y/110*delta
 	if !is_on_floor():
-		print(dive_bomb_momentum)
+		pass
+		#print(dive_bomb_momentum)
 		if !is_gliding():
 			velocity+=Vector3(stats.wind_vector.x,stats.wind_vector.y/4,stats.wind_vector.z)/125*delta
 	velocity.x = clamp(velocity.x,-MAX_SPEED,MAX_SPEED)

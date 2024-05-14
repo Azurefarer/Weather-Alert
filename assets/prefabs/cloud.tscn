@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://bxrcqefybf0mx"]
+[gd_scene load_steps=23 format=3 uid="uid://bxrcqefybf0mx"]
 
 [ext_resource type="Script" path="res://scripts/cloud.gd" id="1_ivh7q"]
 [ext_resource type="AudioStream" uid="uid://cy2gih1hwpkkf" path="res://assets/sounds/sfx/environment/rain.mp3" id="2_g6yme"]
@@ -6,6 +6,40 @@
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_wmad1"]
 height = 3864.89
 radius = 276.363
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_t358x"]
+lifetime_randomness = 0.36
+direction = Vector3(10, 20, 10)
+spread = 180.0
+initial_velocity_min = 5.5
+initial_velocity_max = 13.8
+gravity = Vector3(0, -3.9, 0)
+damping_max = 7.233
+scale_min = 7.4
+scale_max = 18.1
+
+[sub_resource type="Gradient" id="Gradient_1eat8"]
+colors = PackedColorArray(0.150753, 0.385058, 1, 1, 0, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_8btou"]
+gradient = SubResource("Gradient_1eat8")
+fill_from = Vector2(0, 1)
+fill_to = Vector2(0, 0)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jis4b"]
+transparency = 1
+cull_mode = 2
+shading_mode = 0
+diffuse_mode = 3
+specular_mode = 2
+albedo_texture = SubResource("GradientTexture2D_8btou")
+billboard_mode = 1
+billboard_keep_scale = true
+distance_fade_max_distance = 0.0
+
+[sub_resource type="QuadMesh" id="QuadMesh_auts7"]
+material = SubResource("StandardMaterial3D_jis4b")
+size = Vector2(0.03, 0.03)
 
 [sub_resource type="Curve" id="Curve_605xl"]
 _data = [Vector2(0, 0.275221), 0.0, 0.0, 0, 0, Vector2(0.182243, 0.378761), 0.0, 0.0, 0, 0, Vector2(0.28972, 0.269469), 0.0, 0.0, 0, 0, Vector2(0.397196, 0.442035), 0.0, 0.0, 0, 0, Vector2(0.490654, 0.234956), 0.0, 0.0, 0, 0, Vector2(0.619159, 0.430531), 0.0, 0.0, 0, 0, Vector2(0.714953, 0.292478), 0.0, 0.0, 0, 0, Vector2(0.841121, 0.465044), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -24,16 +58,12 @@ gravity = Vector3(0, -21.48, 0)
 scale_min = 5.55
 scale_max = 32.3
 scale_curve = SubResource("CurveTexture_e2uu3")
+collision_mode = 2
+collision_use_scale = true
+sub_emitter_mode = 3
+sub_emitter_amount_at_collision = 3
 
-[sub_resource type="Gradient" id="Gradient_1eat8"]
-colors = PackedColorArray(0.150753, 0.385058, 1, 1, 0, 1, 1, 0)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_8btou"]
-gradient = SubResource("Gradient_1eat8")
-fill_from = Vector2(0, 1)
-fill_to = Vector2(0, 0)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jis4b"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_joa1d"]
 transparency = 1
 shading_mode = 0
 diffuse_mode = 3
@@ -43,8 +73,8 @@ billboard_mode = 2
 billboard_keep_scale = true
 distance_fade_max_distance = 0.0
 
-[sub_resource type="QuadMesh" id="QuadMesh_auts7"]
-material = SubResource("StandardMaterial3D_jis4b")
+[sub_resource type="QuadMesh" id="QuadMesh_s3s22"]
+material = SubResource("StandardMaterial3D_joa1d")
 size = Vector2(0.015, 0.5)
 
 [sub_resource type="Curve" id="Curve_f10ub"]
@@ -169,6 +199,16 @@ drop_emitter = NodePath("../DropEmitter")
 cloud_emitter = NodePath("../CloudEmitter")
 rain_sfx = NodePath("../Rain")
 
+[node name="SplashEmitter" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -745.093, 0)
+extra_cull_margin = 1500.0
+amount = 320000
+lifetime = 0.27
+speed_scale = 0.99
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_t358x")
+draw_pass_1 = SubResource("QuadMesh_auts7")
+
 [node name="DropEmitter" type="GPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 126.869, 0)
 extra_cull_margin = 1500.0
@@ -176,11 +216,13 @@ visibility_range_end = 3000.0
 visibility_range_end_margin = 500.0
 visibility_range_fade_mode = 1
 amount = 320000
+sub_emitter = NodePath("../SplashEmitter")
 lifetime = 40.55
-speed_scale = 1.5
+speed_scale = 0.85
 fixed_fps = 60
+collision_base_size = 0.4
 process_material = SubResource("ParticleProcessMaterial_2yijd")
-draw_pass_1 = SubResource("QuadMesh_auts7")
+draw_pass_1 = SubResource("QuadMesh_s3s22")
 
 [node name="CloudEmitter" type="GPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.86729, 126.869, -1.37439)
@@ -230,6 +272,7 @@ stream = ExtResource("2_g6yme")
 volume_db = -80.0
 unit_size = 82.36
 autoplay = true
+max_distance = 680.05
 
 [connection signal="timeout" from="UpdateTimer" to="Stats" method="_on_update_timer_timeout"]
 [connection signal="timeout" from="RepositionTimer" to="Stats" method="_on_reposition_timer_timeout"]

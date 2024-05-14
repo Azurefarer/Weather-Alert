@@ -120,6 +120,16 @@ return={
 3d/default_cell_height=0.5
 3d/default_edge_connection_margin=1.0
 
+[physics]
+
+3d/run_on_separate_thread=true
+common/max_physics_steps_per_frame=4
+
 [rendering]
 
+textures/canvas_textures/default_texture_filter=2
+global_illumination/gi/use_half_resolution=true
+shading/overrides/force_vertex_shading=true
+anti_aliasing/screen_space_roughness_limiter/enabled=false
 scaling_3d/scale=0.5
+environment/glow/upscale_mode=0

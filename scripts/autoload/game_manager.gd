@@ -80,10 +80,11 @@ func transition_camera(camera1,camera2):
 	camera1.fov = origin_fov
 		
 @rpc("any_peer","call_local","reliable")
-func shoot(path,pos,velocity):
+func shoot(path,pos,velocity,basisX):
 	var instance = load(path).instantiate()
 	get_node("/root").add_child(instance)
 	instance.global_position = pos
-	instance.global_basis.y = velocity
-	instance.linear_velocity = velocity
+	instance.global_basis.y = velocity.normalized()
+	instance.global_basis.x = basisX.normalized()
+	instance.linear_velocity = velocity*50
 	

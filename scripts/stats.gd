@@ -8,6 +8,11 @@ var experienced_humidity: float
 var wind_vector: Vector3
 var mass:= 70
 
+@export var MAX_HP: int
+var current_hp: int
+@export var MAX_STAM: float
+var current_stam: float
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -23,6 +28,18 @@ func _process(delta):
 	#	return
 	#print("looking")
 
+@rpc("any_peer","reliable","call_local")
+func damaged(damage,blast):
+	if !is_multiplayer_authority():
+		return
+	current_hp-=damage
+	get_parent().velocity = blast
+	if current_hp<0:
+		die()
+
+func die():
+	current_hp = MAX_HP
+	get_parent().global_position = get_parent().get_parent().global_position
 
 func _on_update_timer_timeout():
 	update()

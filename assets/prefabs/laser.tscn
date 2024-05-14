@@ -1,15 +1,48 @@
-[gd_scene load_steps=2 format=3 uid="uid://8ewlxldq28hr"]
+[gd_scene load_steps=5 format=3 uid="uid://8ewlxldq28hr"]
 
 [ext_resource type="Script" path="res://scripts/projectile.gd" id="1_6hyro"]
+[ext_resource type="AudioStream" uid="uid://mn0fqe4wgg6x" path="res://assets/sounds/sfx/police_mech_1/fire_laser.mp3" id="2_qft0r"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ay7ai"]
+transparency = 1
+blend_mode = 1
+shading_mode = 2
+albedo_color = Color(0.905882, 0, 0.211765, 1)
+emission_enabled = true
+emission = Color(0.905882, 0, 0.211765, 1)
+emission_energy_multiplier = 3.0
 
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_kbwab"]
+radius = 0.035
+height = 0.85
 
 [node name="Laser" type="RigidBody3D"]
-gravity_scale = 0.1
+collision_layer = 0
+collision_mask = 524289
+gravity_scale = 0.0
+custom_integrator = true
+continuous_cd = true
+max_contacts_reported = 10
+contact_monitor = true
 script = ExtResource("1_6hyro")
+damage = 10
+lifetime = 10.0
+knockback = 100
 
 [node name="CSGCylinder3D" type="CSGCylinder3D" parent="."]
-radius = 0.00492734
-height = 0.262902
+material_override = SubResource("StandardMaterial3D_ay7ai")
+radius = 0.033
+height = 0.853
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_kbwab")
+
+[node name="Sound" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.41306, 0)
+stream = ExtResource("2_qft0r")
+volume_db = -7.0
+unit_size = 3.74
+autoplay = true
+max_distance = 23.85
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

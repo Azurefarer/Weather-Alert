@@ -11,10 +11,22 @@ const JUMP_VELOCITY = 4.5
 @export var ceil_check_ray: RayCast3D
 @export var nav: NavigationAgent3D
 @onready var stats: Node = $Stats
+var direction: Vector3
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
+func look_at_target(delta):
+	var original_rotation = global_rotation
+	var look_to = (global_position-direction.normalized()*100)
+	look_to.y = global_position.y
+	if (look_to - global_position).length() > 1:
+		look_at(look_to)
+	var target_rotation = global_rotation
+	global_rotation = original_rotation
+	global_rotation.y = lerp_angle(global_rotation.y,target_rotation.y,delta*1)
+	global_rotation.x = lerp_angle(global_rotation.x,target_rotation.x,delta*1)
+	global_rotation.z = lerp_angle(global_rotation.z,0,delta*14)
 
 func _physics_process(delta):
 	navigation_path(delta)

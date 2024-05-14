@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://cr3o673h8ofgo"]
+[gd_scene load_steps=14 format=3 uid="uid://cr3o673h8ofgo"]
 
 [ext_resource type="Script" path="res://scripts/console.gd" id="1_snvo6"]
 
@@ -39,6 +39,8 @@ uv1_triplanar = true
 [sub_resource type="QuadMesh" id="QuadMesh_hwwfx"]
 size = Vector2(0.215, 0.115)
 
+[sub_resource type="ViewportTexture" id="ViewportTexture_ojhg4"]
+
 [sub_resource type="ViewportTexture" id="ViewportTexture_eq3tj"]
 viewport_path = NodePath("Monitor/SubViewport")
 
@@ -49,7 +51,7 @@ shading_mode = 2
 diffuse_mode = 3
 specular_mode = 1
 albedo_color = Color(0.623529, 0.478431, 0, 1)
-albedo_texture = SubResource("ViewportTexture_eq3tj")
+albedo_texture = SubResource("ViewportTexture_ojhg4")
 emission_enabled = true
 emission_energy_multiplier = 4.77
 emission_texture = SubResource("ViewportTexture_eq3tj")

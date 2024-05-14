@@ -124,6 +124,7 @@ theme_override_font_sizes/normal_font_size = 24
 text = "HUMIDITY"
 
 [node name="Wind" type="RichTextLabel" parent="UI"]
+visible = false
 z_index = 1
 layout_mode = 0
 offset_left = 867.0
@@ -139,6 +140,7 @@ bbcode_enabled = true
 text = "[center]MPH"
 
 [node name="Day" type="RichTextLabel" parent="UI"]
+visible = false
 layout_mode = 0
 offset_top = 547.0
 offset_right = 407.0
@@ -151,6 +153,7 @@ theme_override_font_sizes/normal_font_size = 24
 text = "DAY"
 
 [node name="WeatherArrow" type="Sprite2D" parent="UI"]
+visible = false
 position = Vector2(1073, 527.75)
 scale = Vector2(0.14, 0.14)
 texture = SubResource("ViewportTexture_t7l05")
