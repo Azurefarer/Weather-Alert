@@ -34,11 +34,16 @@ func _physics_process(delta):
 		return
 	if powered_on:
 		if behavior.current_behavior == "wander":
-			if walk_time == 0:
-				navigation_path(delta)
-			walk_time+=delta
-			if walk_time<1:
+			if watching != null:
+				walk_time = 0
+				watching = null
 				footstep_soundoff = false
+				$ShootTimer.stop()
+			#if walk_time == 0:
+			#	navigation_path(delta)
+			walk_time+=delta
+			navigation_path(delta)
+			if walk_time<1:
 				velocity = velocity.lerp(Vector3.ZERO,delta*15)
 			elif walk_time>=1 and walk_time<2:
 				if !footstep_soundoff:
@@ -48,16 +53,15 @@ func _physics_process(delta):
 				velocity = velocity.lerp(direction*SPEED*2,delta*7)
 			elif walk_time>=2:
 				walk_time = 0
+				footstep_soundoff = false
 				match stride:
 					0:
 						stride = 1
 					1:
 						stride = 0
 			#print(velocity)
-			watching = null
 			probe.global_position = probe.global_position.lerp(global_position+Vector3.UP*10.85+global_basis.z*-4.04+global_basis.x*-3.633,delta)
 			probe.global_rotation = global_rotation
-			$ShootTimer.stop()
 		elif behavior.current_behavior == "watch" and watching != null:
 			probe.global_position = probe.global_position.lerp(watching.global_position+Vector3.UP*10.85+watching.global_basis.z*3.633,delta)
 			probe.look_at(watching.global_position)
@@ -78,16 +82,6 @@ func _physics_process(delta):
 	velocity_export = velocity
 	#print(velocity)
 	move_and_slide()
-
-func navigation_path(delta):
-	#print(nav.target_position)
-	direction = nav.get_next_path_position() - global_position
-	if nav.distance_to_target ( )<2:
-		direction = Vector3.ZERO
-	#direction.y = 0
-	direction = direction.normalized()
-	#print("currentPos:"+str(global_position))
-	#print("nextPos:"+str(nav.get_next_path_position()))
 
 func animate():
 	if is_on_floor() and powered_on:

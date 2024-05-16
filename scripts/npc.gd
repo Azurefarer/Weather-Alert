@@ -43,19 +43,11 @@ func _physics_process(delta):
 	move_and_slide()
 
 func navigation_path(delta):
-	var direction = Vector3()
 	direction = nav.get_next_path_position() - global_position
+	if nav.distance_to_target ( )<2:
+		direction = Vector3.ZERO
 	direction = direction.normalized()
-	velocity = velocity.lerp(direction*SPEED,delta*3)
-	var original_rotation = global_rotation
-	var look_to = (global_position-direction.normalized()*100)
-	look_to.y = global_position.y
-	look_at(look_to)
-	var target_rotation = global_rotation
-	global_rotation = original_rotation
-	global_rotation.y = lerp_angle(global_rotation.y,target_rotation.y,delta*1)
-	global_rotation.x = lerp_angle(global_rotation.x,target_rotation.x,delta*1)
-	global_rotation.z = lerp_angle(global_rotation.z,0,delta*14)
+	
 
 func animate():
 	if is_on_floor():
